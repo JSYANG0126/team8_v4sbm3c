@@ -343,7 +343,7 @@
   <dialectName>hsqldb</dialectName>
   <logicalMode>true</logicalMode>
   <jarFile>C:\Users\dudwn\OneDrive\바탕 화면\학원\ojdbc8.jar</jarFile>
-  <jdbcDriver>oracle.jdbc.OracleDriver</jdbcDriver>
+  <jdbcDriver>oracle.jdbc.driver.OracleDriver</jdbcDriver>
   <jdbcUrl>jdbc:oracle:thin:@54.180.45.133:1521:XE</jdbcUrl>
   <jdbcUser>team8</jdbcUser>
   <jdbcPassword>69017000</jdbcPassword>
