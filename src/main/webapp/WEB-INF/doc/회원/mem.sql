@@ -24,3 +24,14 @@ COMMENT ON COLUMN MEM.ADDRESS2 is '주소2';
 COMMENT ON COLUMN MEM.MDATE is '가입일';
 COMMENT ON COLUMN MEM.GRADE is '등급';
 COMMENT ON COLUMN MEM.qnano is '질문번호';
+
+DROP SEQUENCE MEM_SEQ;
+
+CREATE SEQUENCE MEM_SEQ
+  START WITH 1              -- 시작 번호
+  INCREMENT BY 1            -- 증가값
+  MAXVALUE 99999            -- 최대값: 99999 --> NUMBER(5) 대응
+  CACHE 2                   -- 2번은 메모리에서만 계산
+  NOCYCLE;                  -- 다시 1부터 생성되는 것을 방지
+  
+commit;

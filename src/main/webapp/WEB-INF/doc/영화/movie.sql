@@ -34,3 +34,14 @@ COMMENT ON COLUMN movie.FILE1 is '메인이미지';
 COMMENT ON COLUMN movie.FILE1SAVED is '실제 저장된 메인 이미지';
 COMMENT ON COLUMN movie.THUMB1 is '메인 이미지 Preview';
 COMMENT ON COLUMN movie.SIZE1 is '메인 이미지 크기';
+
+DROP SEQUENCE MOVIE_SEQ;
+
+CREATE SEQUENCE MOVIE_SEQ
+  START WITH 1              -- 시작 번호
+  INCREMENT BY 1            -- 증가값
+  MAXVALUE 99999            -- 최대값: 99999 --> NUMBER(5) 대응
+  CACHE 2                   -- 2번은 메모리에서만 계산
+  NOCYCLE;                  -- 다시 1부터 생성되는 것을 방지
+  
+commit;
