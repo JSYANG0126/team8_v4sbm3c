@@ -8,17 +8,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=5.0, width=device-width" /> 
 <title>http://localhost:9093/index.jsp</title>
+<link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
+
 </head>
 <body>
 <c:import url="/menu/top.do" />
-  <div style="margin: 50px;">
-      <H1>깃 테스트</H1>
-      <ol>
-          <li>팀장: 컴돌이</li>
-          <li>팀원1 : 김치찌개</li>
-          <li>팀원2 :  짱아</li>
-      </ol>
-  </div> 
+
+  <div style="width: 70%; margin: 30px auto;">
+    <img src="/images/web_main.jpg" style="width: 100%;">
+  </div>
+  
 <jsp:include page="./menu/bottom.jsp" flush='false' />   
 </body>
 </html>
