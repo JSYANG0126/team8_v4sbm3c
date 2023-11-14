@@ -11,3 +11,27 @@ COMMENT ON COLUMN QNA.qnano is '질문번호';
 COMMENT ON COLUMN QNA.memno is '회원 번호';
 COMMENT ON COLUMN QNA.qnatitle is '질문거리';
 COMMENT ON COLUMN QNA.qnainfo is '질문내용';
+
+CREATE SEQUENCE QNA_SEQ
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 999999999
+    CACHE 2
+    NOCYCLE;
+    
+COMMIT;  
+
+-- 등록
+INSERT INTO QNA(qnano, memno, qnatitle, qnainfo) VALUES (QNA_SEQ.nextval, 1, '궁금이', '돈 잘버는 방법');
+
+-- Read : List
+SELECT * FROM QNA;
+SELECT qnano, memno, qnatitle, qnainfo FROM QNA ORDER BY qnano ASC;
+
+-- Update
+UPDATE QNA SET qnatitle='분식' WHERE qnano=1;
+SELECT qnano, memno, qnatitle, qnainfo FROM QNA ORDER BY qnano ASC;
+
+-- Delete
+DELETE FROM QNA WHERE qnano=1;
+SELECT qnano, memno, qnatitle, qnainfo FROM QNA ORDER BY qnano ASC;
