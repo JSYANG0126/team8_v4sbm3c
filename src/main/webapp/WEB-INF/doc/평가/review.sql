@@ -6,7 +6,7 @@ CREATE TABLE review(
         retitle                       		VARCHAR2(30)		 NOT NULL,
 		movieinfo                       		VARCHAR2(200)		 NOT NULL,
 		redate                        		DATE		 NULL ,	
-		word                          		CHAR(20)		 NULL ,
+		word                          		VARCHAR2(100)		 NULL ,
 		pwd                           		VARCHAR2(15)		 NULL ,
 		mainimg                       		VARCHAR2(200)		 NULL ,
 		savemainimg                   		VARCHAR2(200)		 NULL ,

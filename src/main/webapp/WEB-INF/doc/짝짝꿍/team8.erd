@@ -366,12 +366,12 @@
                                   <columnName>word</columnName>
                                   <logicalName>검색단어</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
-                                    <name>CHAR</name>
-                                    <logicalName>Character</logicalName>
+                                    <name>VARCHAR2</name>
+                                    <logicalName>String</logicalName>
                                     <supportSize>true</supportSize>
-                                    <type>1</type>
+                                    <type>12</type>
                                   </columnType>
-                                  <size>20</size>
+                                  <size>100</size>
                                   <notNull>false</notNull>
                                   <primaryKey>false</primaryKey>
                                   <description></description>
