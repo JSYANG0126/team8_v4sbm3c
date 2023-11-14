@@ -34,4 +34,39 @@ CREATE SEQUENCE MEM_SEQ
   CACHE 2                   -- 2번은 메모리에서만 계산
   NOCYCLE;                  -- 다시 1부터 생성되는 것을 방지
   
+-- CREATE
+-- 회원 관리용 계정, Q/A 용 계정
+INSERT INTO mem(memno, id, passwd, mname, tel, zipcode, address1, address2, mdate, grade)
+VALUES (mem_seq.nextval, 'qnamanager', '1234', '질문답변관리자', '000-0000-0000', '12345', '서울시 종로구', '관철동', sysdate, 1);
+ 
+INSERT INTO mem(memno, id, passwd, mname, tel, zipcode, address1, address2, mdate, grade)
+VALUES (mem_seq.nextval, 'crm', '1234', '고객관리자', '000-0000-0000', '12345', '서울시 종로구', '관철동', sysdate, 1);
+ 
+-- 개인 회원 테스트 계정
+INSERT INTO mem(memno, id, passwd, mname, tel, zipcode, address1, address2, mdate, grade)
+VALUES (mem_seq.nextval, 'user1@gmail.com', '1234', '왕눈이', '000-0000-0000', '12345', '서울시 종로구', '관철동', sysdate, 15);
+
+-- READ
+SELECT * FROM mem;
+     MEMNO ID                             PASSWD                                                       MNAME                          TEL            ZIPCO ADDRESS1                                                                         ADDRESS2                                           MDATE                    GRADE
+---------- ------------------------------ ------------------------------------------------------------ ------------------------------ -------------- ----- -------------------------------------------------------------------------------- -------------------------------------------------- ------------------- ----------
+         1 qnaadmin                       1234                                                         질문답변관리자                 000-0000-0000  12345 서울시 종로구                                                                    관철동                                             2023-11-09 05:04;46          1
+         2 crm                            1234                                                         고객관리자                     000-0000-0000  12345 서울시 종로구                                                                    관철동                                             2023-11-09 05:04;46          1
+         3 user1@gmail.com                1234                                                         왕눈이                         000-0000-0000  12345 서울시 종로구                                                                    관철동                                             2023-11-14 11:29;02         15
+
+
+-- UPDATE
+UPDATE mem
+SET passwd = '123'
+WHERE mname = '왕눈이';
+     MEMNO ID                             PASSWD                                                       MNAME                          TEL            ZIPCO ADDRESS1                                                                         ADDRESS2                                           MDATE                    GRADE
+---------- ------------------------------ ------------------------------------------------------------ ------------------------------ -------------- ----- -------------------------------------------------------------------------------- -------------------------------------------------- ------------------- ----------
+         1 qnaadmin                       1234                                                         질문답변관리자                 000-0000-0000  12345 서울시 종로구                                                                    관철동                                             2023-11-09 05:04;46          1
+         2 crm                            1234                                                         고객관리자                     000-0000-0000  12345 서울시 종로구                                                                    관철동                                             2023-11-09 05:04;46          1
+         3 user1@gmail.com                123                                                          왕눈이                         000-0000-0000  12345 서울시 종로구                                                                    관철동                                             2023-11-14 11:29;02         15
+
+--DELETE
+delete from mem
+where mname = 'manager100';
+
 commit;

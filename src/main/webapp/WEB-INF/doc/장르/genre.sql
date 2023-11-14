@@ -1,10 +1,12 @@
+DROP TABLE genre CASCADE CONSTRAINTS;
+
 CREATE TABLE genre(
 		genreno                       		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
 		name                          		VARCHAR2(30)		 NOT NULL,
 		cnt                           		NUMBER(7)		 DEFAULT 0		 NOT NULL,
 		rdate                         		DATE		 NOT NULL,
-		SEQNO                         		NUMBER(5)		 NULL ,
-		VISIBLE                       		CHAR(1)		 NULL 
+		SEQNO                         		NUMBER(5)		 DEFAULT 1 NOT NULL,
+		VISIBLE                       		CHAR(1)		 DEFAULT 'N' NOT NULL 
 );
 
 COMMENT ON TABLE genre is '장르';
@@ -25,3 +27,31 @@ CREATE SEQUENCE GENRE_SEQ
   NOCYCLE;                  -- 다시 1부터 생성되는 것을 방지
   
 commit;
+
+-- CREATE
+INSERT INTO genre(genreno, name, cnt, rdate) VALUES(genre_seq.nextval, '영화1', 0, sysdate); 
+INSERT INTO genre(genreno, name, cnt, rdate) VALUES(genre_seq.nextval, '영화2', 0, sysdate); 
+INSERT INTO genre(genreno, name, cnt, rdate) VALUES(genre_seq.nextval, '영화3', 0, sysdate);
+
+-- READ: LIST
+SELECT * FROM genre;
+SELECT genreno, name, cnt, rdate, seqno, visible FROM genre ORDER BY genreno ASC;
+   GENRENO NAME                                  CNT RDATE         SEQNO V
+---------- ------------------------------ ---------- -------- ---------- -
+         1 영화1                                   0 23/11/10          1 N
+         2 영화2                                   0 23/11/10          1 N
+         3 영화3                                   0 23/11/10          1 N
+
+-- UPDATE
+UPDATE genre SET name='영화4', cnt=1 WHERE genreno=3;
+SELECT * FROM genre WHERE genreno=3;
+   GENRENO NAME                                  CNT RDATE         SEQNO V
+---------- ------------------------------ ---------- -------- ---------- -
+         3 영화4                                   1 23/11/10          1 N
+        
+        
+-- DELETE
+DELETE FROM genre WHERE genreno=7;
+DELETE FROM genre WHERE genreno >= 10;
+
+COMMIT;
