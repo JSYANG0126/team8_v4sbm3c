@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace = "dev.mvc.mem.MemDAOInter">
+  <select id="checkID" resultType="int" parameterType="String">
+    SELECT COUNT(id) as cnt
+    FROM mem
+    WHERE id=#{id}
+  </select>
+  
+  <insert id="create" parameterType="dev.mvc.mem.MemVO">
+    INSERT INTO mem(memno, id, passwd, mname, tel, zipcode, address1, address2, mdate, grade)
+    VALUES (mem_seq.nextval, #{id}, #{passwd}, #{mname}, #{tel}, #{zipcode}, 
+                 #{address1}, #{address2}, sysdate, #{grade})
+  </insert>
+     
+  <select id="list" resultType="dev.mvc.mem.MemVO">
+    SELECT memno, id, passwd, mname, tel, zipcode, address1, address2, mdate, grade
+    FROM mem
+    ORDER BY grade ASC, id ASC
+  </select>
+  
+  <!-- memno로 회원 정보 조회 -->
+  <select id="read" resultType="dev.mvc.mem.MemVO" parameterType="int">
+    SELECT memno, id, passwd, mname, tel, zipcode, address1, address2, mdate, grade
+    FROM mem
+    WHERE memno = #{memno}
+  </select>  
+
+  <!-- id(이메일)로 회원 정보 조회 -->
+  <select id="readById" resultType="dev.mvc.mem.MemVO" parameterType="String">
+    SELECT memno, id, passwd, mname, tel, zipcode, address1, address2, mdate, grade
+    FROM mem
+    WHERE id = #{id}
+  </select>
+  
+  <update id="update" parameterType="dev.mvc.mem.MemVO">
+    UPDATE mem
+    SET id=#{id}, mname=#{mname}, tel=#{tel}, zipcode=#{zipcode}, address1=#{address1}, address2=#{address2}
+    WHERE memno=#{memno}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM mem
+    WHERE memno=#{memno}
+  </delete>
+  
+  <!-- 로그인 -->
+  <select id="login" resultType="int" parameterType="HashMap">
+    SELECT COUNT(memno) as cnt
+    FROM mem
+    WHERE id=#{id} AND passwd=#{passwd}
+  </select>
+  
+  <!--  현재 패스워드 검사 -->
+  <select id="passwd_check" parameterType="HashMap" resultType="int">
+    SELECT COUNT(memno) as cnt
+    FROM mem
+    WHERE memno=#{memno} AND passwd=#{passwd}
+  </select>
+  
+  <!-- 패스워드 변경 -->
+  <update id="passwd_update" parameterType="HashMap">
+    UPDATE mem
+    SET passwd=#{passwd}
+    WHERE memno=#{memno}
+  </update>
+  
+</mapper> 
