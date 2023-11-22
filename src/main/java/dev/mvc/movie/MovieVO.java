@@ -33,10 +33,6 @@ public class MovieVO {
 	private String passwd = "";
 	private String word = "";
 	private String rdate;
-	private String file1 = "";
-	private String file1saved = "";
-	private String thumb1;
-	private long size1;
 	/**
     이미지 파일
     <input type='file' class="form-control" name='file1MF' id='file1MF' 
@@ -44,6 +40,49 @@ public class MovieVO {
     */
     private MultipartFile file1MF;
     /** 메인 이미지 크기 단위, 파일 크기 */
+    private String size1_label = "";
+    /** 메인 이미지 */
+    private String file1 = "";
+    /** 실제 저장된 메인 이미지 */
+    private String file1saved = "";
+    public String getSize1_label() {
+		return size1_label;
+	}
+	public void setSize1_label(String size1_label) {
+		this.size1_label = size1_label;
+	}
+	/** 메인 이미지 preview */
+    private String thumb1 = "";
+    /** 메인 이미지 크기 */
+    private long size1;
+    
+    // 페이징 관련
+    // -----------------------------------------------------------------------------------
+    /** 시작 rownum */
+    private int start_num;    
+    /** 종료 rownum */
+    private int end_num;    
+    /** 현재 페이지 */
+    private int now_page = 1;
+    
+	public int getStart_num() {
+		return start_num;
+	}
+	public void setStart_num(int start_num) {
+		this.start_num = start_num;
+	}
+	public int getEnd_num() {
+		return end_num;
+	}
+	public void setEnd_num(int end_num) {
+		this.end_num = end_num;
+	}
+	public int getNow_page() {
+		return now_page;
+	}
+	public void setNow_page(int now_page) {
+		this.now_page = now_page;
+	}
 	public int getMovieno() {
 		return movieno;
 	}
@@ -144,8 +183,9 @@ public class MovieVO {
 	public String toString() {
 		return "MovieVO [movieno=" + movieno + ", genreno=" + genreno + ", managerno=" + managerno + ", title=" + title
 				+ ", content=" + content + ", recom=" + recom + ", cnt=" + cnt + ", reprycnt=" + reprycnt + ", passwd="
-				+ passwd + ", word=" + word + ", rdate=" + rdate + ", file1=" + file1 + ", file1saved=" + file1saved
-				+ ", thumb1=" + thumb1 + ", size1=" + size1 + ", file1MF=" + file1MF + "]";
+				+ passwd + ", word=" + word + ", rdate=" + rdate + ", file1MF=" + file1MF + ", size1_label="
+				+ size1_label + ", file1=" + file1 + ", file1saved=" + file1saved + ", thumb1=" + thumb1 + ", size1="
+				+ size1 + ", start_num=" + start_num + ", end_num=" + end_num + ", now_page=" + now_page + "]";
 	}
 	
 }
