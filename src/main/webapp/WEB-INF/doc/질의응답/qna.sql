@@ -27,9 +27,11 @@ INSERT INTO QNA(qnano, memno, qnatitle, qnainfo) VALUES (QNA_SEQ.nextval, 1, '�
 -- Read : List
 SELECT * FROM QNA;
 SELECT qnano, memno, qnatitle, qnainfo FROM QNA ORDER BY qnano ASC;
+SELECT qnano, memno, qnatitle, qnainfo FROM QNA
+WHERE qnano=1;
 
 -- Update
-UPDATE QNA SET qnatitle='분식' WHERE qnano=1;
+UPDATE QNA SET qnatitle='분식', qnainfo='내용' WHERE qnano=1;
 SELECT qnano, memno, qnatitle, qnainfo FROM QNA ORDER BY qnano ASC;
 
 -- Delete

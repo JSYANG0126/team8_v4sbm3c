@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 자식 XML 태그들은 dev.mvc.genre.GenreDAOInter.java interface와 연결됨 -->
+<mapper namespace="dev.mvc.qna.QnaDAOInter">
+
+	<!-- 등록 -->
+	<insert id="create" parameterType="dev.mvc.qna.QnaVO">
+		INSERT INTO QNA(qnano, memno, qnatitle, qnainfo) 
+		VALUES qnano = #{qnano}, memno = #{memno}, qnatitle = #{qnatitle}, qnainfo = #{qnainfo}
+	</insert>
+	
+	<!-- 전체 목록 -->
+	<select id="list" resultType="dev.mvc.qna.QnaVO">
+		SELECT qnano, memno, qnatitle, qnainfo 
+		FROM QNA 
+		ORDER BY qnano ASC
+	</select>
+	
+	<!-- 조회 -->
+	<select id="read" resultType="dev.mvc.qna.QnaVO" parameterType="int">
+		SELECT qnano, memno, qnatitle, qnainfo 
+		FROM QNA 
+		WHERE qnano = #{qnano}
+	</select>
+	
+	<!-- 댓글 수정 -->
+	<update id="update" parameterType="dev.mvc.qna.QnaVO">
+		UPDATE QNA SET qnatitle=#{qnatitle}, qnainfo=#{qnainfo} WHERE qnano=#{qnano}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM QNA WHERE qnano=#{qnano}
+	</delete>
+	
+</mapper>
