@@ -27,7 +27,7 @@ public class GenreProc implements GenreProcInter {
 
 	  @Override
 	  public GenreVO read(int genreno) {
-	    GenreVO  genreVO  = this.genreDAO.read(genreno);
+	    GenreVO genreVO  = this.genreDAO.read(genreno);
 	    
 	    return genreVO;
 	  }

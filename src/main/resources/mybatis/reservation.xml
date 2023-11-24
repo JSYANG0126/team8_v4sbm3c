@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.reservation.ReservationDAOInter">
+  
+  <!-- 생성 -->
+  <insert id="create" parameterType="dev.mvc.reservation.ReservationVO">
+        INSERT INTO reservation(reservationno, tname, link) VALUES(reservation_seq.nextval, #{tname}, #{link})
+  </insert>
+  
+  <!-- 읽어오기 -->
+  <select id="list_all" resultType="dev.mvc.reservation.ReservationVO" >
+    SELECT reservationno, tname, link 
+    FROM reservation 
+    ORDER BY reservationno ASC
+  </select>
+  
+    <!-- 읽기, SQL -> GenreVO return -->
+  <select id="read" resultType="dev.mvc.reservation.ReservationVO" parameterType="int">
+    SELECT reservationno, tname, link 
+    FROM reservation  
+    WHERE reservationno=#{reservationno}
+  </select>
+  
+  <!-- return: 수정한 레코드 갯수 리턴, parameterType: 수정할 레코드 정보 -->
+  <select id="update" parameterType="dev.mvc.reservation.ReservationVO" >
+    UPDATE reservation 
+    SET tname=#{tname}, link=#{link}
+    WHERE reservationno=#{reservationno}
+  </select>
+  
+ </mapper>
