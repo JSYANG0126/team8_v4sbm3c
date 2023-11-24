@@ -2,20 +2,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:set var="mreviewno" value="${mreviewVO.mreviewno }" />
-<c:set var="genreno" value="${mreviewVO.genreno }" />
-<c:set var="title" value="${mreviewVO.title }" />
-<c:set var="file1" value="${mreviewVO.file1 }" />
-<c:set var="file1saved" value="${mreviewVO.file1saved }" />
-<c:set var="thumb1" value="${mreviewVO.thumb1.toLowerCase() }" />
-<c:set var="size1" value="${mreviewVO.size1 }" />
+<c:set var="movieno" value="${movieVO.movieno }" />
+<c:set var="genreno" value="${movieVO.genreno }" />
+<c:set var="title" value="${movieVO.title }" />
+<c:set var="file1" value="${movieVO.file1 }" />
+<c:set var="file1saved" value="${movieVO.file1saved }" />
+<c:set var="thumb1" value="${movieVO.thumb1.toLowerCase() }" />
+<c:set var="size1" value="${movieVO.size1 }" />
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, width=device-width" /> 
-<title>http://localhost:9091/</title>
+<title>http://localhost:9093/</title>
 <link rel="shortcut icon" href="/images/star.png" /> <%-- /static 기준 --%>
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
 
@@ -64,7 +64,7 @@
 
           <c:choose>
             <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
-              <img src="/mreview/storage/${file1saved }" style='width: 90%;'> 
+              <img src="/movie/storage/${file1saved }" style='width: 90%;'> 
             </c:when>
             <c:otherwise> <!-- 이미지가 없는 경우 -->
               상품 관련 이미지가 없습니다.
@@ -79,7 +79,7 @@
           </c:if>
           <br>
           <FORM name='frm' method='post' action='./delete.do'>
-              <input type='hidden' name='mreviewno' value='${mreviewno}'>
+              <input type='hidden' name='movieno' value='${movieno}'>
               <input type='hidden' name='genreno' value='${genreno}'>
               <input type='hidden' name='now_page' value='${param.now_page}'>
               <br><br>

@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, width=device-width" /> 
-<title>http://localhost:9091/genre/list_all.do</title>
+<title>http://localhost:9093/genre/list_all.do</title>
 <link rel="shortcut icon" href="/images/star.png" /> <%-- /static 기준 --%>
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
 
@@ -36,7 +36,7 @@
           </div>
             
           <label>관련 카테고리 이름</label>:  ${genreVO.name } 
-          <a href="../mreview/list_by_genreno.do?genreno=${genreVO.genreno }&now_page=1" title="관련 카테고리로 이동"><img src='/genre/images/link.png'></a>
+          <a href="../movie/list_by_genreno.do?genreno=${genreVO.genreno }&now_page=1" title="관련 카테고리로 이동"><img src='/genre/images/link.png'></a>
           &nbsp;      
           <button type="submit" id='submit' class='btn btn-danger btn-sm' style='height: 28px; margin-bottom: 5px;'>관련 자료와 함게 카테고리 삭제</button>
           

@@ -1,4 +1,7 @@
-CREATE TABLE MEM(
+DROP TABLE mem;
+DROP TABLE mem CASCADE CONSTRAINTS;
+
+CREATE TABLE mem(
 		memno                         		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
 		ID                            		VARCHAR2(30)		 NOT NULL,
 		PASSWD                        		VARCHAR2(60)		 NOT NULL,
@@ -9,21 +12,22 @@ CREATE TABLE MEM(
 		ADDRESS2                      		VARCHAR2(50)		 NULL ,
 		MDATE                         		DATE		 NOT NULL,
 		GRADE                         		NUMBER(2)		 NOT NULL,
-		qnano                         		NUMBER(10)		 NULL 
+		qnano                         		NUMBER(10)		 NULL,
+        PRIMARY KEY (memno)
 );
 
-COMMENT ON TABLE MEM is '회원';
-COMMENT ON COLUMN MEM.memno is '회원 번호';
-COMMENT ON COLUMN MEM.ID is '아이디';
-COMMENT ON COLUMN MEM.PASSWD is '패스워드';
-COMMENT ON COLUMN MEM.MNAME is '성명';
-COMMENT ON COLUMN MEM.TEL is '전화번호';
-COMMENT ON COLUMN MEM.ZIPCODE is '우편번호';
-COMMENT ON COLUMN MEM.ADDRESS1 is '주소1';
-COMMENT ON COLUMN MEM.ADDRESS2 is '주소2';
-COMMENT ON COLUMN MEM.MDATE is '가입일';
-COMMENT ON COLUMN MEM.GRADE is '등급';
-COMMENT ON COLUMN MEM.qnano is '질문번호';
+COMMENT ON TABLE mem is '회원';
+COMMENT ON COLUMN mem.memno is '회원 번호';
+COMMENT ON COLUMN mem.ID is '아이디';
+COMMENT ON COLUMN mem.PASSWD is '패스워드';
+COMMENT ON COLUMN mem.MNAME is '성명';
+COMMENT ON COLUMN mem.TEL is '전화번호';
+COMMENT ON COLUMN mem.ZIPCODE is '우편번호';
+COMMENT ON COLUMN mem.ADDRESS1 is '주소1';
+COMMENT ON COLUMN mem.ADDRESS2 is '주소2';
+COMMENT ON COLUMN mem.MDATE is '가입일';
+COMMENT ON COLUMN mem.GRADE is '등급';
+COMMENT ON COLUMN mem.qnano is '질문번호';
 
 DROP SEQUENCE MEM_SEQ;
 

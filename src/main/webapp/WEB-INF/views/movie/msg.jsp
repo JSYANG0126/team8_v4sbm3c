@@ -18,7 +18,7 @@
 
 <c:set var="code" value="${param.code }" /> <%--mav.addObject("code", "create_success"); --%>
 <c:set var="cnt" value="${param.cnt }" />     <%-- mav.addObject("cnt", cnt); --%>
-<c:set var="genreno" value="${param.genreno }" /> <%-- mav.addObject("genreno", mreviewVO.getGenreno()); // redirect parameter 적용 --%>
+<c:set var="genreno" value="${param.genreno }" /> <%-- mav.addObject("genreno", movieVO.getGenreno()); // redirect parameter 적용 --%>
 
 <DIV class='message'>
   <fieldset class='fieldset_basic'>
