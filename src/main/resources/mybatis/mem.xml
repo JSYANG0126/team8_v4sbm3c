@@ -66,8 +66,13 @@
     WHERE memno=#{memno}
   </update>
   
+<<<<<<< HEAD
   <!-- 회원 정지검사 -->
   <select id="sp_check" resultType="int" parameterType="dev.mvc.mem.MemVO">
+=======
+  <!-- 회원 검사 -->
+  <select id="id_check" resultType="int" parameterType="dev.mvc.mem.MemVO">
+>>>>>>> dc5a003c9570dcec16b74ce07266735490547a92
     SELECT COUNT(*) as cnt
     FROM mem 
     WHERE id={#id} AND grade >= 40 AND grade &lt;= 49;
