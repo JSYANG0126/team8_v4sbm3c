@@ -15,7 +15,7 @@ public class HomeCont {
   }
   
   //http://localhost:9093/
-  @RequestMapping(value = {"", "/"}, method=RequestMethod.GET)
+  @RequestMapping(value = {"", "/","/index.do"}, method=RequestMethod.GET)
   public ModelAndView home() {
     System.out.println("---> home()");
     
