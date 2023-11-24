@@ -67,7 +67,7 @@
   </update>
   
   <!-- 회원 검사 -->
-  <select id="id_check" resultType="int" parameterType="dev.mvc.mem">
+  <select id="id_check" resultType="int" parameterType="dev.mvc.mem.MemVO">
     SELECT COUNT(*) as cnt
     FROM mem 
     WHERE id={#id} AND grade >= 40 AND grade &lt;= 49;
