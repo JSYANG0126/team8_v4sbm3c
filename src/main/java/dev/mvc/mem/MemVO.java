@@ -1,5 +1,5 @@
 package dev.mvc.mem;
-//CREATE TABLE MEM(
+//CREATE TABLE mem(
 //		memno                         		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
 //		ID                            		VARCHAR2(30)		 NOT NULL,
 //		PASSWD                        		VARCHAR2(60)		 NOT NULL,
@@ -10,7 +10,8 @@ package dev.mvc.mem;
 //		ADDRESS2                      		VARCHAR2(50)		 NULL ,
 //		MDATE                         		DATE		 NOT NULL,
 //		GRADE                         		NUMBER(2)		 NOT NULL,
-//		qnano                         		NUMBER(10)		 NULL 
+//		qnano                         		NUMBER(10)		 NULL,
+//      PRIMARY KEY (memno)
 //);
 public class MemVO {
 	private int memno;

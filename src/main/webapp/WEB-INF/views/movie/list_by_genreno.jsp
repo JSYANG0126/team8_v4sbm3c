@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, width=device-width" /> 
-<title>http://localhost:9092/mreview/list_all.do</title>
+<title>http://localhost:9093/movie/list_all.do</title>
 <link rel="shortcut icon" href="/images/star.png" /> <%-- /static 기준 --%>
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
 
@@ -71,38 +71,38 @@
       </tr>
     </thead>
     <tbody>
-        <c:forEach var="mreviewVO" items="${list }" varStatus="info">
-          <c:set var="mreviewno" value="${mreviewVO.mreviewno }" />
-          <c:set var="thumb1" value="${mreviewVO.thumb1 }" />
+        <c:forEach var="movieVO" items="${list }" varStatus="info">
+          <c:set var="movieno" value="${movieVO.movieno }" />
+          <c:set var="thumb1" value="${movieVO.thumb1 }" />
     
-          <tr onclick="location.href='./read.do?mreviewno=${mreviewno}&word=${param.word }&now_page=${param.now_page == null ? 1 : param.now_page }&genreno=${param.genreno }'" style="cursor: pointer;">
+          <tr onclick="location.href='./read.do?movieno=${movieno}&word=${param.word }&now_page=${param.now_page == null ? 1 : param.now_page }&genreno=${param.genreno }'" style="cursor: pointer;">
             <td>
               <c:choose>
                 <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}"> <%-- 이미지인지 검사 --%>
-                  <%-- registry.addResourceHandler("/mreview/storage/**").addResourceLocations("file:///" +  mreview.getUploadDir()); --%>
-                  <img src="/mreview/storage/${thumb1 }" style="width: 120px; height: 90px;">
+                  <%-- registry.addResourceHandler("/movie/storage/**").addResourceLocations("file:///" +  movie.getUploadDir()); --%>
+                  <img src="/movie/storage/${thumb1 }" style="width: 120px; height: 90px;">
                 </c:when>
-                <c:otherwise> <!-- 이미지가 없는 경우 기본 이미지 출력: /static/mreview/images/none1.png -->
-                  <img src="/mreview/images/none1.png" style="width: 120px; height: 90px;">
+                <c:otherwise> <!-- 이미지가 없는 경우 기본 이미지 출력: /static/movie/images/none1.png -->
+                  <img src="/movie/images/none1.png" style="width: 120px; height: 90px;">
                 </c:otherwise>
               </c:choose>
             </td>
             <td class="td_bs_left">
-              <span style="font-weight: bold;">${mreviewVO.title }</span><br>
+              <span style="font-weight: bold;">${movieVO.title }</span><br>
               <c:choose>
-                <c:when test="${mreviewVO.content.length() > 160 }">
-                  ${mreviewVO.content.substring(0, 160) }...
+                <c:when test="${movieVO.content.length() > 160 }">
+                  ${movieVO.content.substring(0, 160) }...
                 </c:when>
                 <c:otherwise>
-                  ${mreviewVO.content }
+                  ${movieVO.content }
                 </c:otherwise>
               </c:choose>
-              (${mreviewVO.rdate.substring(0, 16) })
+              (${movieVO.rdate.substring(0, 16) })
             </td>
             <td class="td_bs">
-              <a href="/mreview/map.do?genreno=${genreno }&mreviewno=${mreviewno}&now_page=${param.now_page}" title="지도"><img src="/mreview/images/map.png" class="icon"></a>
-              <a href="/mreview/youtube.do?genreno=${genreno }&mreviewno=${mreviewno}&now_page=${param.now_page}" title="유튜브"><img src="/mreview/images/youtube.png" class="icon"></a>
-              <a href="/mreview/delete.do?genreno=${genreno }&mreviewno=${mreviewno}&now_page=${param.now_page}" title="삭제"><img src="/mreview/images/delete.png" class="icon"></a>
+              <a href="/movie/map.do?genreno=${genreno }&movieno=${movieno}&now_page=${param.now_page}" title="지도"><img src="/movie/images/map.png" class="icon"></a>
+              <a href="/movie/youtube.do?genreno=${genreno }&movieno=${movieno}&now_page=${param.now_page}" title="유튜브"><img src="/movie/images/youtube.png" class="icon"></a>
+              <a href="/movie/delete.do?genreno=${genreno }&movieno=${movieno}&now_page=${param.now_page}" title="삭제"><img src="/movie/images/delete.png" class="icon"></a>
             </td>
           </tr>
         </c:forEach>

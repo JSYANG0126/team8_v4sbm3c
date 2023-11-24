@@ -3,10 +3,10 @@
 
 <c:set var="genreno" value="${genreVO.genreno }" />
 
-<c:set var="mreviewno" value="${mreviewVO.mreviewno }" />
-<c:set var="title" value="${mreviewVO.title }" />
-<c:set var="content" value="${mreviewVO.content }" />
-<c:set var="word" value="${mreviewVO.word }" />
+<c:set var="movieno" value="${movieVO.movieno }" />
+<c:set var="title" value="${movieVO.title }" />
+<c:set var="content" value="${movieVO.content }" />
+<c:set var="word" value="${movieVO.word }" />
  
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -58,7 +58,7 @@
   
   <form name='frm' method='post' action='./update_text.do'>
     <input type="hidden" name="genreno" value="${genreno }">
-    <input type="hidden" name="mreviewno" value="${mreviewno }">
+    <input type="hidden" name="movieno" value="${movieno }">
     <input type="hidden" name="now_page" value="${param.now_page }">
     
     <div>

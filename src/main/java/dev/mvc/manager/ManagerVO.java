@@ -15,6 +15,7 @@ public class ManagerVO {
 	private String mname;
 	private String mdate;
 	private int grade;
+	
 	public int getManagerno() {
 		return managerno;
 	}

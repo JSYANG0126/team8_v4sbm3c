@@ -4,18 +4,18 @@
 
 <c:set var="name" value="${genreVO.name }" />
 
-<c:set var="genreno" value="${mreviewVO.genreno }" />
-<c:set var="mreviewno" value="${mreviewVO.mreviewno }" />
-<c:set var="thumb1" value="${mreviewVO.thumb1 }" />
-<c:set var="file1saved" value="${mreviewVO.file1saved }" />
-<c:set var="title" value="${mreviewVO.title }" />
-<c:set var="content" value="${mreviewVO.content }" />
-<c:set var="rdate" value="${mreviewVO.rdate }" />
-<c:set var="youtube" value="${mreviewVO.youtube }" />
-<c:set var="map" value="${mreviewVO.map }" />
-<c:set var="file1" value="${mreviewVO.file1 }" />
-<c:set var="size1_label" value="${mreviewVO.size1_label }" />
-<c:set var="word" value="${mreviewVO.word }" />
+<c:set var="genreno" value="${movieVO.genreno }" />
+<c:set var="movieno" value="${movieVO.movieno }" />
+<c:set var="thumb1" value="${movieVO.thumb1 }" />
+<c:set var="file1saved" value="${movieVO.file1saved }" />
+<c:set var="title" value="${movieVO.title }" />
+<c:set var="content" value="${movieVO.content }" />
+<c:set var="rdate" value="${movieVO.rdate }" />
+<c:set var="youtube" value="${movieVO.youtube }" />
+<c:set var="map" value="${movieVO.map }" />
+<c:set var="file1" value="${movieVO.file1 }" />
+<c:set var="size1_label" value="${movieVO.size1_label }" />
+<c:set var="word" value="${movieVO.word }" />
  
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -36,21 +36,21 @@
     <%-- 관리자로 로그인해야 메뉴가 출력됨 --%>
     <c:if test="${sessionScope.manager_id != null }">
       <%--
-      http://localhost:9091/mreview/create.do?genreno=1
-      http://localhost:9091/mreview/create.do?genreno=2
-      http://localhost:9091/mreview/create.do?genreno=3
+      http://localhost:9091/movie/create.do?genreno=1
+      http://localhost:9091/movie/create.do?genreno=2
+      http://localhost:9091/movie/create.do?genreno=3
       --%>
       <a href="./create.do?genreno=${genreno }">등록</a>
       <span class='menu_divide' >│</span>
-      <a href="./update_text.do?mreviewno=${mreviewno}&now_page=${param.now_page}&word=${param.word }">글 수정</a>
+      <a href="./update_text.do?movieno=${movieno}&now_page=${param.now_page}&word=${param.word }">글 수정</a>
       <span class='menu_divide' >│</span>
-      <a href="./update_file.do?mreviewno=${mreviewno}&now_page=${param.now_page}">파일 수정</a>  
+      <a href="./update_file.do?movieno=${movieno}&now_page=${param.now_page}">파일 수정</a>  
       <span class='menu_divide' >│</span>
-      <a href="./map.do?genreno=${genreno }&mreviewno=${mreviewno}">지도</a>
+      <a href="./map.do?genreno=${genreno }&movieno=${movieno}">지도</a>
       <span class='menu_divide' >│</span>
-      <a href="./youtube.do?genreno=${genreno }&mreviewno=${mreviewno}">Youtube</a>
+      <a href="./youtube.do?genreno=${genreno }&movieno=${movieno}">Youtube</a>
       <span class='menu_divide' >│</span>
-      <a href="./delete.do?mreviewno=${mreviewno}&now_page=${param.now_page}&genreno=${genreno}">삭제</a>  
+      <a href="./delete.do?movieno=${movieno}&now_page=${param.now_page}&genreno=${genreno}">삭제</a>  
       <span class='menu_divide' >│</span>
     </c:if>
 
@@ -89,11 +89,11 @@
         <DIV style="width: 100%; word-break: break-all;">
           <c:choose>
             <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
-              <%-- /static/mreview/storage/ --%>
-              <img src="/mreview/storage/${file1saved }" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'> 
+              <%-- /static/movie/storage/ --%>
+              <img src="/movie/storage/${file1saved }" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'> 
             </c:when>
             <c:otherwise> <!-- 기본 이미지 출력 -->
-              <img src="/mreview/images/none1.png" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'> 
+              <img src="/movie/images/none1.png" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'> 
             </c:otherwise>
           </c:choose>
 
@@ -129,8 +129,8 @@
       <li class="li_none">
         <div>
           <c:if test="${file1.trim().length() > 0 }">
-            첨부 파일: <a href='/download?dir=/mreview/storage&filename=${file1saved}&downname=${file1}'>${file1}</a> (${size1_label}) 
-            <a href='/download?dir=/mreview/storage&filename=${file1saved}&downname=${file1}'><img src="/mreview/images/download.png"></a>
+            첨부 파일: <a href='/download?dir=/movie/storage&filename=${file1saved}&downname=${file1}'>${file1}</a> (${size1_label}) 
+            <a href='/download?dir=/movie/storage&filename=${file1saved}&downname=${file1}'><img src="/movie/images/download.png"></a>
           </c:if>
         </div>
       </li>   

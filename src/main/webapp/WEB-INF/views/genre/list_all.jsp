@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, width=device-width" /> 
-<title>http://localhost:9092/genre/list_all.do</title>
+<title>http://localhost:9093/genre/list_all.do</title>
 <link rel="shortcut icon" href="/images/star.png" /> <%-- /static 기준 --%>
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
  
@@ -59,11 +59,11 @@
     
           <tr>
             <td class="td_bs">${seqno }</td>
-            <td><a href="../mreview/list_by_genreno.do?genreno=${genreno }" style="display: block;">${genreVO.name }</a></td>
+            <td><a href="../movie/list_by_genreno.do?genreno=${genreno }" style="display: block;">${genreVO.name }</a></td>
             <td class="td_bs">${genreVO.cnt }</td>
             <td class="td_bs">${genreVO.rdate.substring(0, 10) }</td>
             <td class="td_bs">
-              <a href="../mreview/create.do?genreno=${genreno }" title="등록"><img src="/genre/images/create.png" class="icon"></a>
+              <a href="../movie/create.do?genreno=${genreno }" title="등록"><img src="/genre/images/create.png" class="icon"></a>
               <c:choose>
                 <c:when test="${genreVO.visible == 'Y'}">
                   <a href="./update_visible_n.do?genreno=${genreno }" title="카테고리 공개 설정"><img src="/genre/images/show.png" class="icon"></a>
