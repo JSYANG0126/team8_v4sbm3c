@@ -118,4 +118,16 @@ public int passwd_update(HashMap<String, Object> map) {
 	int cnt = this.memDAO.passwd_update(map);
     return cnt;
 }
+
+@Override
+public int sp_check(MemVO memVO) {
+	int cnt = this.memDAO.sp_check(memVO);
+	return cnt;
+}
+
+@Override
+public int wd_check(MemVO memVO) {
+	int cnt = this.memDAO.wd_check(memVO);
+	return cnt;
+}
 }

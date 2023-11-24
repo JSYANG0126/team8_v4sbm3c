@@ -389,6 +389,8 @@ public class MemCont {
      HashMap<String, Object> map = new HashMap<String, Object>();
      map.put("id", id);
      map.put("passwd", passwd);
+     
+     
     
      int cnt = memProc.login(map);
      if (cnt == 1) { // 로그인 성공

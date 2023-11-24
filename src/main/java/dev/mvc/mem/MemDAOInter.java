@@ -79,4 +79,18 @@ public interface MemDAOInter {
    * @return 변경된 패스워드 갯수
    */
   public int passwd_update(HashMap<String, Object> map);
+  
+  /**
+   * 회원 정지검사
+   * @param memVO
+   * @return cnt
+   */
+  public int sp_check(MemVO memVO);
+  
+  /**
+   * 회원 탈퇴검사
+   * @param memVO
+   * @return cnt
+   */
+  public int wd_check(MemVO memVO);
 }
