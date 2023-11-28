@@ -46,7 +46,8 @@
 	  <div class='menu_line'></div>
 	  
 	  <form name='frm' method='post' action='./create.do' enctype="multipart/form-data">
-	    
+              <input type='hidden' name='memno' value='${memno}'>
+              <input type='hidden' name='qname' value='${qname}'>
 	    <div>
 	       <label>제목</label>
 	       <input type='text' name='qnatitle' value='앨리멘탈' required="required" 

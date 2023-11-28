@@ -93,6 +93,7 @@ public class MemCont {
       int cnt= memProc.create(memVO); // SQL insert
       
       if (cnt == 1) { // insert 레코드 개수, 회원 가입 성공
+        
         mav.addObject("code", "create_success");
         mav.addObject("mname", memVO.getMname());  // 홍길동님(user4) 회원 가입을 축하합니다.
         mav.addObject("id", memVO.getId());
