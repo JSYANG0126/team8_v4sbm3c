@@ -13,7 +13,6 @@ CREATE TABLE mem(
 		MDATE                         		DATE		 NOT NULL,
 		GRADE                         		NUMBER(2)		 NOT NULL,
 		qnano                         		NUMBER(10)		 NULL,
-        PRIMARY KEY (memno)
 );
 
 COMMENT ON TABLE mem is '회원';

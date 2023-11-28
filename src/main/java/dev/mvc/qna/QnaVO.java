@@ -5,6 +5,8 @@ public class QnaVO {
   private int memno;
   private String qnatitle;
   private String qnainfo;
+  private String qdate;
+  private String qname;
   
   public int getQnano() {
     return qnano;
@@ -29,6 +31,18 @@ public class QnaVO {
   }
   public void setQnainfo(String qnainfo) {
     this.qnainfo = qnainfo;
+  }
+  public String getQdate() {
+    return qdate;
+  }
+  public void setQdate(String qdate) {
+    this.qdate = qdate;
+  }
+  public String getQname() {
+    return qname;
+  }
+  public void setQname(String qname) {
+    this.qname = qname;
   }
   
   

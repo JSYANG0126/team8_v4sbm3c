@@ -6,20 +6,20 @@
 
 	<!-- 등록 -->
 	<insert id="create" parameterType="dev.mvc.qna.QnaVO">
-		INSERT INTO QNA(qnano, memno, qnatitle, qnainfo) 
-		VALUES qnano = #{qnano}, memno = #{memno}, qnatitle = #{qnatitle}, qnainfo = #{qnainfo}
+		INSERT INTO QNA(qnano, memno, qnatitle, qnainfo, qdate, qname) 
+		VALUES (QNA_SEQ.nextval, #{memno}, #{qnatitle}, #{qnainfo}, sysdate, #{qname})
 	</insert>
 	
 	<!-- 전체 목록 -->
 	<select id="list" resultType="dev.mvc.qna.QnaVO">
-		SELECT qnano, memno, qnatitle, qnainfo 
+		SELECT qnano, memno, qnatitle, qnainfo, qdate, qname 
 		FROM QNA 
-		ORDER BY qnano ASC
+		ORDER BY qnano DESC
 	</select>
 	
 	<!-- 조회 -->
 	<select id="read" resultType="dev.mvc.qna.QnaVO" parameterType="int">
-		SELECT qnano, memno, qnatitle, qnainfo 
+		SELECT qnano, memno, qnatitle, qnainfo, qdate, qname
 		FROM QNA 
 		WHERE qnano = #{qnano}
 	</select>
