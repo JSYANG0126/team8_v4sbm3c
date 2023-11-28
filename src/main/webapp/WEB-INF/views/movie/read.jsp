@@ -11,8 +11,6 @@
 <c:set var="title" value="${movieVO.title }" />
 <c:set var="content" value="${movieVO.content }" />
 <c:set var="rdate" value="${movieVO.rdate }" />
-<c:set var="youtube" value="${movieVO.youtube }" />
-<c:set var="map" value="${movieVO.map }" />
 <c:set var="file1" value="${movieVO.file1 }" />
 <c:set var="size1_label" value="${movieVO.size1_label }" />
 <c:set var="word" value="${movieVO.word }" />
@@ -45,10 +43,6 @@
       <a href="./update_text.do?movieno=${movieno}&now_page=${param.now_page}&word=${param.word }">글 수정</a>
       <span class='menu_divide' >│</span>
       <a href="./update_file.do?movieno=${movieno}&now_page=${param.now_page}">파일 수정</a>  
-      <span class='menu_divide' >│</span>
-      <a href="./map.do?genreno=${genreno }&movieno=${movieno}">지도</a>
-      <span class='menu_divide' >│</span>
-      <a href="./youtube.do?genreno=${genreno }&movieno=${movieno}">Youtube</a>
       <span class='menu_divide' >│</span>
       <a href="./delete.do?movieno=${movieno}&now_page=${param.now_page}&genreno=${genreno}">삭제</a>  
       <span class='menu_divide' >│</span>
@@ -102,22 +96,6 @@
           ${content }
         </DIV>
       </li>
-      
-      <c:if test="${youtube.trim().length() > 0 }">
-        <li class="li_none" style="clear: both; padding-top: 5px; padding-bottom: 5px;">
-          <DIV style="text-align: center;">
-            ${youtube }
-          </DIV>
-        </li>
-      </c:if>
-      
-      <c:if test="${map.trim().length() > 0 }">
-        <li class="li_none" style="clear: both; padding-top: 5px; padding-bottom: 5px;">
-          <DIV style='text-align: center; width:640px; height: 360px; margin: 0px auto;'>
-            ${map }
-          </DIV>
-        </li>
-      </c:if>
       
       <li class="li_none" style="clear: both;">
         <DIV style='text-decoration: none;'>

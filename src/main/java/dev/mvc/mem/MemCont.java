@@ -253,6 +253,7 @@ public class MemCont {
        mav.addObject("code", "delete_success");
        mav.addObject("mname", memVO.getMname());  // 홍길동님(user4) 회원 정보를 삭제했습니다.
        mav.addObject("id", memVO.getId());
+       memVO.setGrade(99); // 탈퇴 회원 등록 99 지정
      } else {
        mav.addObject("code", "delete_fail");
      }
