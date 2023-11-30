@@ -12,7 +12,7 @@ CREATE TABLE mem(
 		ADDRESS2                      		VARCHAR2(50)		 NULL ,
 		MDATE                         		DATE		 NOT NULL,
 		GRADE                         		NUMBER(2)		 NOT NULL,
-		qnano                         		NUMBER(10)		 NULL,
+		qnano                         		NUMBER(10)		 NULL
 );
 
 COMMENT ON TABLE mem is '회원';

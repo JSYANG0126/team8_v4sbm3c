@@ -1,8 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 자식 XML 태그들은 dev.mvc.genre.GenreDAOInter.java interface와 연결됨 -->
+
 <mapper namespace="dev.mvc.comments.CommentsDAOInter">
 
+	<!--  댓글 작성 -->
+	<insert id="create" parameterType="dev.mvc.comments.CommentsVO">
+    INSERT INTO comments(commentno, movieno, memno, reply, cdate, cname)
+    VALUES (comments_seq.nextval, #{movieno}, #{memno}, #{reply}, sysdate, #{cname})
+</insert>
 
-</mapper>
+	 <!--  댓글 리스트 -->
+	<select id="list" resultType="dev.mvc.comments.CommentsVO">	
+		SELECT commentno, movieno, memno, reply, cdate, favorite, cname 
+		FROM comments 
+		ORDER BY commentno DESC	
+	</select>
+	
+	  <!-- 특정 카테고리의 등록된 글목록 -->
+  <select id="list_by_movieno" resultType="dev.mvc.comments.CommentsVO" parameterType="int">
+    SELECT commentno, movieno, memno, reply, cdate, favorite, cname
+    FROM comments 
+    WHERE movieno = #{movieno}
+    ORDER BY commentno DESC
+  </select> 
+  
+	<!-- 삭제/수정용 -->
+	<select id="read" parameterType="int" resultType="dev.mvc.comments.CommentsVO">
+		SELECT commentno, movieno, memno, reply, cdate, favorite, cname FROM comments
+		WHERE commentno=#{commentno}
+	</select>
+	
+	<!-- 수정 -->
+	<update id="update" parameterType="dev.mvc.comments.CommentsVO">
+		UPDATE comments SET reply=#{reply} 
+		WHERE commentno=#{commentno}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM comments WHERE commentno=#{commentno}
+	</delete>
+</mapper> 

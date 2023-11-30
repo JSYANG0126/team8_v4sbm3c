@@ -7,7 +7,7 @@ CREATE TABLE comments(
 		memno                         		NUMBER(10)		 NOT NULL ,
 		reply                      		VARCHAR2(100)		 NOT NULL,
 		cdate                          		DATE		 NULL ,
-		favorite                          		NUMBER(10)	DEFAULT 0	 NOT NULL,
+		favorite                          		NUMBER(10)	DEFAULT 0	 NULL,
         cname                           VARCHAR2(30)        NOT NULL,
   FOREIGN KEY (movieno) REFERENCES movie (movieno),
   FOREIGN KEY (memno) REFERENCES MEM (memno)

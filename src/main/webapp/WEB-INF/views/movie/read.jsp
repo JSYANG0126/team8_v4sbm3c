@@ -114,7 +114,47 @@
       </li>   
     </ul>
   </fieldset>
-
+  
+ <form name='frm' method='post' action='/comments/create.do'>
+ 		<input type='hidden' name='memno' value='${memno}'>
+    <input type='hidden' name='movieno' value='${movieno}'>
+    <div style="text-align: center;">
+      <label>댓글</label>
+      <input type="text" name="reply" value="" required="required" autofocus="autofocus" 
+                 class="" style="width: 50%">
+      <button type="submit" class="btn btn-secondary btn-sm" style="height: 28px; margin-bottom: 5px;">등록</button>
+      <button type="button" onclick="location.href='./list_all.do'" class="btn btn-secondary btn-sm" 
+                  style="height: 28px; margin-bottom: 5px;">목록</button> 
+    </div>
+  </form>
+	
+	<table class="table table">
+    <colgroup>
+       <col style="width: 10%;"></col>
+      <col style="width: 50%;"></col>
+      <col style="width: 15%;"></col>
+      <col style="width: 5%;"></col>
+      </colgroup>
+      <tbody>
+      <c:forEach var="CommentsVO" items="${list_comments }" varStatus="info">
+          <tr>
+            <td>
+             ${CommentsVO.cname}
+            </td>
+            <td>
+              <span>${CommentsVO.reply}</span><br>
+            </td>
+            <td>
+								${CommentsVO.cdate}
+            </td>
+            <td>
+            <a href="/comments/delete.do?commentno=${CommentsVO.commentno }&movieno=${param.movieno}">삭제</a>
+            </td>
+          </tr>
+         </c:forEach>
+    </tbody>
+      
+  </table>
 </DIV>
  
 <jsp:include page="../menu/bottom.jsp" flush='false' />

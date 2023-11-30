@@ -2,7 +2,7 @@ package dev.mvc.comments;
 
 import java.util.ArrayList;
 
-public interface CommentsDAOInter {
+public interface CommentsProcInter {
   public int create(CommentsVO commentsVO);
   
   public ArrayList<CommentsVO>list();

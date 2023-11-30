@@ -1,12 +1,14 @@
 package dev.mvc.comments;
 
 public class CommentsVO {
+  
   private int commentno;
   private int movieno;
   private int memno;
   private String reply;
   private String cdate;
   private int favorite;
+  private String cname;
   public int getCommentno() {
     return commentno;
   }
@@ -43,6 +45,13 @@ public class CommentsVO {
   public void setFavorite(int favorite) {
     this.favorite = favorite;
   }
+  public String getCname() {
+    return cname;
+  }
+  public void setCname(String cname) {
+    this.cname = cname;
+  }
+  
   
   
 }
