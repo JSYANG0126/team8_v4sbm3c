@@ -23,5 +23,9 @@ public class ReservationVO {
   public void setLink(String link) {
     this.link = link;
   }
+  @Override
+  public String toString() {
+    return "ReservationVO [reservationno=" + reservationno + ", tname=" + tname + ", link=" + link + "]";
+  }
   
 }
