@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.comments.CommentsProcInter;
+import dev.mvc.comments.CommentsVO;
 import dev.mvc.genre.GenreProcInter;
 import dev.mvc.genre.GenreVO;
 import dev.mvc.manager.ManagerProcInter;
@@ -33,6 +35,12 @@ public class MovieCont {
   @Autowired
   @Qualifier("dev.mvc.movie.MovieProc") //@component("dev.mvc.comtents.MovieProc")
   private MovieProcInter movieProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.comments.CommentsProc")
+  private CommentsProcInter commentsProc;
+  
+
   
   public MovieCont () {
     System.out.println("-> MovieCont created.");
@@ -388,6 +396,10 @@ public class MovieCont {
     movieVO.setContent(content);  
     movieVO.setSize1_label(size1_label);
     
+    ArrayList<CommentsVO> list_comments = this.commentsProc.list_by_movieno(movieno);
+    
+
+    mav.addObject("list_comments", list_comments);
     mav.addObject("movieVO", movieVO);
     
     return mav;
