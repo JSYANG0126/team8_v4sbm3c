@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.theater.TheaterDAOInter">
+
+<!-- 등록한 레코드 갯수 1 리턴, #{managerno}: public int getManagerno() 호출됨 -->
+<insert id="create" parameterType="dev.mvc.theater.TheaterVO">
+    INSERT INTO theater(theaterno, memno, tname, tinfo, tdate, map) 
+    VALUES(theater_seq.nextval, #{memno}, #{tname} ,#{tinfo}, sysdate, #{map})  
+</insert>
+
+</mapper>

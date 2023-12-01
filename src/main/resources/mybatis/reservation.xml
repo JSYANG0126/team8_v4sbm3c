@@ -24,10 +24,15 @@
   </select>
   
   <!-- return: 수정한 레코드 갯수 리턴, parameterType: 수정할 레코드 정보 -->
-  <select id="update" parameterType="dev.mvc.reservation.ReservationVO" >
+  <update id="update" parameterType="dev.mvc.reservation.ReservationVO" >
     UPDATE reservation 
     SET tname=#{tname}, link=#{link}
     WHERE reservationno=#{reservationno}
-  </select>
+  </update>
+  
+  <!-- return: 삭제한 레코드 갯수 리턴, parameterType: 삭제할 레코드 정보 -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM reservation WHERE reservationno=#{reservationno}
+  </delete>
   
  </mapper>
