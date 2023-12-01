@@ -3,7 +3,7 @@ package dev.mvc.theater;
 public class TheaterVO {
   private int theaterno;
   private int memno;
-  private String ttitle;
+  private String tname;
   private String tinfo;
   private String tdate;
   private String map;
@@ -20,11 +20,11 @@ public class TheaterVO {
   public void setMemno(int memno) {
     this.memno = memno;
   }
-  public String getTtitle() {
-    return ttitle;
+  public String getTname() {
+    return tname;
   }
-  public void setTtitle(String ttitle) {
-    this.ttitle = ttitle;
+  public void setTname(String tname) {
+    this.tname = tname;
   }
   public String getTinfo() {
     return tinfo;

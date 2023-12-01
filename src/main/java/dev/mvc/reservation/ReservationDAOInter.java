@@ -29,4 +29,9 @@ public interface ReservationDAOInter {
    * @return
    */
   public int update(ReservationVO reservationVO);
+  
+  /**
+   * 삭제
+   */
+  public int delete(int reservationno);
 }

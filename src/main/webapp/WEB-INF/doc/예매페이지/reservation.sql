@@ -30,6 +30,10 @@ SELECT reservationno, tname, link FROM reservation WHERE reservationno=1;
 UPDATE reservation SET tname='lotte cinema', link='www.lotte cinema' WHERE reservationno=1;
 
 
+    UPDATE reservation 
+    SET tname='메가박스', link='www.'
+    WHERE reservationno= 5;
+
 -- DELETE
 DELETE FROM reservation WHERE reservationno=1;
 
