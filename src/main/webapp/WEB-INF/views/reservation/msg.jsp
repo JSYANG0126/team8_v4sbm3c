@@ -79,7 +79,7 @@ String name = (String)request.getAttribute("name");
           <%  
           }
           %>
-          <button type="button" onclick="location.href='./list.do'" class="btn btn-secondary btn-sm">전체 목록</button>
+          <button type="button" onclick="location.href='./list_all.do'" class="btn btn-secondary btn-sm">전체 목록</button>
         </li>
         
     </ul>

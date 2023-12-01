@@ -36,6 +36,12 @@ public class ReservationProc implements ReservationProcInter  {
     return cnt;
   }
 
+  @Override
+  public int delete(int reservationno) {
+    int cnt = this.reservationDAO.delete(reservationno);
+    return cnt;
+  }
+
  
  
 

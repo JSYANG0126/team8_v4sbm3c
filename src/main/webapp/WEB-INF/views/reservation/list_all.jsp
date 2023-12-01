@@ -15,7 +15,7 @@
 <body>
 <c:import url="/menu/top.do" />
 
-  <div class='title_line'>카테고리</div>
+  <div class='title_line'>예매 페이지 링크</div>
   
   <aside class="aside_right">
     <c:choose>
@@ -42,8 +42,9 @@
       <thead>
         <tr>
           <th class="th_bs">순서</th>
-          <th class="th_bs">예매 페이지 이름</th>
+          <th class="th_bs">홈페이지</th>
           <th class="th_bs">URL</th>
+          <th class="th_bs">비고</th>
         </tr>
       </thead>
       <tbody>
@@ -54,9 +55,18 @@
             <td><a style="display: block; text-align:center;">${reservationno }</a></td>
             <td><a style="display: block; text-align:center;">${reservationVO.tname }</a></td>
             <td><a href="${link }">${link }</a>
+            
             <td class="td_bs">
-              <a href="./update.do?reservationno=${reservationno }" title="수정"><img src="/reservation/images/update.png" class="icon"></a>
-              <a href="./delete.do?reservationno=${reservationno }" title="삭제"><img src="/reservation/images/delete.png" class="icon"></a>
+              <c:choose>
+					      <c:when test="${sessionScope.manager_id != null}">
+					         <a href="./update.do?reservationno=${reservationno }" title="수정"><img src="/reservation/images/update.png" class="icon"></a>
+                   <a href="./delete.do?reservationno=${reservationno }" title="삭제"><img src="/reservation/images/delete.png" class="icon"></a>
+					      </c:when>
+					      <c:otherwise>
+					         <a href="../qna/list_all.do">링크 문제시 문의</a>
+					      </c:otherwise>
+				      </c:choose>
+             
             </td>
           </tr>
         </c:forEach>

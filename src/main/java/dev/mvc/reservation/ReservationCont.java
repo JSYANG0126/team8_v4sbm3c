@@ -9,10 +9,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import dev.mvc.manager.ManagerProcInter;
+
 
 @Controller
 public class ReservationCont {
@@ -118,15 +117,13 @@ public class ReservationCont {
   @RequestMapping(value="/reservation/update.do", method = RequestMethod.POST)
   public ModelAndView update(ReservationVO reservationVO) { // 자동으로 reservationVO 객체가 생성되고 폼의 값이 할당됨
     ModelAndView mav = new ModelAndView();
-
-    int cnt = this.reservationProc.update(reservationVO); // 수정 처리
     System.out.println(reservationVO);
+    int cnt = this.reservationProc.update(reservationVO); // 수정 처리
     System.out.println("-> cnt: " + cnt);
     
     if (cnt == 1) {
       mav.setViewName("redirect:/reservation/list_all.do"); 
-      
-    } else {
+    }else{
       mav.addObject("code", "update_fail");
       mav.setViewName("/reservation/msg"); // /WEB-INF/views/reservation/msg.jsp
     }
@@ -135,6 +132,47 @@ public class ReservationCont {
     
     return mav;
   }
+  
+  /**
+  * 삭제폼 
+  * http://localhost:9093/reservation/delete.do
+  * @return
+   */
+   @RequestMapping(value="/reservation/delete.do", method = RequestMethod.GET)
+   public ModelAndView delete(int reservationno) { // int cateno = (int) request.getParemeter("cateno");
+     ModelAndView mav = new ModelAndView();
+     mav.setViewName("/reservation/delete"); // /WEB-INF/views/cate/delete.jsp
+     
+     ReservationVO reservationVO = this.reservationProc.read(reservationno);
+     
+     mav.addObject("reservationVO", reservationVO); // 
+     return mav;
+   }
+   /**
+    * 삭제처리, http://localhost:9093/reservation/delete.do?reservationno=8
+    * @param cateno 삭제할 내용
+    * @return  
+    */
+   @RequestMapping(value="/reservation/delete.do", method = RequestMethod.POST)
+   public ModelAndView delete_proc(int reservationno) { // int cateno = (int) request.getParemeter("cateno");
+     ModelAndView mav = new ModelAndView();
+     mav.setViewName("/reservation/msg"); // /WEB-INF/views/cate/delete.jsp
+     
+     ReservationVO reservationVO = this.reservationProc.read(reservationno); // 삭제할 레코드 정보 읽기
+     
+     int cnt = this.reservationProc.delete(reservationno);
+     System.out.println("->cnt" + cnt);
+     
+     if (cnt == 1) {
+       mav.addObject("code","delete_success"); // 키, 값
+       mav.addObject("name", reservationVO.getTname()); // 카테고리 이름 jsp로 전송
+     } else {
+       mav.addObject("code", "delete_fail");
+     }
+     
+     mav.addObject("cnt", cnt);
+     return mav;
+   }
 
 }
 
