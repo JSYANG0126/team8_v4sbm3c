@@ -80,7 +80,7 @@
                     <a class="dropdown-item" href="/mem/passwd_update.do">비밀번호 변경</a>
                     <a class="dropdown-item" href="/mem/read.do">회원 정보 수정</a>
                     <a class="dropdown-item" href="javascript: alert('개발 예정')">로그인 내역</a>
-                    <a class="dropdown-item" href="mem/delete.do">회원 탈퇴</a>
+                    <a class="dropdown-item" href="mem/delete.do?memno=${sessionScope.memno }">회원 탈퇴</a>
                   </c:otherwise>
                 </c:choose>
               </div>
