@@ -131,9 +131,9 @@
 	<table class="table table">
     <colgroup>
        <col style="width: 10%;"></col>
-      <col style="width: 50%;"></col>
-      <col style="width: 15%;"></col>
-      <col style="width: 5%;"></col>
+      <col style="width: 60%;"></col>
+      <col style="width: 20%;"></col>
+      <col style="width: 10%;"></col>
       </colgroup>
       <tbody>
       <c:forEach var="CommentsVO" items="${list_comments }" varStatus="info">
@@ -148,9 +148,18 @@
 								${CommentsVO.cdate}
             </td>
             <td>
-            <a href="/comments/delete.do?commentno=${CommentsVO.commentno }&movieno=${param.movieno}">삭제</a>
+            <c:if test="${sessionScope.id != null && sessionScope.memno == CommentsVO.memno }">
+            <a href="/comments/delete.do?commentno=${CommentsVO.commentno }&movieno=${param.movieno}"><img src="/comments/delete.png" title="삭제"></a>
+            <a href="/comments/update.do?commentno=${CommentsVO.commentno }&movieno=${param.movieno}"><img src="/comments/update.png" title="수정"></a>
+            </c:if>
+            <c:if test="${sessionScope.manager_id != null }">
+            <a href="/comments/delete.do?commentno=${CommentsVO.commentno }&movieno=${param.movieno}"><img src="/comments/delete.png" title="삭제"></a>
+            <a href="/comments/update.do?commentno=${CommentsVO.commentno }&movieno=${param.movieno}"><img src="/comments/update.png" title="수정"></a>
+            </c:if>
             </td>
+            
           </tr>
+
          </c:forEach>
     </tbody>
       

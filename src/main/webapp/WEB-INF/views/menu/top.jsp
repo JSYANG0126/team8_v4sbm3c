@@ -41,14 +41,18 @@
 
       <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
-            <%-- 게시판 목록 출력 --%>
-            <c:forEach var="genreVO" items="${list_top}">
-              <c:set var="genreno" value="${genreVO.genreno }" />
-              <c:set var="name" value="${genreVO.name }" />
-              <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
-                <a class="nav-link top_menu_link" href="/movie/list_by_genreno.do?genreno=${genreVO.genreno }&now_page=1">${genreVO.name }</a> 
-              </li>
-            </c:forEach>
+            
+            <%-- 게시판 목록 서브메뉴 --%>
+            <li class="nav-item dropdown">
+              <a class="nav-link top_menu_link dropdown-toggle" data-bs-toggle="dropdown" href="#">장르 목록</a>
+              <div class="dropdown-menu">
+                <c:forEach var="genreVO" items="${list_top }">
+                    <c:set var="genreno" value="${genreVO.genreno }" />
+                    <c:set var="name" value="${genreVO.name }" />
+                    <a class="dropdown-item" href="/movie/list_by_genreno.do?genreno=${genreVO.genreno }&now_page=1">${genreVO.name }</a> 
+                </c:forEach>
+              </div>
+            </li>
             
             <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
               <a class="nav-link top_menu_link" href="/movie/list_all.do">전체 글 목록</a>

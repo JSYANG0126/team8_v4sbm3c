@@ -3,6 +3,7 @@ package dev.mvc.comments;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,6 +17,7 @@ import dev.mvc.mem.MemProcInter;
 import dev.mvc.mem.MemVO;
 import dev.mvc.movie.MovieProcInter;
 import dev.mvc.movie.MovieVO;
+import dev.mvc.qna.QnaVO;
 
 
 @Controller
@@ -81,6 +83,48 @@ public class CommentsCont {
       
        // request.setAttribute("cnt", cnt);
   //    mav.addObject("cnt", 0); // request.setAttribute("cnt", cnt);
+    
+    return mav;
+  }
+  
+  // 수정폼
+  @RequestMapping(value="/comments/update.do", method = RequestMethod.GET)
+  public ModelAndView update(HttpSession session, int commentno) { // int cateno = (int)request.getParameter("cateno");
+    ModelAndView mav = new ModelAndView();
+    if (this.memProc.isMem(session)) {
+      mav.setViewName("/comments/update");
+        
+      CommentsVO commentsVO = this.commentsProc.read(commentno);
+      mav.addObject("commentsVO", commentsVO);
+          
+      ArrayList<CommentsVO> list = (ArrayList<CommentsVO>)this.commentsProc.list();
+      mav.addObject("list", list);
+    } else {
+      mav.setViewName("/mem/login_need"); 
+    }
+    
+    
+    return mav;
+  }
+  
+  // 수정처리
+  @RequestMapping(value="/comments/update.do", method = RequestMethod.POST)
+  public ModelAndView update(HttpSession session, CommentsVO commentsVO) { 
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/comments/msg"); 
+
+    int cnt = this.commentsProc.update(commentsVO); 
+    System.out.println("-> cnt: " + cnt);
+    
+    if (cnt == 1) {
+      mav.addObject("code", "update_success");
+      mav.setViewName("redirect:/movie/read.do?movieno=" + commentsVO.getMovieno());   
+    } else {
+      mav.setViewName("/comments/msg"); 
+      mav.addObject("code", "update_fail");
+    }
+    
+    mav.addObject("cnt", cnt); 
     
     return mav;
   }
