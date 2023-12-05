@@ -33,7 +33,7 @@
       <span class='menu_divide' >│</span> 
     </c:if>
     
-    <c:if test="${sessionScope.manager_id != null }">
+    <c:if test="${sessionScope.memno == 1 }">
       <%--
       http://localhost:9091/movie/create.do?genreno=1
       http://localhost:9091/movie/create.do?genreno=2
