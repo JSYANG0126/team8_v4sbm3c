@@ -100,8 +100,6 @@
               (${movieVO.rdate.substring(0, 16) })
             </td>
             <td class="td_bs">
-              <a href="/movie/map.do?genreno=${genreno }&movieno=${movieno}&now_page=${param.now_page}" title="지도"><img src="/movie/images/map.png" class="icon"></a>
-              <a href="/movie/youtube.do?genreno=${genreno }&movieno=${movieno}&now_page=${param.now_page}" title="유튜브"><img src="/movie/images/youtube.png" class="icon"></a>
               <a href="/movie/delete.do?genreno=${genreno }&movieno=${movieno}&now_page=${param.now_page}" title="삭제"><img src="/movie/images/delete.png" class="icon"></a>
             </td>
           </tr>
