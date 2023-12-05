@@ -134,7 +134,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   
   <!-- 특정 카테고리에 속한 모든 레코드 삭제 -->
-  <delete id="delete_by_cateno" parameterType="int">
+  <delete id="delete_by_genreno" parameterType="int">
     DELETE FROM movie
     WHERE genreno=#{genreno}
   </delete>
