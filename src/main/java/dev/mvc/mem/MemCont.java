@@ -561,5 +561,32 @@ public class MemCont {
     
     return mav;
   }
+
+  /**
+   * 아이디 찾기 폼
+   * @param mname
+   * @param tel
+   */
+  @RequestMapping(value="/mem/id_find.do", method=RequestMethod.GET )
+  public ModelAndView id_find() {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/mem/id_find"); // /WEB-INF/views/mem/id_find.jsp
+   
+    return mav; // forward
+  }
   
+  
+  /**
+   * 아이디 찾기 폼
+   * @param mname
+   * @param tel
+   * @param email
+   */
+  @RequestMapping(value="/mem/passwd_find.do", method=RequestMethod.GET )
+  public ModelAndView passwd_find() {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/mem/passwd_find"); // /WEB-INF/views/mem/passwd_find.jsp
+   
+    return mav; // forward
+  }
 }
