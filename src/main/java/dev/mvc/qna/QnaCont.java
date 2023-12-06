@@ -11,11 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.answer.AnswerProcInter;
+import dev.mvc.answer.AnswerVO;
+import dev.mvc.comments.CommentsVO;
 import dev.mvc.genre.GenreVO;
 import dev.mvc.manager.ManagerProcInter;
 import dev.mvc.mem.MemProcInter;
 import dev.mvc.mem.MemVO;
+import dev.mvc.movie.Movie;
+import dev.mvc.movie.MovieVO;
 import dev.mvc.qna.QnaVO;
+import dev.mvc.tool.Tool;
 
 @Controller
 public class QnaCont {
@@ -31,6 +37,9 @@ public class QnaCont {
   @Qualifier("dev.mvc.manager.ManagerProc") //@component("dev.mvc.manager.ManagerProc")
   private ManagerProcInter managerProc;
   
+  @Autowired
+  @Qualifier("dev.mvc.answer.AnswerProc")
+  private AnswerProcInter answerProc;
   
   public QnaCont() {
     System.out.println("-> QnaCont created.");  
@@ -120,6 +129,9 @@ public class QnaCont {
     
     QnaVO qnaVO = this.qnaProc.read(qnano);
     mav.addObject("qnaVO", qnaVO);
+    
+    ArrayList<AnswerVO> list = this.answerProc.list_by_qnano(qnano); 
+    mav.addObject("list", list);
     
     return mav;
   }
@@ -211,6 +223,10 @@ public class QnaCont {
    
    ModelAndView mav = new ModelAndView(); 
    if (this.memProc.isMem(session)) {
+
+     ArrayList<AnswerVO> list = this.answerProc.list_by_qnano(qnano); 
+     this.answerProc.delete_by_qnano(qnano);
+     
      int cnt = this.qnaProc.delete(qnano);
        
      if (cnt == 1) {

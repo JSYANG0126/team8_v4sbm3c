@@ -713,7 +713,7 @@ public class MovieCont {
     @RequestMapping(value = "/movie/delete.do", method = RequestMethod.POST)
     public ModelAndView delete(MovieVO movieVO) {
       ModelAndView mav = new ModelAndView();
-      
+
       // -------------------------------------------------------------------
       // 파일 삭제 시작
       // -------------------------------------------------------------------
@@ -729,7 +729,8 @@ public class MovieCont {
       // -------------------------------------------------------------------
       // 파일 삭제 종료
       // -------------------------------------------------------------------
-          
+        
+      this.commentsProc.delete_by_movieno(movieVO.getMovieno());
       this.movieProc.delete(movieVO.getMovieno()); // DBMS 삭제
           
       // -------------------------------------------------------------------------------------
