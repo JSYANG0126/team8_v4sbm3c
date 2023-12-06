@@ -14,4 +14,6 @@ public interface CommentsProcInter {
   public int update(CommentsVO commentsVO);
   
   public int delete(int commentno);
+
+  public int delete_by_movieno(int movieno);
 }
