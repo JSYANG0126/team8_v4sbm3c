@@ -564,8 +564,6 @@ public class MemCont {
 
   /**
    * 아이디 찾기 폼
-   * @param mname
-   * @param tel
    */
   @RequestMapping(value="/mem/id_find.do", method=RequestMethod.GET )
   public ModelAndView id_find() {
@@ -575,9 +573,37 @@ public class MemCont {
     return mav; // forward
   }
   
+  /**
+   * 아이디 찾기 처리
+   * @param mname
+   * @param tel
+   */
+  @RequestMapping(value="/mem/id_find.do", method=RequestMethod.GET )
+  public ModelAndView id_find(HttpSession session, MemVO memVO) {
+    ModelAndView mav = new ModelAndView();
+    
+    String mname = (String)session.getAttribute("mname");
+    String tel = (String)session.getAttribute("tel");
+    
+    if(memVO.getMname().equals(mname)) {
+    	if(memVO.getTel().equals(tel) ) {
+    		String id = memVO.getId();
+    		int atIndex = id.indexOf('@');
+    		String maskedID = id.substring(0, Math.min(atIndex, 4)) + "*".repeat(Math.max(0, atIndex - 4)) + id.substring(atIndex);
+    		System.out.println("회원님의 id는 " + maskedID + "입니다.");
+    	}
+    	else {
+    		
+    	}
+    } else {
+    	
+    }
+    
+    return mav;
+  }
   
   /**
-   * 아이디 찾기 폼
+   * 비밀번호 찾기 폼
    * @param mname
    * @param tel
    * @param email

@@ -19,8 +19,14 @@
     
     <div style="width: 60%; margin: 0px auto ">
         <div class="form-group" style ="padding-bottom: 5px">
+        <label>아이디(이메일):
+            <input type='text' class="form-control form-control-sm" name='mname' id='mname' value='user1@gmail.com' required="required" placeholder="아이디" autofocus="autofocus">
+        </label>
+        </div>  
+        
+        <div class="form-group" style ="padding-bottom: 5px">
         <label>성명:
-            <input type='text' class="form-control form-control-sm" name='mname' id='mname' value='홍길동' required="required" placeholder="아이디" autofocus="autofocus">
+            <input type='text' class="form-control form-control-sm" name='mname' id='mname' value='홍길동' required="required" placeholder="성명" autofocus="autofocus">
         </label>
         </div>   
     
@@ -29,12 +35,7 @@
             <input type='text' class="form-control form-control-sm" name='tel' id='tel' value='010-0000-0000' required="required" placeholder="전화번호" autofocus="autofocus">
         </label>
         </div>   
-        
-        <div class="form-group">
-        <label>이메일:
-            <input type='text' class="form-control form-control-sm" name='email' id='email' value='user1@gmail.com' required="required" placeholder="이메일" autofocus="autofocus">
-        </label>
-        </div>  
+
         
         <div class="bottom_menu">
             <button type="button" id='btn_send' onclick="send()" class="btn btn-primary btn-sm">아이디 찾기</button>
