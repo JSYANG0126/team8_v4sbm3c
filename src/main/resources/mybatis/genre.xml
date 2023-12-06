@@ -4,7 +4,7 @@
 <!-- 자식 XML 태그들은 dev.mvc.genre.GenreDAOInter.java interface와 연결됨 -->
 <mapper namespace="dev.mvc.genre.GenreDAOInter">
     <insert id="create" parameterType="dev.mvc.genre.GenreVO">
-        INSERT INTO genre(genreno, name, cnt, rdate) VALUES(genre_seq.nextval #{name}, 0, sysdate)
+        INSERT INTO genre(genreno, name, cnt, rdate) VALUES(genre_seq.nextval, #{name}, 0, sysdate)
     </insert>
     
   <!-- 출력 모드 적용 -->
