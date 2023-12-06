@@ -91,7 +91,57 @@
       </li>
     </ul>
   </fieldset>
+  
+  <c:if test="${sessionScope.memno == 1}">
+	<form name='frm' method='post' action='/answer/create.do'>
+ 		<input type='hidden' name='memno' value='${memno}'>
+    <input type='hidden' name='qnano' value='${param.qnano}'>
+    <div style="text-align: center;">
+      <label>답변</label>
+      <input type="text" name="reply" value="" required="required" autofocus="autofocus" 
+                 class="" style="width: 50%">
+      <button type="submit" class="btn btn-secondary btn-sm" style="height: 28px; margin-bottom: 5px;">등록</button>
+      <button type="button" onclick="location.href='./list_all.do'" class="btn btn-secondary btn-sm" 
+                  style="height: 28px; margin-bottom: 5px;">목록</button> 
+    </div>
+  </form>
+  </c:if>
+	
+	<table class="table table">
+    <colgroup>
+       <col style="width: 15%;"></col>
+      <col style="width: 60%;"></col>
+      <col style="width: 20%;"></col>
+      <col style="width: 5%;"></col>
+      </colgroup>
+      <tbody>
+      <c:forEach var="AnswerVO" items="${list }" varStatus="info">
+          <tr>
+            <td>
+             ${AnswerVO.aname}
+            </td>
+            <td>
+              <span>${AnswerVO.reply}</span><br>
+            </td>
+            <td>
+								${AnswerVO.adate}
+            </td>
+            <td>
+            <c:if test="${sessionScope.id != null && sessionScope.memno == QnaVO.memno }">
+            <a href="/answer/delete.do?answerno=${AnswerVO.answerno }&qnano=${param.qnano}"><img src="/answer/delete.png" title="삭제"></a>
+            <a href="/answer/update.do?answerno=${AnswerVO.answerno }&qnano=${param.qnano}"><img src="/answer/update.png" title="수정"></a>
+            </c:if>
+            <c:if test="${sessionScope.memno == 1}">
+            <a href="/answer/delete.do?answerno=${AnswerVO.answerno }&qnano=${param.qnano}"><img src="/answer/delete.png" title="삭제"></a>
+            <a href="/answer/update.do?answerno=${AnswerVO.answerno }&qnano=${param.qnano}"><img src="/answer/update.png" title="수정"></a></c:if>
+            </td>
+            
+          </tr>
 
+         </c:forEach>
+    </tbody>
+      
+  </table>
 </DIV>
  
 <jsp:include page="../menu/bottom.jsp" flush='false' />

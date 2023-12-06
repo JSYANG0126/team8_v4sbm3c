@@ -15,7 +15,7 @@
 </head>
 <body>
 <c:import url="/menu/top.do" />
-  <DIV class='title_line'> 질문 삭제</DIV>
+  <DIV class='title_line'> 답변 삭제</DIV>
   
   <aside class="aside_right">
     <a href="./create.do">글쓰기</a>
@@ -25,24 +25,6 @@
     <a href="./list_all.do?">목록</a>    
   </aside>
   
-  <div style="text-align: right; clear: both;">  
-    <form name='frm' id='frm' method='get' action='./list_by_search_paging.do'>
-	    <%-- 게시판의 구분 --%>      
-      <c:choose>
-        <c:when test="${param.word != '' }"> <%-- 검색하는 경우 --%>
-          <input type='text' name='word' id='word' value='${param.word }' class='input_word'>
-        </c:when>
-        <c:otherwise> <%-- 검색하지 않는 경우 --%>
-          <input type='text' name='word' id='word' value='' class='input_word'>
-        </c:otherwise>
-      </c:choose>
-      <button type='submit' class='btn btn-secondary btn-sm' style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px;">검색</button>
-      <c:if test="${param.word.length() > 0 }">
-        <button type='button' class='btn btn-secondary btn-sm' 
-                    onclick="location.href='./list_all.do?'" style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px;">검색 취소</button>  
-      </c:if>    
-    </form>
-  </div>
   
   <div class='menu_line'></div>
 
@@ -51,10 +33,11 @@
       <li class="li_none">
 
         <DIV style='text-align: left; width: 47%; float: left;'>
-          <span style='font-size: 1.5em;'>${qnaVO.qnatitle}</span>
+          <span style='font-size: 1.5em;'>답변 삭제</span>
           <br>
           <FORM name='frm' method='post' action='./delete.do'>
-              <input type='hidden' name='qnano' value='${param.qnano}'>
+              <input type='hidden' name='answerno' value='${answerVO.answerno}'>
+              <input type='hidden' name='qnano' value='${answerVO.qnano}'>
               <br><br>
               <div style='text-align: center; margin: 10px auto;'>
                 <span style="color: #FF0000; font-weight: bold;">삭제를 진행 하시겠습니까? 삭제하시면 복구 할 수 없습니다.</span><br><br>

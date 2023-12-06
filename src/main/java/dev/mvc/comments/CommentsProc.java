@@ -46,4 +46,9 @@ public class CommentsProc implements CommentsProcInter {
     return cnt;
   }
 
+  @Override
+  public int delete_by_movieno(int movieno) {
+    int cnt = this.commentsDAO.delete_by_movieno(movieno);
+    return cnt;
+  }
 }

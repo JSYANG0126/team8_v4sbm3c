@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 자식 XML 태그들은 dev.mvc.genre.GenreDAOInter.java interface와 연결됨 -->
+<mapper namespace="dev.mvc.answer.AnswerDAOInter">
+	<!-- 등록 -->
+	<insert id="create" parameterType="dev.mvc.answer.AnswerVO">
+		INSERT INTO answer(answerno, qnano, memno, reply, adate, aname) 
+		VALUES (answer_seq.nextval, #{qnano}, #{memno}, #{reply}, sysdate, #{aname})
+
+	</insert>
+
+	<!-- 전체 목록 -->
+	<select id="list" resultType="dev.mvc.answer.AnswerVO">
+		SELECT answerno, qnano, memno, reply, adate, aname 
+		FROM answer 
+		ORDER BY answerno DESC
+	</select>
+	
+	<!-- 특정 카테고리의 등록된 답변목록 -->
+  <select id="list_by_qnano" resultType="dev.mvc.answer.AnswerVO" parameterType="int">
+    SELECT answerno, qnano, memno, reply, adate, aname 
+    FROM answer 
+    WHERE qnano = #{qnano}
+    ORDER BY answerno DESC
+  </select> 
+  
+	<!-- 조회 -->
+	<select id="read" resultType="dev.mvc.answer.AnswerVO" parameterType="int">
+		SELECT answerno, qnano, memno, reply, adate, aname
+		FROM answer 
+		WHERE answerno = #{answerno}
+	</select>
+
+	<!-- 답변 수정 -->
+	<update id="update" parameterType="dev.mvc.answer.AnswerVO">
+		UPDATE answer SET reply=#{reply}  WHERE answerno=#{answerno}
+	</update>
+	
+	<!-- 답변 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM answer WHERE answerno=#{answerno}
+	</delete>
+
+  <!-- 질문에 속한 모든 레코드 삭제 -->
+  <delete id="delete_by_qnano" parameterType="int">
+    DELETE FROM answer
+    WHERE qnano=#{qnano}
+  </delete>
+</mapper>

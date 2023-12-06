@@ -41,4 +41,10 @@
 	<delete id="delete" parameterType="int">
 		DELETE FROM comments WHERE commentno=#{commentno}
 	</delete>
+	
+	  <!-- movie에 속한 모든 레코드 삭제 -->
+  <delete id="delete_by_movieno" parameterType="int">
+    DELETE FROM comments
+    WHERE movieno=#{movieno}
+  </delete>
 </mapper> 
