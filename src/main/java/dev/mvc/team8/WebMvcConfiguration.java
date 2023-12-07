@@ -11,6 +11,7 @@ import dev.mvc.tool.Tool;
 public class WebMvcConfiguration implements WebMvcConfigurer{
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+<<<<<<< HEAD
         // Windows: path = "C:/kd/deploy/MR_v2sbm3c_blog/mreview/storage";
         // ▶ file:///C:/kd/deploy/MR_v2sbm3c_blog/mreview/storage
       
@@ -25,6 +26,17 @@ public class WebMvcConfiguration implements WebMvcConfigurer{
         
         // JSP 인식되는 경로: http://localhost:9092/member/storage";
         // registry.addResourceHandler("/mreview/storage/**").addResourceLocations("file:///" +  Tool.getOSPath() + "/member/storage/");
+=======
+      
+        // JSP 인식되는 경로: http://localhost:9093/movie/storage";
+        registry.addResourceHandler("/movie/storage/**").addResourceLocations("file:///" +  Movie.getUploadDir());
+        
+        // JSP 인식되는 경로: http://localhost:9091/attachfile/storage";
+        // registry.addResourceHandler("/contents/storage/**").addResourceLocations("file:///" +  Tool.getOSPath() + "/attachfile/storage/");
+        
+        // JSP 인식되는 경로: http://localhost:9091/member/storage";
+        // registry.addResourceHandler("/contents/storage/**").addResourceLocations("file:///" +  Tool.getOSPath() + "/member/storage/");
+>>>>>>> 1c06a85fbf9235f66b5c5eb3dcc0d48d5d5f20a7
     }
  
 }

@@ -33,6 +33,7 @@ public class MovieVO {
 	private String passwd = "";
 	private String word = "";
 	private String rdate;
+
 	/**
     이미지 파일
     <input type='file' class="form-control" name='file1MF' id='file1MF' 
@@ -52,7 +53,7 @@ public class MovieVO {
 		this.size1_label = size1_label;
 	}
 	/** 메인 이미지 preview */
-    private String thumb1 = "";
+    private String thumb1;
     /** 메인 이미지 크기 */
     private long size1;
     
