@@ -5,9 +5,16 @@
 <mapper namespace="dev.mvc.theater.TheaterDAOInter">
 
 <!-- 등록한 레코드 갯수 1 리턴, #{managerno}: public int getManagerno() 호출됨 -->
-<insert id="create" parameterType="dev.mvc.theater.TheaterVO">
-    INSERT INTO theater(theaterno, memno, tname, tinfo, tdate, map) 
-    VALUES(theater_seq.nextval, #{memno}, #{tname} ,#{tinfo}, sysdate, #{map})  
-</insert>
+	<insert id="create" parameterType="dev.mvc.theater.TheaterVO">
+	    INSERT INTO theater(theaterno, memno, tname, tinfo, tdate, map) 
+	    VALUES(theater_seq.nextval, #{memno}, #{tname} ,#{tinfo}, sysdate, #{map})  
+	</insert>
+	
+	<!-- 모든 카테고리의 등록된 글목록 -->
+  <select id="list_all" resultType="dev.mvc.theater.TheaterVO">
+    SELECT theaterno, memno, tname, tinfo, tdate, map
+    FROM theater
+    ORDER BY theaterno DESC
+  </select> 
 
 </mapper>

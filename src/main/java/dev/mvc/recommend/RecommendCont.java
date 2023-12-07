@@ -1,7 +1,9 @@
 package dev.mvc.recommend;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +11,18 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.genre.GenreVO;
 import dev.mvc.manager.ManagerProcInter;
 import dev.mvc.genre.GenreProcInter;
 import dev.mvc.mem.MemProcInter;
+import dev.mvc.movie.Movie;
 import dev.mvc.movie.MovieVO;
 import dev.mvc.reservation.ReservationVO;
 import dev.mvc.tool.Tool;
+import dev.mvc.tool.Upload;
 
 
 @Controller
@@ -77,6 +82,30 @@ public class RecommendCont {
     return mav;
   }
   
+  
+  /**
+   * 등록 처리 http://localhost:9093/recommend/create.do
+   * 
+   * @return
+   */
+  @RequestMapping(value = "/recommend/create.do", method = RequestMethod.POST)
+  public ModelAndView create(HttpServletRequest request, HttpSession session, RecommendVO recommendVO) {
+    ModelAndView mav = new ModelAndView();
+    
+    if (memProc.isMem(session)) { // 회원으로 로그인한경우
+      
+      mav.addObject("url", "/recommend/msg"); // 
+      mav.setViewName("redirect:/recommend/msg.do"); 
+
+    } else {
+      mav.addObject("url", "/mem/login_need"); 
+      mav.setViewName("redirect:/recommend/msg.do"); 
+    }
+    
+    return mav; // forward
+  }
+  
+  
   /**
    * 전체 목록
    * http://localhost:9092/recommend/list_all.do
@@ -94,6 +123,70 @@ public class RecommendCont {
     
     return mav;
   }
+  
+  /**
+   * 파일 삭제 폼
+   * http://localhost:9092/recommend/delete.do?recommendno=1
+   * 
+   * @return
+   */
+  @RequestMapping(value = "/recommend/delete.do", method = RequestMethod.GET)
+  public ModelAndView delete(HttpSession session, int recommendno) {
+    ModelAndView mav = new ModelAndView();
+    
+    if (memProc.isMem(session)) { // 회원으로 로그인한경우
+      RecommendVO recommendVO = this.recommendProc.read(recommendno);
+      mav.addObject("recommendVO", recommendVO);
+      
+      GenreVO genreVO = this.genreProc.read(recommendVO.getGenreno());
+      mav.addObject("genreVO", genreVO);
+      
+      mav.setViewName("/recommend/delete"); // /WEB-INF/views/movie/delete.jsp
+      
+    } else {
+      mav.addObject("url", "/mem/login_need"); // /WEB-INF/views/manager/login_need.jsp
+      mav.setViewName("redirect:/recommend/msg.do"); 
+    }
+
+
+    return mav; // forward
+  }
+  
+  // 삭제 처리, 수정 처리를 복사하여 개발
+  // 자식 테이블 레코드 삭제 -> 부모 테이블 레코드 삭제
+  /**
+   * 카테고리 삭제
+   * @param session
+   * @param genreno 삭제할 카테고리 번호
+   * @return
+   */
+  @RequestMapping(value="/recommend/delete.do", method=RequestMethod.POST)
+  public ModelAndView delete_proc(HttpSession session, int genreno) { // <form> 태그의 값이 자동으로 저장됨
+    ModelAndView mav = new ModelAndView();
+    
+    if (this.memProc.isMem(session) == true) {
+      ArrayList<RecommendVO> list = this.recommendProc.list_all();
+      
+      int cnt = this.genreProc.delete(genreno); 
+      
+      if (cnt == 1) {
+        mav.setViewName("redirect:/index.do");     
+        
+      } else {
+        mav.addObject("code", "delete_fail");
+        mav.setViewName("/recommend/msg"); 
+      }
+      
+      mav.addObject("cnt", cnt);
+      
+    } else {
+      mav.setViewName("/mem/login_need"); 
+    }
+    
+    return mav;
+  }
+  
+
 
 }
 

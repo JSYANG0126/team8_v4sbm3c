@@ -22,11 +22,19 @@ public class RecommendProc implements RecommendProcInter {
     ArrayList<RecommendVO> list = this.recommendDAO.list_all();
     return list;
   }
+  
+  @Override
+  public RecommendVO read(int recommendno) {
+    RecommendVO recommendVO = this.recommendDAO.read(recommendno);
+    return recommendVO;
+  }
 
   @Override
   public int delete(int recommendno) {
     int cnt = this.recommendDAO.delete(recommendno);
     return cnt;
   }
+
+
 
 }

@@ -1,5 +1,9 @@
 package dev.mvc.theater;
 
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -9,7 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.manager.ManagerProcInter;
 import dev.mvc.mem.MemProcInter;
+import dev.mvc.movie.MovieVO;
 import dev.mvc.reservation.ReservationVO;
+import dev.mvc.tool.Tool;
 
 
 @Controller
@@ -56,6 +62,31 @@ public class TheaterCont {
     
     mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt);
 
+    return mav;
+  }
+  
+  /**
+   * 전체 목록
+   * http://localhost:9093/theater/list_all.do
+   * @return
+   */
+  @RequestMapping(value="/theater/list_all.do", method = RequestMethod.GET)
+  public ModelAndView list_all(HttpSession session) {
+    ModelAndView mav = new ModelAndView();
+    
+    if (this.memProc.isMem(session) == true) {
+      mav.setViewName("/theater/list_all"); // /WEB-INF/views/movie/list_all.jsp
+      
+      ArrayList<TheaterVO> list = this.theaterProc.list_all();
+      
+      
+      mav.addObject("list", list);
+      
+    } else {
+      mav.setViewName("/mem/login_need"); // /WEB-INF/views/manager/login_need.jsp
+      
+    }
+    
     return mav;
   }
   

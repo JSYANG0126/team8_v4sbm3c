@@ -1,5 +1,7 @@
 package dev.mvc.theater;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +17,12 @@ public class TheaterProc implements TheaterProcInter {
   public int create(TheaterVO theaterVO) {
     int cnt = this.theaterDAO.create(theaterVO);
     return cnt;
+  }
+
+  @Override
+  public ArrayList<TheaterVO> list_all() {
+    ArrayList<TheaterVO> list = this.theaterDAO.list_all();
+    return list;
   }
 
 }

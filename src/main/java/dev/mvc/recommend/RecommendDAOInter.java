@@ -18,6 +18,13 @@ public interface RecommendDAOInter {
   public ArrayList<RecommendVO> list_all();
   
   /**
+   * 조회
+   * @param recommendno
+   * @return
+   */
+  public RecommendVO read(int recommendno);
+  
+  /**
    * 삭제
    * @param recommendno
    * @return

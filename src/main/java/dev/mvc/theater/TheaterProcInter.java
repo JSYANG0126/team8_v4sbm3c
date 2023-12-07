@@ -1,5 +1,7 @@
 package dev.mvc.theater;
 
+import java.util.ArrayList;
+
 public interface TheaterProcInter {
 
   /**
@@ -8,6 +10,12 @@ public interface TheaterProcInter {
    * @return
    */
   public int create(TheaterVO theaterVO);
+  
+  /**
+   * 전체 목록
+   * @return
+   */
+  public ArrayList<TheaterVO> list_all(); 
 
 
 }

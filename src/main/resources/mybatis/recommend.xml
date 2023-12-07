@@ -19,7 +19,7 @@
 	<select id="read" resultType="dev.mvc.recommend.RecommendVO" parameterType="int">
 	  SELECT recommendno, memno, genreno, seq, rdate
 	  FROM recommend    
-	  WHERE memno = #{memno} and genreno = #{genreno}
+	  WHERE memno = #{memno}
 	  ORDER BY recommendno ASC  
 	</select>
 	
