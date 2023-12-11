@@ -588,9 +588,7 @@ public class MemCont {
 //    if(memVO.getMname().equals(mname)) {
 //    	if(memVO.getTel().equals(tel) ) {
 //    		String id = memVO.getId();
-//    		int atIndex = id.indexOf('@');
-//    		// String maskedID = id.substring(0, Math.min(atIndex, 4)) + "*".repeat(Math.max(0, atIndex - 4)) + id.substring(atIndex);
-//    		// System.out.println("회원님의 id는 " + maskedID + "입니다.");
+//    		System.out.println("회원님의 id는 " + id + "입니다.");
 //    	}
 //    	else {
 //    		
@@ -602,6 +600,20 @@ public class MemCont {
 //    return mav;
 //  }
   
+  /**
+   * @param mname
+   * @param tel
+   */
+  @RequestMapping(value="/mem/id_find.do", method=RequestMethod.GET )
+  public ModelAndView id_find(HttpServletRequest request, MemVO memVO) {
+  ModelAndView mav = new ModelAndView();
+  String mname = request.getParameter("mname");
+  String tel = request.getParameter("tel");
+  
+  System.out.println("사용자의 mname: " + mname);
+  System.out.println("사용자의 tel: " + tel);
+  return mav;
+  }
   /**
    * 비밀번호 찾기 폼
    * @param mname
