@@ -578,7 +578,7 @@ public class MemCont {
 //   * @param mname
 //   * @param tel
 //   */
-//  @RequestMapping(value="/mem/id_find.do", method=RequestMethod.GET )
+//  @RequestMapping(value="/mem/id_find.do", method=RequestMethod.POST )
 //  public ModelAndView id_find(HttpSession session, MemVO memVO) {
 //    ModelAndView mav = new ModelAndView();
 //    
@@ -604,16 +604,17 @@ public class MemCont {
    * @param mname
    * @param tel
    */
-  @RequestMapping(value="/mem/id_find.do", method=RequestMethod.GET )
-  public ModelAndView id_find(HttpServletRequest request, MemVO memVO) {
-  ModelAndView mav = new ModelAndView();
-  String mname = request.getParameter("mname");
-  String tel = request.getParameter("tel");
+  @RequestMapping(value="/mem/id_find.do", method=RequestMethod.POST )
+  public ModelAndView id_find(HttpServletRequest request) {
+	  ModelAndView mav = new ModelAndView();
+	  String mname = request.getParameter("mname");
+  	  String tel = request.getParameter("tel");
   
-  System.out.println("사용자의 mname: " + mname);
-  System.out.println("사용자의 tel: " + tel);
-  return mav;
+  	  System.out.println("사용자의 mname: " + mname);
+  	  System.out.println("사용자의 tel: " + tel);
+  	  return mav;
   }
+  
   /**
    * 비밀번호 찾기 폼
    * @param mname
@@ -627,4 +628,5 @@ public class MemCont {
    
     return mav; // forward
   }
+  
 }
