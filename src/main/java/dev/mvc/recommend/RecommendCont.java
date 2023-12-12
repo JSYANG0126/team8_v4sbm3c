@@ -11,18 +11,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.genre.GenreVO;
 import dev.mvc.manager.ManagerProcInter;
 import dev.mvc.genre.GenreProcInter;
 import dev.mvc.mem.MemProcInter;
-import dev.mvc.movie.Movie;
-import dev.mvc.movie.MovieVO;
-import dev.mvc.reservation.ReservationVO;
-import dev.mvc.tool.Tool;
-import dev.mvc.tool.Upload;
+
 
 
 @Controller

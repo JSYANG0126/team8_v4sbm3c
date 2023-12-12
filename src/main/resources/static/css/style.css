@@ -468,6 +468,13 @@
     width: 16px;
   }
   
+  .icon2{
+    width: 16px;
+    display: flex;
+	  align-items: center;
+	  justify-content: center;
+  }
+  
   .form_input {
     margin-top: 5px;
     margin-bottom: 5px;

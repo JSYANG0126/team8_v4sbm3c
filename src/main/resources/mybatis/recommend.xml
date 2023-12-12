@@ -15,6 +15,28 @@
 	  FROM recommend    
 	  ORDER BY recommendno ASC  
 	</select>
+
+  <!-- 1) 1번 회원 로그인시 관심분야를 가져오는 SQL -->
+   <select id="mem_genre">
+   SELECT genreno FROM recommend WHERE memno=1
+   </select>
+	<!-- 관심분야의 카테고리 1번 상품중에 recom(추천수) 컬럼의 내림차순 정렬후 상품 목록 10건을 출력 -->
+	<select id="list_recom" resultType="dev.mvc.recommend.RecommendVO" parameterType="dev.mvc.recommend.RecommendVO"  >
+	   SELECT contentsno, adminno, cateno, title, content, recom, cnt, replycnt, rdate,
+           file1, file1saved, thumb1, size1, map, youtube, r
+		FROM (
+		           SELECT contentsno, adminno, cateno, title, content, recom, cnt, replycnt, rdate,
+		                      file1, file1saved, thumb1, size1, map, youtube, rownum as r
+		           FROM (
+		                     SELECT contentsno, adminno, cateno, title, content, recom, cnt, replycnt, rdate,
+		                                file1, file1saved, thumb1, size1, map, youtube
+		                     FROM contents
+		                     WHERE cateno=1 AND (title LIKE '%단풍%' OR content LIKE '%단풍%' OR word LIKE '%단풍%')
+		                     ORDER BY jumsu DESC
+		           )          
+		)
+		WHERE <![CDATA[ r >= 1 AND r <= 10 ]]>
+	</select>
 	
 	<select id="read" resultType="dev.mvc.recommend.RecommendVO" parameterType="int">
 	  SELECT recommendno, memno, genreno, seq, rdate

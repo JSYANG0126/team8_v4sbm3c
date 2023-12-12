@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import dev.mvc.movie.MovieVO;
+
 
 @Component("dev.mvc.recommend.RecommendProc")
 public class RecommendProc implements RecommendProcInter {
@@ -22,6 +24,13 @@ public class RecommendProc implements RecommendProcInter {
     ArrayList<RecommendVO> list = this.recommendDAO.list_all();
     return list;
   }
+
+  @Override
+  public ArrayList<RecommendVO> list_recom(MovieVO movieVO) {
+    ArrayList<RecommendVO> list = this.recommendDAO.list_recom(movieVO);
+    return list;
+  }
+
   
   @Override
   public RecommendVO read(int recommendno) {
@@ -34,6 +43,10 @@ public class RecommendProc implements RecommendProcInter {
     int cnt = this.recommendDAO.delete(recommendno);
     return cnt;
   }
+
+
+
+
 
 
 
