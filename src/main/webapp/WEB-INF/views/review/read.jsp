@@ -2,18 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:set var="name" value="${genreVO.name }" />
-
-<c:set var="genreno" value="${movieVO.genreno }" />
-<c:set var="movieno" value="${movieVO.movieno }" />
-<c:set var="thumb1" value="${movieVO.thumb1 }" />
-<c:set var="file1saved" value="${movieVO.file1saved }" />
-<c:set var="title" value="${movieVO.title }" />
-<c:set var="content" value="${movieVO.content }" />
-<c:set var="rdate" value="${movieVO.rdate }" />
-<c:set var="file1" value="${movieVO.file1 }" />
-<c:set var="size1_label" value="${movieVO.size1_label }" />
-<c:set var="word" value="${movieVO.word }" />
+<c:set var="reviewno" value="${reviewVO.reviewno }" />
+<c:set var="thumb1" value="${reviewVO.thumb1 }" />
+<c:set var="file1saved" value="${reviewVO.file1saved }" />
+<c:set var="rtitle" value="${reviewVO.rtitle }" />
+<c:set var="rinfo" value="${reviewVO.rinfo }" />
+<c:set var="rdate" value="${reviewVO.rdate }" />
+<c:set var="file1" value="${reviewVO.file1 }" />
+<c:set var="size1_label" value="${reviewVO.size1_label }" />
+<c:set var="word" value="${reviewVO.word }" />
  
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -28,34 +25,34 @@
  
 <body>
 <c:import url="/menu/top.do" />
-  <DIV class='title_line'><A href="./list_by_genreno.do?genreno=${genreVO.genreno }" class='title_link'>${genreVO.name }</A></DIV>
+  <DIV class='title_line'><A href="javascript:location.reload();" class='title_link'>${rtitle }</A></DIV>
 
   <aside class="aside_right">
     <%-- 관리자로 로그인해야 메뉴가 출력됨 --%>
-    <c:if test="${sessionScope.manager_id != null }">
+    <c:if test="${sessionScope.id != null && sessionScope.memno == reviewVO.memno }">
       <%--
       http://localhost:9091/movie/create.do?genreno=1
       http://localhost:9091/movie/create.do?genreno=2
       http://localhost:9091/movie/create.do?genreno=3
       --%>
-      <a href="./create.do?genreno=${genreno }">등록</a>
+      <a href="./create.do?reviewno=${reviewno }">등록</a>
       <span class='menu_divide' >│</span>
-      <a href="./update_text.do?movieno=${movieno}&now_page=${param.now_page}&word=${param.word }">글 수정</a>
+      <a href="./update_text.do?reviewno=${reviewno}&now_page=${param.now_page}&word=${param.word }">글 수정</a>
       <span class='menu_divide' >│</span>
-      <a href="./update_file.do?movieno=${movieno}&now_page=${param.now_page}">파일 수정</a>  
+      <a href="./update_file.do?reviewno=${reviewno}&now_page=${param.now_page}">파일 수정</a>  
       <span class='menu_divide' >│</span>
-      <a href="./delete.do?movieno=${movieno}&now_page=${param.now_page}&genreno=${genreno}">삭제</a>  
+      <a href="./delete.do?reviewno=${reviewno}&now_page=${param.now_page}">삭제</a>  
       <span class='menu_divide' >│</span>
     </c:if>
 
     <a href="javascript:location.reload();">새로고침</a>
     <span class='menu_divide' >│</span>    
-    <a href="./list_by_genreno.do?genreno=${genreno }&now_page=${param.now_page}&word=${param.word }">목록형</a>    
-    <span class='menu_divide' >│</span>
-    <a href="./list_by_genreno_grid.do?genreno=${genreno }&now_page=${param.now_page}&word=${param.word }">갤러리형</a>
+    <a href="./list_paging.do?now_page=${param.now_page == null ? 1 : param.now_page }&word=${param.word }">목록형</a>   
+    <span class='menu_divide' >│</span>    
+    <a href="./list_grid.do?now_page=${param.now_page == null ? 1 : param.now_page }&word=${param.word }">갤러리형</a>       
   </aside> 
   
-  <div style="text-align: right; clear: both;">  
+<!--    <div style="text-align: right; clear: both;">  
     <form name='frm' id='frm' method='get' action='./list_by_genreno.do'>
       <input type='hidden' name='genreno' value='${param.genreno }'>  <%-- 게시판의 구분 --%>
       
@@ -73,7 +70,7 @@
                     onclick="location.href='./list_by_genreno.do?genreno=${param.genreno}&word='">검색 취소</button>  
       </c:if>    
     </form>
-  </div>
+  </div> -->
   
   <DIV class='menu_line'></DIV>
 
@@ -84,16 +81,16 @@
           <c:choose>
             <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
               <%-- /static/movie/storage/ --%>
-              <img src="/movie/storage/${file1saved }" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'> 
+              <img src="/review/storage/${file1saved }" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'> 
             </c:when>
             <c:otherwise> <!-- 기본 이미지 출력 -->
-              <img src="/movie/images/none1.png" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'> 
+              <img src="/review/images/none1.png" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'> 
             </c:otherwise>
           </c:choose>
 
-          <span style="font-size: 1.5em; font-weight: bold;">${title }</span>
+          <span style="font-size: 1.5em; font-weight: bold;">${rtitle }</span>
           <span style="font-size: 1em;"> ${rdate }</span><br>
-          ${content }
+          ${rinfo }
         </DIV>
       </li>
       
@@ -107,15 +104,15 @@
       <li class="li_none">
         <div>
           <c:if test="${file1.trim().length() > 0 }">
-            첨부 파일: <a href='/download?dir=/movie/storage&filename=${file1saved}&downname=${file1}'>${file1}</a> (${size1_label}) 
-            <a href='/download?dir=/movie/storage&filename=${file1saved}&downname=${file1}'><img src="/movie/images/download.png"></a>
+            첨부 파일: <a href='/download?dir=/review/storage&filename=${file1saved}&downname=${file1}'>${file1}</a> (${size1_label}) 
+            <a href='/download?dir=/review/storage&filename=${file1saved}&downname=${file1}'><img src="/review/images/download.png"></a>
           </c:if>
         </div>
       </li>   
     </ul>
   </fieldset>
   
- <form name='frm' method='post' action='/comments/create.do'>
+<!--   <form name='frm' method='post' action='/comments/create.do'>
  		<input type='hidden' name='memno' value='${memno}'>
     <input type='hidden' name='movieno' value='${movieno}'>
     <div style="text-align: center;">
@@ -152,7 +149,7 @@
             <a href="/comments/delete.do?commentno=${CommentsVO.commentno }&movieno=${param.movieno}"><img src="/comments/delete.png" title="삭제"></a>
             <a href="/comments/update.do?commentno=${CommentsVO.commentno }&movieno=${param.movieno}"><img src="/comments/update.png" title="수정"></a>
             </c:if>
-            <c:if test="${sessionScope.memno == 1}">
+            <c:if test="${sessionScope.memno == 11 }">
             <a href="/comments/delete.do?commentno=${CommentsVO.commentno }&movieno=${param.movieno}"><img src="/comments/delete.png" title="삭제"></a>
             <a href="/comments/update.do?commentno=${CommentsVO.commentno }&movieno=${param.movieno}"><img src="/comments/update.png" title="수정"></a>
             </c:if>
@@ -163,7 +160,7 @@
          </c:forEach>
     </tbody>
       
-  </table>
+  </table>-->
 </DIV>
  
 <jsp:include page="../menu/bottom.jsp" flush='false' />

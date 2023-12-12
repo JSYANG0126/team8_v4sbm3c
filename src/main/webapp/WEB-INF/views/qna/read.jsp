@@ -17,7 +17,7 @@
  
 <body>
 <c:import url="/menu/top.do" />
-  <DIV class='title_line'><A href="./list_by_genreno.do?genreno=${genreVO.genreno }" class='title_link'>${genreVO.name }</A></DIV>
+  <DIV class='title_line'><A href="./list_all.do" class='title_link'>질문</A></DIV>
 
   <aside class="aside_right">
     <%-- 관리자로 로그인해야 메뉴가 출력됨 --%>
@@ -33,7 +33,7 @@
       <span class='menu_divide' >│</span> 
     </c:if>
     
-    <c:if test="${sessionScope.memno == 1 }">
+    <c:if test="${sessionScope.memno == 5 }">
       <%--
       http://localhost:9091/movie/create.do?genreno=1
       http://localhost:9091/movie/create.do?genreno=2
@@ -49,7 +49,7 @@
     <a href="./list_all.do">목록</a>    
   </aside> 
   
-  <div style="text-align: right; clear: both;">  
+<!--    <div style="text-align: right; clear: both;">  
     <form name='frm' id='frm' method='get' action='./list_by_genreno.do'>
       <input type='hidden' name='genreno' value='${param.genreno }'>  
       
@@ -67,7 +67,7 @@
                     onclick="location.href='./list_by_genreno.do?genreno=${param.genreno}&word='">검색 취소</button>  
       </c:if>    
     </form>
-  </div> 
+  </div> -->
   
   <DIV class='menu_line'></DIV>
 
@@ -131,7 +131,7 @@
             <a href="/answer/delete.do?answerno=${AnswerVO.answerno }&qnano=${param.qnano}"><img src="/answer/delete.png" title="삭제"></a>
             <a href="/answer/update.do?answerno=${AnswerVO.answerno }&qnano=${param.qnano}"><img src="/answer/update.png" title="수정"></a>
             </c:if>
-            <c:if test="${sessionScope.memno == 1}">
+            <c:if test="${sessionScope.memno == 5}">
             <a href="/answer/delete.do?answerno=${AnswerVO.answerno }&qnano=${param.qnano}"><img src="/answer/delete.png" title="삭제"></a>
             <a href="/answer/update.do?answerno=${AnswerVO.answerno }&qnano=${param.qnano}"><img src="/answer/update.png" title="수정"></a></c:if>
             </td>

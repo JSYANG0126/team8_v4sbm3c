@@ -4,6 +4,85 @@
 <!-- 자식 XML 태그들은 dev.mvc.genre.GenreDAOInter.java interface와 연결됨 -->
 <mapper namespace="dev.mvc.review.ReviewDAOInter">
 
+	<!-- 회원용 게시판 게시글 등록 -->
+	<insert id="create" parameterType="dev.mvc.review.ReviewVO">
+		INSERT INTO review(reviewno, memno, rtitle, rinfo, rdate, rname, word, file1, file1saved, thumb1, size1) 
+		VALUES (review_seq.nextval, #{memno}, #{rtitle},  #{rinfo}, sysdate, #{rname}, #{word}, #{file1}, #{file1saved}, #{thumb1}, #{size1})	
+	</insert>
 
-
+	<!-- 게시판 게시글 목록 -->	
+	<select id="list" resultType="dev.mvc.review.ReviewVO">
+		SELECT reviewno, memno, rtitle, rinfo, rdate, rname, word, file1, file1saved, thumb1, size1
+		FROM review 
+		ORDER BY reviewno DESC
+	</select>
+	
+	 <!--  검색 레코드 갯수 -->	 
+	  <select id="search_count" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as cnt
+    FROM review
+    <choose>
+      <when test="word == null or word == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
+      </when>
+      <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
+        WHERE (UPPER(rtitle) LIKE '%' || UPPER(#{word}) || '%' 
+                                                  OR UPPER(rinfo) LIKE '%' || UPPER(#{word}) || '%' 
+                                                  OR UPPER(word) LIKE '%' || UPPER(#{word}) || '%')
+      </otherwise>
+    </choose>
+  </select>   
+  
+	  <!-- 카테고리별 검색 + 페이징 목록 -->
+  <select id="list_search_paging" resultType="dev.mvc.review.ReviewVO" parameterType="dev.mvc.review.ReviewVO">
+   SELECT reviewno, memno, rtitle, rinfo, rdate, rname, word, file1, file1saved, thumb1, size1, r
+   FROM (
+              SELECT reviewno, memno, rtitle, rinfo, rdate, rname, word, file1, file1saved, thumb1, size1, rownum as r
+              FROM (
+                        SELECT reviewno, memno, rtitle, rinfo, rdate, rname, word, file1, file1saved, thumb1, size1
+                        FROM review
+                        <choose>
+                          <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->          
+                          </when>
+                          <otherwise>
+                            WHERE  (UPPER(rtitle) LIKE '%' || UPPER(#{word}) || '%' 
+                                                              OR UPPER(rinfo) LIKE '%' || UPPER(#{word}) || '%' 
+                                                              OR UPPER(word) LIKE '%' || UPPER(#{word}) || '%')
+                          </otherwise>
+                        </choose>
+                        ORDER BY reviewno DESC
+               )
+    )
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+     
+    <!-- 1 page: WHERE r >= 1 AND r <= 10; 
+          2 page: WHERE r >= 11 AND r <= 20;
+          3 page: WHERE r >= 21 AND r <= 30; -->
+  </select>
+  
+	<!-- 게시글 조회 -->
+	<select id="read" resultType="dev.mvc.review.ReviewVO" parameterType="int">
+		SELECT reviewno, memno, rtitle, rinfo, rdate, rname, word, file1, file1saved, thumb1, size1
+		FROM review
+		WHERE reviewno=#{reviewno}
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="update" parameterType="dev.mvc.review.ReviewVO">
+		UPDATE review 
+		SET rtitle=#{rtitle}, rinfo=#{rinfo}, word=#{word}
+		WHERE reviewno=#{reviewno}
+	</update>
+	
+	  <!-- 파일 수정 -->
+  <update id="update_file" parameterType="dev.mvc.review.ReviewVO">
+    UPDATE review
+    SET file1=#{file1}, file1saved=#{file1saved}, thumb1=#{thumb1}, size1=#{size1}
+    WHERE reviewno = #{reviewno}
+  </update>
+  
+  <!-- 게시글 삭제 -->
+  <delete id="delete" parameterType="int">
+		DELETE FROM review WHERE reviewno=#{reviewno}
+  </delete>
+  
 </mapper>
