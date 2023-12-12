@@ -35,8 +35,7 @@
     <colgroup>
         <col style='width: 10%;'/>
         <col style='width: 40%;'/>
-        <col style='width: 10%;'/>    
-        <col style='width: 20%;'/>
+        <col style='width: 30%;'/>    
         <col style='width: 20%;'/>
       </colgroup>
       <thead>
@@ -54,7 +53,17 @@
           <tr>
             <td><a style="display: block; text-align:center;">${reservationno }</a></td>
             <td><a style="display: block; text-align:center;">${reservationVO.tname }</a></td>
-            <td><a href="${link }">${link }</a>
+           <td style="text-align: center;"><a href="javascript:void(0);" onclick="openLink('${link}')">${link}</a></td>
+						
+						<script>
+						    function openLink(link) {
+						        // 주소가 http:// 또는 https://로 시작하는지 확인
+						        if (!link.startsWith('http://') && !link.startsWith('https://')) {
+						            link = 'https://' + link;
+						        }
+						        window.open(link, '_blank');
+						    }
+						</script>
             
             <td class="td_bs">
               <c:choose>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 자식 XML 태그들은 dev.mvc.genre.GenreDAOInter.java interface와 연결됨 -->
+<mapper namespace="dev.mvc.chat.ChatDAOInter">
+
+	<!--채팅 목록 -->
+	<select id="list" resultType="dev.mvc.chat.ChatVO">
+		SELECT chatno, memno, msg, rdate 
+		FROM chat 
+		ORDER BY chatno DESC
+	</select>
+	
+	<!--채팅 단일 요소 -->
+  <select id="read" resultType="dev.mvc.chat.ChatVO" parameterType="int">
+    SELECT chatno, memno, msg, rdate 
+    FROM chat 
+    WHERE chatno=#{chatno} 
+  </select>
+
+	
+	<!-- 채팅 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM chat WHERE chatno=#{chatno}
+	</delete>
+
+</mapper>

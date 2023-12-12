@@ -13,13 +13,18 @@
 <jsp:include page="../menu/top.jsp" flush='false' />
  <div class='title_line'>추천 영화관 등록</div>
  
-<form name='frm' method='post' action='/reservation/create.do'>
+<form name='frm' method='post' action='/theater/create.do'>
+    
+    <input type='hidden' name='memno' value="${sessionScope.memno }" required="required" autofocus="autofocus" 
+                    class="form-contro form-control-sml" style="width:50%"><br>
+    <input type='hidden' name='map' value="지도 추가 필요" required="required" autofocus="autofocus" 
+                    class="form-contro form-control-sml" style="width:50%"><br>
     <div>
         <label>영화관 이름</label>
         <input type='text' name='tname' value="" required="required" autofocus="autofocus" 
                     class="form-contro form-control-sml" style="width:50%"><br>
-        <label>페이지 URL </label>            
-        <input type='text' name='link' value="" required="required" autofocus="autofocus" 
+        <label>영화관 설명 </label>            
+        <input type='text' name='tinfo' value="" required="required" autofocus="autofocus" 
                     class="form-contro form-control-sml" style="width:50%">            
     </div>
     
