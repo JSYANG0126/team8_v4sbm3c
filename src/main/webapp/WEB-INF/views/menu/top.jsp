@@ -65,6 +65,14 @@
             <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
               <a class="nav-link top_menu_link" href="/qna/list_all.do">질문/답변</a>
             </li>
+            
+            <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
+              <a class="nav-link top_menu_link" href="/theater/list_all.do">영화관</a>
+            </li>
+            
+            <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
+              <a class="nav-link top_menu_link" href="http://localhost:5000/chatbot?memno=${sessionScope.memno }">챗봇</a>
+            </li>
 
             <li class="nav-item dropdown"> <%-- 회원 서브 메뉴 --%>
               <a class="nav-link top_menu_link dropdown-toggle" data-bs-toggle="dropdown" href="#">회원</a>
@@ -77,6 +85,7 @@
                   </c:when>
                   <c:otherwise>
                     <a class="dropdown-item" href="http://localhost:8000/ais/recommend_form/?memno=${sessionScope.memno }">관심분야 등록하고 추천받기</a>
+                    <a class="dropdown-item" href="/chat/list.do">챗봇 채팅 내역</a>
                     <a class="dropdown-item" href="/mem/read.do">가입 정보</a>
                     <a class="dropdown-item" href="/mem/passwd_update.do">비밀번호 변경</a>
                     <a class="dropdown-item" href="/mem/read.do">회원 정보 수정</a>
@@ -96,7 +105,7 @@
               <c:otherwise>
                 <li class="nav-item dropdown"> <%-- 관리자 서브 메뉴 --%>
                   <a class="nav-link top_menu_link dropdown-toggle" data-bs-toggle="dropdown" href="#">관리자</a>
-                  <div class="dropdown-menu">
+                  <div class="dropdown-menu">               
                     <a class="dropdown-item" href='/genre/list_all.do'>카테고리 전체 목록</a>
                     <a class="dropdown-item" href='/mem/list.do'>회원 목록</a>
                     <a class="dropdown-item" href='/manager/logout.do'>관리자 ${sessionScope.manager_id } 로그아웃</a>

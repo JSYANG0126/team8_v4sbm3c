@@ -5,9 +5,43 @@
 <mapper namespace="dev.mvc.theater.TheaterDAOInter">
 
 <!-- 등록한 레코드 갯수 1 리턴, #{managerno}: public int getManagerno() 호출됨 -->
-<insert id="create" parameterType="dev.mvc.theater.TheaterVO">
-    INSERT INTO theater(theaterno, memno, tname, tinfo, tdate, map) 
-    VALUES(theater_seq.nextval, #{memno}, #{tname} ,#{tinfo}, sysdate, #{map})  
-</insert>
+	<insert id="create" parameterType="dev.mvc.theater.TheaterVO">
+	    INSERT INTO theater(theaterno, memno, tname, tinfo, tdate, map) 
+	    VALUES(theater_seq.nextval, #{memno}, #{tname} ,#{tinfo}, sysdate, #{map})  
+	</insert>
+	
+	<!-- 모든 카테고리의 등록된 글목록 -->
+  <select id="list_all" resultType="dev.mvc.theater.TheaterVO">
+    SELECT theaterno, memno, tname, tinfo, tdate, map
+    FROM theater
+    ORDER BY theaterno DESC
+  </select> 
+  
+    <!-- 특정 글목록 -->
+  <select id="read" resultType="dev.mvc.theater.TheaterVO" parameterType="int">
+    SELECT theaterno, memno, tname, tinfo, tdate, map
+    FROM theater
+    WHERE theaterno = #{theaterno}
+  </select> 
+  
+    <!-- return: 수정한 레코드 갯수 리턴, parameterType: 수정할 레코드 정보 -->
+  <update id="update" parameterType="dev.mvc.theater.TheaterVO" >
+    UPDATE theater 
+    SET tname=#{tname}, tinfo=#{tinfo}
+    WHERE theaterno=#{theaterno}
+  </update>
+ 
+   <!-- map 등록, 수정, 삭제, 
+         HashMap: VO 클래스는 변수가 너무 많아서 메모리 낭비가 발생함으로,
+                       보통 3개 이하의 적은 변수만 전달하는 경우 HashMap 사용 권장 -->
+  <update id="map" parameterType="HashMap">
+    UPDATE theater SET map=#{map} WHERE theaterno=#{theaterno}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM theater
+    WHERE theaterno=#{theaterno}
+  </delete>
+  
 
 </mapper>

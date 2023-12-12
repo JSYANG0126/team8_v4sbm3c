@@ -2,6 +2,8 @@ package dev.mvc.recommend;
 
 import java.util.ArrayList;
 
+import dev.mvc.movie.MovieVO;
+
 public interface RecommendDAOInter {
   
   /**
@@ -16,6 +18,19 @@ public interface RecommendDAOInter {
    * @return
    */
   public ArrayList<RecommendVO> list_all();
+  
+  /**
+   * 전체 리스트 + 페이징
+   * @return
+   */
+  public ArrayList<RecommendVO> list_recom(MovieVO movieVO);
+  
+  /**
+   * 조회
+   * @param recommendno
+   * @return
+   */
+  public RecommendVO read(int recommendno);
   
   /**
    * 삭제
