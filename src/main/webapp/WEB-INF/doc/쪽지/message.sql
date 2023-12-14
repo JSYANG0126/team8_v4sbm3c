@@ -4,7 +4,7 @@ CREATE TABLE message(
 		messageno                     		NUMBER(10)		 NOT NULL 		 PRIMARY KEY,
 		mtitle                        		VARCHAR2(100)		 NULL ,
 		minfo                         		VARCHAR2(200)		 NULL ,
-        gdate                               DATE            NOT NULL ,
+        gdate                               DATE            NOT NULL 
 );
 
 COMMENT ON TABLE message is '쪽지';

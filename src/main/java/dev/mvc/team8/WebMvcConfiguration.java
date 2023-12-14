@@ -5,6 +5,11 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import dev.mvc.movie.Movie;
+<<<<<<< HEAD
+=======
+import dev.mvc.review.Review;
+import dev.mvc.tool.Tool;
+>>>>>>> b5ec3b0801c067bcb45d775beeb353afcdd51aa2
 
 @Configuration
 public class WebMvcConfiguration implements WebMvcConfigurer{
@@ -12,6 +17,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer{
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // JSP 인식되는 경로: http://localhost:9093/movie/storage";
         registry.addResourceHandler("/movie/storage/**").addResourceLocations("file:///" +  Movie.getUploadDir());
+        
+
+        registry.addResourceHandler("/review/storage/**").addResourceLocations("file:///" +  Review.getUploadDir());
         
         // JSP 인식되는 경로: http://localhost:9091/attachfile/storage";
         // registry.addResourceHandler("/contents/storage/**").addResourceLocations("file:///" +  Tool.getOSPath() + "/attachfile/storage/");
