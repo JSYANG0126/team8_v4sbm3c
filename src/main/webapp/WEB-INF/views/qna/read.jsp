@@ -33,7 +33,7 @@
       <span class='menu_divide' >│</span> 
     </c:if>
     
-    <c:if test="${sessionScope.memno == 5 }">
+    <c:if test="${sessionScope.grade == 2 }">
       <%--
       http://localhost:9091/movie/create.do?genreno=1
       http://localhost:9091/movie/create.do?genreno=2
@@ -92,7 +92,7 @@
     </ul>
   </fieldset>
   
-  <c:if test="${sessionScope.memno == 1}">
+  <c:if test="${sessionScope.grade == 2}">
 	<form name='frm' method='post' action='/answer/create.do'>
  		<input type='hidden' name='memno' value='${memno}'>
     <input type='hidden' name='qnano' value='${param.qnano}'>

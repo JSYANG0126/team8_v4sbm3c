@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 자식 XML 태그들은 dev.mvc.genre.GenreDAOInter.java interface와 연결됨 -->
+<mapper namespace="dev.mvc.good.GoodDAOInter">
+
+	<!-- 좋아요 등록! -->
+	<insert id="create" parameterType="dev.mvc.good.GoodVO">
+		INSERT INTO good(goodno, movieno, memno, rdate) 
+		VALUES (good_seq.nextval, #{movieno}, #{memno}, sysdate)
+	</insert>
+	
+	<!-- 회원과 본문 내용에 따른 좋아요(좋아요 여부) -->
+	<select id="good_by_mem_cnt" resultType="int" parameterType="dev.mvc.good.GoodVO">
+		SELECT COUNT(*) as cnt 
+		FROM good
+		WHERE movieno=#{movieno} AND memno=#{memno}
+	</select>
+
+	<!-- 본문 글의 총 조회수 -->
+	<select id="good_cnt" resultType="int" parameterType="int">
+		SELECT COUNT(*) as cnt FROM good
+		WHERE movieno=#{movieno}
+	</select>
+	
+	<!-- 좋아요 삭제 -->
+	<delete id="delete" parameterType="dev.mvc.good.GoodVO">
+		DELETE FROM good 
+		WHERE movieno=#{movieno} and memno=#{memno}
+	</delete>
+	
+</mapper>

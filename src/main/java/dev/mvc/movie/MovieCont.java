@@ -18,7 +18,11 @@ import dev.mvc.comments.CommentsProcInter;
 import dev.mvc.comments.CommentsVO;
 import dev.mvc.genre.GenreProcInter;
 import dev.mvc.genre.GenreVO;
+import dev.mvc.good.GoodProcInter;
+import dev.mvc.good.GoodVO;
 import dev.mvc.manager.ManagerProcInter;
+import dev.mvc.mem.MemProcInter;
+import dev.mvc.mem.MemVO;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 
@@ -40,7 +44,13 @@ public class MovieCont {
   @Qualifier("dev.mvc.comments.CommentsProc")
   private CommentsProcInter commentsProc;
   
+  @Autowired
+  @Qualifier("dev.mvc.mem.MemProc")
+  private MemProcInter memProc;
 
+  @Autowired
+  @Qualifier("dev.mvc.good.GoodProc")
+  private GoodProcInter goodProc;
   
   public MovieCont () {
     System.out.println("-> MovieCont created.");
@@ -378,29 +388,35 @@ public class MovieCont {
    * @return
    */
   @RequestMapping(value="/movie/read.do", method = RequestMethod.GET)
-  public ModelAndView read(int movieno) { // int genreno = (int)request.getParameter("genreno");
+  public ModelAndView read(HttpSession session, int movieno) { // int genreno = (int)request.getParameter("genreno");
     ModelAndView mav = new ModelAndView();
-    mav.setViewName("/movie/read"); // /WEB-INF/views/movie/read.jsp
-    
-    MovieVO movieVO = this.movieProc.read(movieno);
-    
-    String title = movieVO.getTitle();
-    String content = movieVO.getContent();
-    long size1 = movieVO.getSize1();
-    
-    title = Tool.convertChar(title);  // 특수 문자 처리
-    content = Tool.convertChar(content); 
-    String size1_label = Tool.unit(size1);
-    
-    movieVO.setTitle(title);
-    movieVO.setContent(content);  
-    movieVO.setSize1_label(size1_label);
-    
-    ArrayList<CommentsVO> list_comments = this.commentsProc.list_by_movieno(movieno);
-    
-
-    mav.addObject("list_comments", list_comments);
-    mav.addObject("movieVO", movieVO);
+    if (this.managerProc.isManager(session) == true || this.memProc.isMem(session)) {
+      mav.setViewName("/movie/read"); // /WEB-INF/views/movie/read.jsp
+      
+      MovieVO movieVO = this.movieProc.read(movieno);
+      
+      String title = movieVO.getTitle();
+      String content = movieVO.getContent();
+      long size1 = movieVO.getSize1();
+      
+      title = Tool.convertChar(title);  // 특수 문자 처리
+      content = Tool.convertChar(content); 
+      String size1_label = Tool.unit(size1);
+      
+      movieVO.setTitle(title);
+      movieVO.setContent(content);  
+      movieVO.setSize1_label(size1_label);
+      
+      ArrayList<CommentsVO> list_comments = this.commentsProc.list_by_movieno(movieno);
+      
+      
+      int good_cnt = this.goodProc.good_cnt(movieno);
+      mav.addObject("good_cnt", good_cnt);
+      mav.addObject("list_comments", list_comments);
+      mav.addObject("movieVO", movieVO);
+    } else {
+        mav.setViewName("/mem/login_need");
+    }
     
     return mav;
   }
