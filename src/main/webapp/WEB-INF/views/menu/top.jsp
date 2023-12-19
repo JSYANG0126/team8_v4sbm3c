@@ -27,6 +27,7 @@
   }
 </style> 
 
+
 <div class='container_main'>
   <div class='top_img'>
     <div class="top_menu_label">영화리뷰 블로그</div>      
@@ -65,21 +66,18 @@
             <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
               <a class="nav-link top_menu_link" href="/qna/list_all.do">질문/답변</a>
             </li>
-<<<<<<< HEAD
+
             <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
               <a class="nav-link top_menu_link" href="/review/list_paging.do">영화 리뷰</a>
             </li>
             
-=======
-            
             <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
-              <a class="nav-link top_menu_link" href="/theater/list_all.do">영화관</a>
+              <a class="nav-link top_menu_link" href="/theater/list_by_search_paging.do?nowpage=1">영화관</a>
             </li>
             
             <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
               <a class="nav-link top_menu_link" href="http://localhost:5000/chatbot?memno=${sessionScope.memno }">챗봇</a>
             </li>
->>>>>>> cb1d171feaccf2c2cea53893894050012fdf29fb
 
             <li class="nav-item dropdown"> <%-- 회원 서브 메뉴 --%>
               <a class="nav-link top_menu_link dropdown-toggle" data-bs-toggle="dropdown" href="#">회원</a>

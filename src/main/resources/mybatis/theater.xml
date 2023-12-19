@@ -6,23 +6,82 @@
 
 <!-- 등록한 레코드 갯수 1 리턴, #{managerno}: public int getManagerno() 호출됨 -->
 	<insert id="create" parameterType="dev.mvc.theater.TheaterVO">
-	    INSERT INTO theater(theaterno, memno, tname, tinfo, tdate, map) 
-	    VALUES(theater_seq.nextval, #{memno}, #{tname} ,#{tinfo}, sysdate, #{map})  
+	    INSERT INTO theater(theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, map) 
+	    VALUES(theater_seq.nextval, #{memno}, #{tname} ,#{tinfo}, #{word}, sysdate, #{img1}, #{img1saved}, #{thumbimg1}, #{size1}, #{size1_label}, #{map} )  
 	</insert>
 	
 	<!-- 모든 카테고리의 등록된 글목록 -->
   <select id="list_all" resultType="dev.mvc.theater.TheaterVO">
-    SELECT theaterno, memno, tname, tinfo, tdate, map
+    SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, map
     FROM theater
     ORDER BY theaterno DESC
   </select> 
   
     <!-- 특정 글목록 -->
   <select id="read" resultType="dev.mvc.theater.TheaterVO" parameterType="int">
-    SELECT theaterno, memno, tname, tinfo, tdate, map
+    SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, map
     FROM theater
     WHERE theaterno = #{theaterno}
   </select> 
+  
+    <!-- 검색 목록 -->
+  <select id="list_by_search" resultType="dev.mvc.theater.TheaterVO" parameterType="HashMap">
+    SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, map
+    FROM theater
+    <choose>
+      <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+          ORDER BY theaterno DESC
+      </when>
+      <otherwise> <!-- 검색하는 경우 -->
+        (UPPER(tname) LIKE '%' || UPPER(#{word}) || '%' 
+        OR UPPER(tinfo) LIKE '%' || UPPER(#{word}) || '%' )
+        ORDER BY theaterno DESC                                          
+      </otherwise>
+    </choose>
+  </select>
+   
+  <!-- 카테고리별 검색 레코드 갯수 -->
+  <select id="search_count" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as cnt
+    FROM theater
+    <choose>
+      <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+          ORDER BY theaterno DESC
+      </when>
+      <otherwise> <!-- 검색하는 경우 -->
+	        WHERE (UPPER(tname) LIKE '%' || UPPER(#{word}) || '%' 
+	        OR UPPER(tinfo) LIKE '%' || UPPER(#{word}) || '%' )
+	        ORDER BY theaterno DESC                                          
+      </otherwise>
+    </choose>
+  </select>   
+  
+  <!-- 카테고리별 검색 + 페이징 목록 -->
+  <select id="list_by_search_paging" resultType="dev.mvc.theater.TheaterVO" parameterType="dev.mvc.theater.TheaterVO">
+   SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, map, r
+   FROM (
+              SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, map, rownum as r
+              FROM (
+                        SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, map
+                        FROM theater
+                        <choose>
+											      <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+											      </when>
+											      <otherwise> <!-- 검색하는 경우 -->
+											        WHERE (UPPER(tname) LIKE '%' || UPPER(#{word}) || '%' 
+														        OR UPPER(tinfo) LIKE '%' || UPPER(#{word}) || '%'  
+														        OR UPPER(word) LIKE '%' || UPPER(#{word}) || '%')                
+											      </otherwise>
+											    </choose>
+											ORDER BY theaterno DESC
+               )
+    )
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+     
+    <!-- 1 page: WHERE r >= 1 AND r <= 10; 
+          2 page: WHERE r >= 11 AND r <= 20;
+          3 page: WHERE r >= 21 AND r <= 30; -->
+  </select>
   
     <!-- return: 수정한 레코드 갯수 리턴, parameterType: 수정할 레코드 정보 -->
   <update id="update" parameterType="dev.mvc.theater.TheaterVO" >
@@ -36,6 +95,20 @@
                        보통 3개 이하의 적은 변수만 전달하는 경우 HashMap 사용 권장 -->
   <update id="map" parameterType="HashMap">
     UPDATE theater SET map=#{map} WHERE theaterno=#{theaterno}
+  </update>
+  
+    <!-- 글 수정 -->
+  <update id="update_text" parameterType="dev.mvc.theater.TheaterVO">
+    UPDATE movie
+    SET title=#{title}, content=#{content},  word=#{word}
+    WHERE movieno = #{movieno}
+  </update>
+  
+  <!-- 파일 수정 -->
+  <update id="update_file" parameterType="dev.mvc.theater.TheaterVO">
+    UPDATE movie
+    SET file1=#{file1}, file1saved=#{file1saved}, thumb1=#{thumb1}, size1=#{size1}
+    WHERE movieno = #{movieno}
   </update>
   
   <delete id="delete" parameterType="int">
