@@ -333,7 +333,7 @@ public class TheaterCont {
     
       // mav.addObject("now_page", now_page);
     
-      mav.setViewName("/movie/list_by_grid");  // /theater/list_by_grid.jsp
+      mav.setViewName("/theater/list_by_grid");  // /theater/list_by_grid.jsp
     
       return mav;
     }
