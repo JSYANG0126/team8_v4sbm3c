@@ -34,7 +34,7 @@ SELECT niceno, reviewno, memno, rdate FROM nice ORDER BY niceno ASC;
 
 -- 본문 글의 총 조회수
 SELECT COUNT(*) as cnt FROM nice
-WHERE reviewno=2;
+WHERE reviewno=10;
 
 -- 1번 회원이 2번 상품을 좋아요 클릭했는지 카운트, 1: 좋아요했음, 0은 자료 없음
 SELECT COUNT(*) as cnt 
