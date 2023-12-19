@@ -112,7 +112,7 @@
     </ul>
   </fieldset>
   
-<!--   <form name='frm' method='post' action='/comments/create.do'>
+<!--    <form name='frm' method='post' action='/comments/create.do'>
  		<input type='hidden' name='memno' value='${memno}'>
     <input type='hidden' name='movieno' value='${movieno}'>
     <div style="text-align: center;">
@@ -149,7 +149,7 @@
             <a href="/comments/delete.do?commentno=${CommentsVO.commentno }&movieno=${param.movieno}"><img src="/comments/delete.png" title="삭제"></a>
             <a href="/comments/update.do?commentno=${CommentsVO.commentno }&movieno=${param.movieno}"><img src="/comments/update.png" title="수정"></a>
             </c:if>
-            <c:if test="${sessionScope.memno == 11 }">
+            <c:if test="${sessionScope.grade == 1 }">
             <a href="/comments/delete.do?commentno=${CommentsVO.commentno }&movieno=${param.movieno}"><img src="/comments/delete.png" title="삭제"></a>
             <a href="/comments/update.do?commentno=${CommentsVO.commentno }&movieno=${param.movieno}"><img src="/comments/update.png" title="수정"></a>
             </c:if>
@@ -160,7 +160,7 @@
          </c:forEach>
     </tbody>
       
-  </table>-->
+  </table> -->
 </DIV>
  
 <jsp:include page="../menu/bottom.jsp" flush='false' />

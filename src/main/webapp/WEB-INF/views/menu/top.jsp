@@ -72,7 +72,7 @@
             </li>
             
             <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
-              <a class="nav-link top_menu_link" href="/theater/list_by_search_paging.do?nowpage=1">영화관</a>
+              <a class="nav-link top_menu_link" href="/theater/list_by_search_paging.do?now_page=1">영화관</a>
             </li>
             
             <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>

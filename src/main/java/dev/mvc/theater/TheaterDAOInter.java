@@ -55,6 +55,18 @@ public interface TheaterDAOInter {
    */
   public int update(TheaterVO theaterVO);
   
+  /**
+   * 파일 수정
+   * @param theaterVO
+   * @return
+   */
+  public int update_file(TheaterVO theaterVO);
+  
+  /**
+   * 패스워드 검사
+   */
+  public int password_check(HashMap<String, Object> hashMap);
+  
     /**
    * map 등록 수정 삭제
    * @param map

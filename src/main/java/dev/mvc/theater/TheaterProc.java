@@ -95,6 +95,12 @@ public class TheaterProc implements TheaterProcInter {
     int cnt = this.theaterDAO.update(theaterVO);
     return cnt;
   }
+  
+  @Override
+  public int update_file(TheaterVO theaterVO) {
+    int cnt = this.theaterDAO.update_file(theaterVO);
+    return cnt;
+  }
 
   @Override
   public int map(HashMap<String, Object> map) {
@@ -205,6 +211,14 @@ public class TheaterProc implements TheaterProcInter {
      
     return str.toString(); 
   }
+
+  @Override
+  public int password_check(HashMap<String, Object> hashMap) {
+    int cnt = this.theaterDAO.password_check(hashMap);
+    return cnt;
+  }
+
+  
 
 
 

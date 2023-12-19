@@ -27,7 +27,7 @@ import com.zaxxer.hikari.HikariDataSource;
 									   "dev.mvc.recom",
 									   "dev.mvc.chatbot",
 									   "dev.mvc.comments",
-									   "dev.mvc.message",
+									   "dev.mvc.good",
 									   "dev.mvc.review",
 									   "dev.mvc.recommend",
 									   "dev.mvc.answer",

@@ -80,8 +80,9 @@
           <c:set var="thumbimg1" value="${theaterVO.thumbimg1 }" />
           <c:set var="memno" value="${theaterVO.memno }" />
           <c:set var="mname" value="${memVO.mname }" />
+          <c:set var="now_page" value="${param.now_page }" />
     
-          <tr onclick="location.href='./read.do?theaterno=${theaterno}'" style="cursor: pointer;">
+          <tr onclick="location.href='./read.do?theaterno=${theaterno}&word=${param.word }&now_page=${param.now_page == null ? 1 : param.now_page }'" style="cursor: pointer;">
             <td class="td_bs">
                <span style="font-weight: bold;">${theaterno }</span><br>
             </td>
@@ -115,7 +116,7 @@
             </td>
             <td class="td_bs">
               <c:if test="${sessionScope.memno == theaterVO.memno }">
-                <a href="./update.do?theaterno=${theaterno }" title="수정"><img src="/theater/images/update.png" class="icon"></a>
+                <a href="./update.do?theaterno=${theaterno }&now_page=${now_page}&word=${word}" title="수정"><img src="/theater/images/update.png" class="icon"></a>
                 <a href="./delete.do?theaterno=${theaterno }" title="삭제"><img src="/theater/images/delete.png" class="icon"></a>
               </c:if>  
             </td>

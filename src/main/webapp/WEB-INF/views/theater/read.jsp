@@ -32,11 +32,13 @@
   <aside class="aside_right">
 
     <c:if test="${sessionScope.id != null }">
-      <a href="./update.do?theaterno=${theaterno }">글 수정</a>
+      <a href="./update.do?theaterno=${theaterno}&now_page=${param.now_page}&word=${param.word }">글 수정</a>
+      <span class='menu_divide' >│</span>
+      <a href="./update_file.do?theaterno=${theaterno}&now_page=${param.now_page}">파일 수정</a>  
       <span class='menu_divide' >│</span>
       <a href="./map.do?theaterno=${theaterno}">지도</a>
       <span class='menu_divide' >│</span>
-      <a href="./delete.do?contentsno=${contentsno}">삭제</a>  
+      <a href="./delete.do?theaterno=${theaterno}">삭제</a>  
       <span class='menu_divide' >│</span>
     </c:if>
     <a href='./list_all.do'>목록</a>

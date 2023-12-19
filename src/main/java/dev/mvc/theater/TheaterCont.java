@@ -14,14 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import dev.mvc.comments.CommentsVO;
-import dev.mvc.genre.GenreVO;
+
 import dev.mvc.manager.ManagerProcInter;
 import dev.mvc.mem.MemProcInter;
 import dev.mvc.mem.MemVO;
 import dev.mvc.movie.Movie;
 import dev.mvc.movie.MovieVO;
-import dev.mvc.reservation.ReservationVO;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 
@@ -229,12 +227,11 @@ public class TheaterCont {
    * @return
    */
   @RequestMapping(value = "/theater/list_by_search_paging.do", method = RequestMethod.GET)
-  public ModelAndView list_by_genreno(HttpSession session, TheaterVO theaterVO) {
+  public ModelAndView list_by_search_paging(HttpSession session, TheaterVO theaterVO) {
     ModelAndView mav = new ModelAndView();
+    
       if (this.memProc.isMem(session) == true) {
-        
-        int memno = (int)session.getAttribute("memno"); // memno FK
-        MemVO memVO = this.memProc.read(memno);
+       
         // 검색 목록
         ArrayList<TheaterVO> list = theaterProc.list_by_search_paging(theaterVO);
         
@@ -252,8 +249,7 @@ public class TheaterCont {
         }
         
         mav.addObject("list", list);
-        mav.addObject("memVO", memVO);
-      
+
         HashMap<String, Object> hashMap = new HashMap<String, Object>();
         hashMap.put("word", theaterVO.getWord());
         
@@ -280,8 +276,7 @@ public class TheaterCont {
         
       }
   
-   
-  
+ 
     return mav;
   }
   
@@ -373,27 +368,46 @@ public class TheaterCont {
   }
   
   /**
-   * 수정 처리, http://localhost:9093/theater/update.do
-   * @param reservationVO 수정할 내용
+   * 수정 처리
+   * http://localhost:9091/movie/update_text.do?movieno=1
+   * 
    * @return
    */
-  @RequestMapping(value="/theater/update.do", method = RequestMethod.POST)
-  public ModelAndView update(TheaterVO theaterVO) { // 자동으로 reservationVO 객체가 생성되고 폼의 값이 할당됨
+  @RequestMapping(value = "/theater/update.do", method = RequestMethod.POST)
+  public ModelAndView update(HttpSession session, TheaterVO theaterVO) {
     ModelAndView mav = new ModelAndView();
-    System.out.println(theaterVO);
-    int cnt = this.theaterProc.update(theaterVO); // 수정 처리
-    System.out.println("-> cnt: " + cnt);
     
-    if (cnt == 1) {
-      mav.setViewName("redirect:/theater/list_all.do"); 
-    }else{
-      mav.addObject("code", "update_fail");
-      mav.setViewName("/theater/msg"); // /WEB-INF/views/reservation/msg.jsp
+    // System.out.println("-> word: " + movieVO.getWord());
+    
+    if (this.memProc.isMem(session)) { // 관리자 로그인 확인
+      HashMap<String, Object> hashMap = new HashMap<String, Object>();
+      hashMap.put("theaterno", theaterVO.getTheaterno());
+      hashMap.put("passwd", theaterVO.getPasswd());
+      
+      if (this.theaterProc.password_check(hashMap) == 1) { // 패스워드 일치
+        this.theaterProc.update(theaterVO); // 글수정  
+         
+        // mav 객체 이용
+        mav.addObject("theaterno", theaterVO.getTheaterno());
+        mav.setViewName("redirect:/theater/read.do"); // 페이지 자동 이동
+        
+      } else { // 패스워드 불일치
+        mav.addObject("code", "passwd_fail");
+        mav.addObject("cnt", 0);
+        mav.addObject("url", "/movie/msg"); // msg.jsp, redirect parameter 적용
+        mav.setViewName("redirect:/movie/msg.do");  // POST -> GET -> JSP 출력
+      }
+    } else { // 정상적인 로그인이 아닌 경우 로그인 유도
+      mav.addObject("url", "/mem/login_need"); // /WEB-INF/views/manager/login_need.jsp
+      mav.setViewName("redirect:/movie/msg.do"); 
     }
     
-    mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt);
+    mav.addObject("now_page", theaterVO.getNow_page()); // POST -> GET: 데이터 분실이 발생함으로 다시하번 데이터 저장 ★
     
-    return mav;
+    // URL에 파라미터의 전송
+    // mav.setViewName("redirect:/movie/read.do?movieno=" + movieVO.getMovieno() + "&genreno=" + movieVO.getGenreno());             
+    
+    return mav; // forward
   }
   
   /**
@@ -436,45 +450,189 @@ public class TheaterCont {
   }
   
   /**
-   * 삭제폼 
-   * http://localhost:9093/theater/delete.do
+   * 파일 수정 폼
+   * http://localhost:9092/theater/update_file.do?theaterno=1
+   * 
    * @return
-    */
-    @RequestMapping(value="/theater/delete.do", method = RequestMethod.GET)
-    public ModelAndView delete(int theaterno) { // int cateno = (int) request.getParemeter("cateno");
-      ModelAndView mav = new ModelAndView();
-      mav.setViewName("/theater/delete"); // /WEB-INF/views/cate/delete.jsp
-      
+   */
+  @RequestMapping(value = "/theater/update_file.do", method = RequestMethod.GET)
+  public ModelAndView update_file(HttpSession session, int theaterno) {
+    ModelAndView mav = new ModelAndView();
+    
+    if (managerProc.isManager(session)) { // 관리자로 로그인한경우
       TheaterVO theaterVO = this.theaterProc.read(theaterno);
+      mav.addObject("theaterVO", theaterVO);
       
-      mav.addObject("theaterVO", theaterVO); // 
-      return mav;
+      mav.setViewName("/theater/update_file"); // /WEB-INF/views/theater/update_file.jsp
+      
+    } else {
+      mav.addObject("url", "/manager/login_need"); // /WEB-INF/views/manager/login_need.jsp
+      mav.setViewName("redirect:/theater/msg.do"); 
     }
-    /**
-     * 삭제처리, http://localhost:9093/theater/delete.do?reservationno=8
-     * @param cateno 삭제할 내용
-     * @return  
-     */
-    @RequestMapping(value="/theater/delete.do", method = RequestMethod.POST)
-    public ModelAndView delete_proc(int theaterno) { // int theaterno = (int) request.getParemeter("cateno");
-      ModelAndView mav = new ModelAndView();
-      mav.setViewName("/theater/msg"); // /WEB-INF/views/theater/delete.jsp
-      
-      TheaterVO theaterVO = this.theaterProc.read(theaterno); // 삭제할 레코드 정보 읽기
-      
-      int cnt = this.theaterProc.delete(theaterno);
-      System.out.println("->cnt" + cnt);
-      
-      if (cnt == 1) {
-        mav.addObject("code","delete_success"); // 키, 값
-        mav.addObject("name", theaterVO.getTname()); // 카테고리 이름 jsp로 전송
-      } else {
-        mav.addObject("code", "delete_fail");
-      }
-      
-      mav.addObject("cnt", cnt);
-      return mav;
-    }
+
+
+    return mav; // forward
+  }
   
+  /**
+   * 파일 수정 처리 http://localhost:9091/theater/update_file.do
+   * 
+   * @return
+   */
+  @RequestMapping(value = "/theater/update_file.do", method = RequestMethod.POST)
+  public ModelAndView update_file(HttpSession session, TheaterVO theaterVO) {
+    ModelAndView mav = new ModelAndView();
+    
+    if (this.memProc.isMem(session)) {
+      // 삭제할 파일 정보를 읽어옴, 기존에 등록된 레코드 저장용
+      TheaterVO theaterVO_old = theaterProc.read(theaterVO.getTheaterno());
+      
+      // -------------------------------------------------------------------
+      // 파일 삭제 시작
+      // -------------------------------------------------------------------
+      String img1saved = theaterVO_old.getImg1saved();  // 실제 저장된 파일명
+      String thumbimg1 = theaterVO_old.getThumbimg1();       // 실제 저장된 povie 이미지 파일명
+      long size1 = 0;
+         
+      String upDir =  Movie.getUploadDir(); // C:/kd/deploy/resort_v3sbm3c/theater/storage/
+      
+      Tool.deleteFile(upDir, img1saved);  // 실제 저장된 파일삭제
+      Tool.deleteFile(upDir, thumbimg1);     // povie 이미지 삭제
+      // -------------------------------------------------------------------
+      // 파일 삭제 종료
+      // -------------------------------------------------------------------
+          
+      // -------------------------------------------------------------------
+      // 파일 전송 시작
+      // -------------------------------------------------------------------
+      String file1 = "";          // 원본 파일명 image
+
+      // 전송 파일이 없어도 file1MF 객체가 생성됨.
+      // <input type='file' class="form-control" name='file1MF' id='file1MF' 
+      //           value='' placeholder="파일 선택">
+      MultipartFile mf = theaterVO.getFile1MF();
+          
+      file1 = mf.getOriginalFilename(); // 원본 파일명
+      size1 = mf.getSize();  // 파일 크기
+          
+      if (size1 > 0) { // 폼에서 새롭게 올리는 파일이 있는지 파일 크기로 체크 ★
+        // 파일 저장 후 업로드된 파일명이 리턴됨, spring.jsp, spring_1.jpg...
+        img1saved = Upload.saveFileSpring(mf, upDir); 
+        
+        if (Tool.isImage(img1saved)) { // 이미지인지 검사
+          // thumb 이미지 생성후 파일명 리턴됨, width: 250, height: 200
+          thumbimg1 = Tool.preview(upDir, img1saved, 250, 200); 
+        }
+        
+      } else { // 파일이 삭제만 되고 새로 올리지 않는 경우
+        file1="";
+        img1saved="";
+        thumbimg1="";
+        size1=0;
+      }
+          
+      theaterVO.setImg1(file1);
+      theaterVO.setImg1saved(img1saved);
+      theaterVO.setThumbimg1(thumbimg1);
+      theaterVO.setSize1(size1);
+      // -------------------------------------------------------------------
+      // 파일 전송 코드 종료
+      // -------------------------------------------------------------------
+          
+      this.theaterProc.update_file(theaterVO); // Oracle 처리
+
+      mav.addObject("theaterno", theaterVO.getTheaterno());
+      mav.setViewName("redirect:/theater/read.do"); // request -> param으로 접근 전환
+                
+    } else {
+      mav.addObject("url", "/manager/login_need"); // login_need.jsp, redirect parameter 적용
+      mav.setViewName("redirect:/theater/msg.do"); // GET
+    }
+
+    // redirect하게되면 전부 데이터가 삭제됨으로 mav 객체에 다시 저장
+    mav.addObject("now_page", theaterVO.getNow_page());
+    
+    return mav; // forward
+  }   
+  
+  /**
+   * 파일 삭제 폼
+   * http://localhost:9092/theater/delete.do?theaterno=1
+   * 
+   * @return
+   */
+  @RequestMapping(value = "/theater/delete.do", method = RequestMethod.GET)
+  public ModelAndView delete(HttpSession session, int theaterno) {
+    ModelAndView mav = new ModelAndView();
+    
+    if (memProc.isMem(session)) { // 관리자로 로그인한경우
+      TheaterVO theaterVO = this.theaterProc.read(theaterno);
+      mav.addObject("theaterVO", theaterVO);
+      
+      mav.setViewName("/theater/delete"); // /WEB-INF/views/theater/delete.jsp
+      
+    } else {
+      mav.addObject("url", "/mem/login_need"); // /WEB-INF/views/manager/login_need.jsp
+      mav.setViewName("redirect:/theater/msg.do"); 
+    }
+
+
+    return mav; // forward
+  }
+  
+  
+  /**
+   * 삭제 처리 http://localhost:9092/movie/delete.do
+   * 
+   * @return
+   */
+  @RequestMapping(value = "/theater/delete.do", method = RequestMethod.POST)
+  public ModelAndView delete(TheaterVO theaterVO) {
+    ModelAndView mav = new ModelAndView();
+
+    // -------------------------------------------------------------------
+    // 파일 삭제 시작
+    // -------------------------------------------------------------------
+    // 삭제할 파일 정보를 읽어옴.
+    TheaterVO theaterVO_read = theaterProc.read(theaterVO.getTheaterno());
+        
+    String img1saved = theaterVO.getImg1saved();
+    String thumbimg1 = theaterVO.getThumbimg1();
+    
+    String uploadDir = Theater.getUploadDir();
+    Tool.deleteFile(uploadDir, img1saved);  // 실제 저장된 파일삭제
+    Tool.deleteFile(uploadDir, thumbimg1);     // povie 이미지 삭제
+    // -------------------------------------------------------------------
+    // 파일 삭제 종료
+    // -------------------------------------------------------------------
+      
+    this.theaterProc.delete(theaterVO.getTheaterno()); // DBMS 삭제
+        
+    // -------------------------------------------------------------------------------------
+    // 마지막 페이지의 마지막 레코드 삭제시의 페이지 번호 -1 처리
+    // -------------------------------------------------------------------------------------    
+    // 마지막 페이지의 마지막 10번째 레코드를 삭제후
+    // 하나의 페이지가 3개의 레코드로 구성되는 경우 현재 9개의 레코드가 남아 있으면
+    // 페이지수를 4 -> 3으로 감소 시켜야함, 마지막 페이지의 마지막 레코드 삭제시 나머지는 0 발생
+    int now_page = theaterVO.getNow_page();
+    
+    HashMap<String, Object> hashMap = new HashMap<String, Object>();
+    hashMap.put("word", theaterVO.getWord());
+    
+    if (theaterProc.search_count(hashMap) % Theater.RECORD_PER_PAGE == 0) {
+      now_page = now_page - 1; // 삭제시 DBMS는 바로 적용되나 크롬은 새로고침등의 필요로 단계가 작동 해야함.
+      if (now_page < 1) {
+        now_page = 1; // 시작 페이지
+      }
+    }
+    // -------------------------------------------------------------------------------------
+
+    mav.addObject("now_page", now_page);
+    mav.setViewName("redirect:/theater/list_by_search_paging.do"); 
+    
+    return mav;
+  } 
+  
+
 
 }

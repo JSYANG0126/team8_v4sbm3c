@@ -10,6 +10,7 @@ public class TheaterVO {
   private String tinfo = "";
   private String tdate;
   private String map = "";
+  private String passwd = "";
   
   
 //파일 업로드 관련
@@ -78,6 +79,14 @@ public MultipartFile getFile1MF() {
   public void setSize1_label(String size1_label) {
     this.size1_label = size1_label;
   }
+
+  public String getPasswd() {
+    return passwd;
+  }
+  public void setPasswd(String passwd) {
+    this.passwd = passwd;
+  }
+
 
   //페이징 관련
   // -----------------------------------------------------------------------------------

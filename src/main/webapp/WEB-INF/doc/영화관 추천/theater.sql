@@ -3,8 +3,8 @@ DROP TABLE theater;
 CREATE TABLE theater(
 		theaterno                     		NUMBER(10)		 NULL 		 PRIMARY KEY,
 		memno                         		NUMBER(10)		 NOT NULL,
-		tname                        		VARCHAR2(30)		 NULL ,
-		tinfo                         		CHAR(100)		 NULL ,
+		tname                        		VARCHAR2(100)		 NULL ,
+		tinfo                         		CHAR(300)		 NULL ,
         WORD                          		VARCHAR2(300)		 NULL ,
 		tdate                         		DATE		 NULL ,	
         IMG1                         		VARCHAR2(100)		 NULL ,
@@ -12,6 +12,7 @@ CREATE TABLE theater(
 		THUMBIMG1                        	VARCHAR2(300)		 NULL ,
 		SIZE1                         	    NUMBER(10)		 DEFAULT 0		 NULL ,
         SIZE1_LABEL                         NUMBER(10)		 DEFAULT 0		 NULL ,
+        passwd                             VARCHAR2(100)		 DEFAULT 0		 NULL ,
         map                           		VARCHAR2(2000)		 NULL ,
   FOREIGN KEY (memno) REFERENCES MEM (memno)
 );
@@ -37,6 +38,7 @@ COMMENT ON COLUMN theater.img1saved is '실제 저장된 메인 이미지';
 COMMENT ON COLUMN theater.thumbimg1 is '메인 이미지 Preview';
 COMMENT ON COLUMN theater.size1 is '메인 이미지 크기';
 COMMENT ON COLUMN theater.size1_label is '메인 이미지 용량';
+COMMENT ON COLUMN theater.passwd is '메인 이미지 용량';
 COMMENT ON COLUMN theater.map is '지도';
 
 COMMIT;

@@ -6,27 +6,27 @@
 
 <!-- 등록한 레코드 갯수 1 리턴, #{managerno}: public int getManagerno() 호출됨 -->
 	<insert id="create" parameterType="dev.mvc.theater.TheaterVO">
-	    INSERT INTO theater(theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, map) 
-	    VALUES(theater_seq.nextval, #{memno}, #{tname} ,#{tinfo}, #{word}, sysdate, #{img1}, #{img1saved}, #{thumbimg1}, #{size1}, #{size1_label}, #{map} )  
+	    INSERT INTO theater(theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, passwd, map) 
+	    VALUES(theater_seq.nextval, #{memno}, #{tname} ,#{tinfo}, #{word}, sysdate, #{img1}, #{img1saved}, #{thumbimg1}, #{size1}, #{size1_label}, #{passwd}, #{map} )  
 	</insert>
 	
 	<!-- 모든 카테고리의 등록된 글목록 -->
   <select id="list_all" resultType="dev.mvc.theater.TheaterVO">
-    SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, map
+    SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, passwd, map
     FROM theater
     ORDER BY theaterno DESC
   </select> 
   
     <!-- 특정 글목록 -->
   <select id="read" resultType="dev.mvc.theater.TheaterVO" parameterType="int">
-    SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, map
+    SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, passwd, map
     FROM theater
     WHERE theaterno = #{theaterno}
   </select> 
   
     <!-- 검색 목록 -->
   <select id="list_by_search" resultType="dev.mvc.theater.TheaterVO" parameterType="HashMap">
-    SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, map
+    SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, passwd, map
     FROM theater
     <choose>
       <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
@@ -58,11 +58,11 @@
   
   <!-- 카테고리별 검색 + 페이징 목록 -->
   <select id="list_by_search_paging" resultType="dev.mvc.theater.TheaterVO" parameterType="dev.mvc.theater.TheaterVO">
-   SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, map, r
+   SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, passwd, map, r
    FROM (
-              SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, map, rownum as r
+              SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, passwd, map, rownum as r
               FROM (
-                        SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, map
+                        SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, passwd, map
                         FROM theater
                         <choose>
 											      <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
@@ -97,19 +97,21 @@
     UPDATE theater SET map=#{map} WHERE theaterno=#{theaterno}
   </update>
   
-    <!-- 글 수정 -->
-  <update id="update_text" parameterType="dev.mvc.theater.TheaterVO">
-    UPDATE movie
-    SET title=#{title}, content=#{content},  word=#{word}
-    WHERE movieno = #{movieno}
-  </update>
+    <!-- 패스워드 검사 -->
+  <select id="password_check" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as cnt 
+    FROM theater
+    WHERE theaterno = #{theaterno} AND passwd=#{passwd}
+  </select>
   
   <!-- 파일 수정 -->
   <update id="update_file" parameterType="dev.mvc.theater.TheaterVO">
-    UPDATE movie
-    SET file1=#{file1}, file1saved=#{file1saved}, thumb1=#{thumb1}, size1=#{size1}
-    WHERE movieno = #{movieno}
+    UPDATE theater
+    SET img1=#{img1}, img1saved=#{img1saved}, thumbimg1=#{thumbimg1}, size1=#{size1}
+    WHERE theaterno = #{theaterno}
   </update>
+  
+
   
   <delete id="delete" parameterType="int">
     DELETE FROM theater
