@@ -112,6 +112,29 @@ COMMENT ON COLUMN MEM.GRADE is '등급';
 COMMENT ON COLUMN MEM.qnano is '질문번호';
 
 
+/************************************/
+/* Table Name: 회원 로그인 내역 */
+/************************************/
+
+DROP TABLE mlogin;
+DROP TABLE mlogin CASCADE CONSTRAINTS;
+
+CREATE TABLE mlogin(
+  mloginno                    NUMBER(10) NOT NULL PRIMARY KEY,
+  memno                NUMBER(10) NOT NULL,
+  ip                            VARCHAR2(15) NOT NULL,
+  logindate                  DATE NOT NULL,
+  FOREIGN KEY (memno) REFERENCES mem (memno)
+);
+
+COMMENT ON TABLE mlogin is '로그인 내역';
+COMMENT ON COLUMN mlogin.mloginno is '로그인 번호';
+COMMENT ON COLUMN mlogin.memno is '회원 번호';
+COMMENT ON COLUMN mlogin.ip is '접속 IP';
+COMMENT ON COLUMN mlogin.logindate is '로그인 날짜';
+
+
+
 /**********************************/
 /* Table Name: 양준석 */
 /**********************************/

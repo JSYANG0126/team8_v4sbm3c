@@ -46,6 +46,7 @@ public class MovieVO {
     private String file1 = "";
     /** 실제 저장된 메인 이미지 */
     private String file1saved = "";
+    
     public String getSize1_label() {
 		return size1_label;
 	}

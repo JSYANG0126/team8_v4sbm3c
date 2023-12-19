@@ -66,6 +66,13 @@
     WHERE memno=#{memno}
   </update>
   
+  <!-- 멤버번호 조회 -->
+  <select id="readByMemno" parameterType="String" resultType="int">
+  SELECT memno
+  FROM mem
+  WHERE id=#{id}
+  </select>
+  
   <!-- 회원 정지검사 -->
   <select id="sp_check" resultType="int" parameterType="dev.mvc.mem.MemVO">
     SELECT COUNT(*) as cnt
@@ -79,4 +86,5 @@
     FROM mem 
     WHERE id={#id} AND grade = 99;
   </select>
+  
 </mapper> 

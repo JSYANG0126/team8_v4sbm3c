@@ -90,6 +90,13 @@ public interface MemProcInter {
   public int passwd_update(HashMap<String, Object> map);
   
   /**
+   * 아이디로 회원번호 조회
+   * @param id
+   * @result 회원번호
+   */
+  public int readByMemno(String id);
+  
+  /**
    * 회원 정지검사
    * @param memVO
    * @return cnt

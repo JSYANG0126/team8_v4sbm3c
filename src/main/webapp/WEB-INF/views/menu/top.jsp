@@ -27,6 +27,7 @@
   }
 </style> 
 
+
 <div class='container_main'>
   <div class='top_img'>
     <div class="top_menu_label">영화리뷰 블로그</div>      
@@ -69,17 +70,14 @@
             <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
               <a class="nav-link top_menu_link" href="/review/list_paging.do">영화 리뷰</a>
             </li>
-            
 
-            
             <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
-              <a class="nav-link top_menu_link" href="/theater/list_all.do">영화관</a>
+              <a class="nav-link top_menu_link" href="/theater/list_by_search_paging.do?now_page=1">영화관</a>
             </li>
             
             <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
               <a class="nav-link top_menu_link" href="http://localhost:5000/chatbot?memno=${sessionScope.memno }">챗봇</a>
             </li>
-
 
             <li class="nav-item dropdown"> <%-- 회원 서브 메뉴 --%>
               <a class="nav-link top_menu_link dropdown-toggle" data-bs-toggle="dropdown" href="#">회원</a>
@@ -96,7 +94,7 @@
                     <a class="dropdown-item" href="/mem/read.do">가입 정보</a>
                     <a class="dropdown-item" href="/mem/passwd_update.do">비밀번호 변경</a>
                     <a class="dropdown-item" href="/mem/read.do">회원 정보 수정</a>
-                    <a class="dropdown-item" href="javascript: alert('개발 예정')">로그인 내역</a>
+                    <a class="dropdown-item" href="/mlogin/list_mlogin.do">로그인 내역</a>
                     <a class="dropdown-item" href="mem/delete.do?memno=${sessionScope.memno }">회원 탈퇴</a>
                   </c:otherwise>
                 </c:choose>
