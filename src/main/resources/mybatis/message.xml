@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
- 
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 자식 XML 태그들은 dev.mvc.genre.GenreDAOInter.java interface와 연결됨 -->
-<mapper namespace="dev.mvc.message.MessageDAOInter">
-
-
-
-</mapper>

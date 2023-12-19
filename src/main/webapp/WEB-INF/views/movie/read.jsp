@@ -14,6 +14,7 @@
 <c:set var="file1" value="${movieVO.file1 }" />
 <c:set var="size1_label" value="${movieVO.size1_label }" />
 <c:set var="word" value="${movieVO.word }" />
+<c:set var="good_cnt" value="${good_cnt }" />
  
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -23,7 +24,77 @@
 <title>Resort world</title>
 <link rel="shortcut icon" href="/images/star.png" /> <%-- /static 기준 --%>
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
-   
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script type="text/javascript">
+var good_cnt = ${good_cnt};
+var movieno = ${movieno};
+var memno = ${memno};
+
+$(document).ready(function () {
+    $.ajax({
+        type: 'GET',
+        url: '/good/good_by_mem_cnt.do',
+        cache: false,
+        data: { movieno: ${movieno}, memno: ${memno} },
+        dataType: 'json',
+        success: function (response) {
+            console.log(response);
+            var mem_cnt = response.cnt;
+            if (mem_cnt == 1) {
+                $('#goodbtn').hide();
+                $('#goodbtn2').show();
+            } else {
+                $('#goodbtn').show();
+                $('#goodbtn2').hide();
+            }
+            $('#good_cnt').text(response.good_cnt);
+        },
+        error: function (error) {
+            console.error('좋아요 확인 실패:', error);
+        }
+    });
+});
+
+function create() {
+    $.ajax({
+        type: 'POST',
+        url: '/good/create.do',
+        data: { movieno: movieno, memno: memno },
+        success: function (response) {
+                good_cnt = response.good_cnt;
+                $('#goodbtn').hide();
+                $('#goodbtn2').show();
+                $('#good_cnt').text(good_cnt);
+        },
+        error: function (error) {
+            console.error('좋아요 요청 실패:', error);
+        }
+    });
+}
+
+function unlike() {
+    var movieno = ${movieno};
+    var memno = ${memno};
+
+    // 서버로 좋아요 요청을 보냄
+    $.ajax({
+        type: 'POST',
+        url: '/good/delete.do',
+        data: { movieno: movieno, memno: memno },
+        success: function (response) {
+                good_cnt = response.good_cnt;
+                $('#goodbtn').show();
+                $('#goodbtn2').hide();
+                $('#good_cnt').text(good_cnt);
+        },
+        error: function (error) {
+            console.error('좋아요 요청 실패:', error);
+        }
+    });
+}
+</script>
+
 </head> 
  
 <body>
@@ -115,6 +186,15 @@
     </ul>
   </fieldset>
   
+  <form id="good_form">						
+	  	<input type="hidden" name="movieno" value="${movieno}">			
+	  	<input type="hidden" name="memno" value="${memno}">			
+			<img src="/good/images/good1.png"  onclick="create();" id="goodbtn" style="display: none;">	
+			<img src="/good/images/good2.png"  onclick="unlike();" id="goodbtn2" style="display: none;">	
+			<span id= "good_cnt" name="good_cnt">${good_cnt }</span>
+  </form>
+
+    
  <form name='frm' method='post' action='/comments/create.do'>
  		<input type='hidden' name='memno' value='${memno}'>
     <input type='hidden' name='movieno' value='${movieno}'>
