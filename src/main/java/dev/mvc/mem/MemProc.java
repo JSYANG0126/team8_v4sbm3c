@@ -120,6 +120,12 @@ public int passwd_update(HashMap<String, Object> map) {
 }
 
 @Override
+public int readByMemno(String id) {
+	int memno = this.memDAO.readByMemno(id);
+	return memno;
+}
+
+@Override
 public int sp_check(MemVO memVO) {
 	int cnt = this.memDAO.sp_check(memVO);
 	return cnt;
@@ -130,4 +136,5 @@ public int wd_check(MemVO memVO) {
 	int cnt = this.memDAO.wd_check(memVO);
 	return cnt;
 }
+
 }

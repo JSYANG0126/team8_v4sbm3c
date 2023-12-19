@@ -5,11 +5,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import dev.mvc.movie.Movie;
-<<<<<<< HEAD
-=======
 import dev.mvc.review.Review;
 import dev.mvc.tool.Tool;
->>>>>>> b5ec3b0801c067bcb45d775beeb353afcdd51aa2
 
 @Configuration
 public class WebMvcConfiguration implements WebMvcConfigurer{

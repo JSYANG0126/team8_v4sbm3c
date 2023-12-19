@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.manager.ManagerProcInter;
+import dev.mvc.mlogin.MloginProcInter;
+import dev.mvc.mlogin.MloginVO;
  
 @Controller
 public class MemCont {
@@ -31,6 +33,10 @@ public class MemCont {
   @Autowired
   @Qualifier("dev.mvc.mem.MemProc")
   private MemProcInter memProc = null;
+  
+  @Autowired
+  @Qualifier("dev.mvc.mlogin.MloginProc")
+  private MloginProcInter mloginProc;
   
   public MemCont(){
     System.out.println("-> MemCont created.");
@@ -388,6 +394,16 @@ public class MemCont {
                              @RequestParam(value="id_save", defaultValue="") String id_save,
                              @RequestParam(value="passwd_save", defaultValue="") String passwd_save) {
      ModelAndView mav = new ModelAndView();
+     
+     int memno = memProc.readByMemno(id);
+     System.out.println(memno);
+     MloginVO mloginVO = new MloginVO();
+     mloginVO.setMemno(memno);
+     String ip=request.getRemoteAddr();
+     mloginVO.setIp(ip);
+     System.out.println(ip);
+     this.mloginProc.create(mloginVO);
+     
      HashMap<String, Object> map = new HashMap<String, Object>();
      map.put("id", id);
      map.put("passwd", passwd);
@@ -601,17 +617,19 @@ public class MemCont {
 //  }
   
   /**
+   * 아이디 찾기 처리
    * @param mname
    * @param tel
    */
   @RequestMapping(value="/mem/id_find.do", method=RequestMethod.POST )
-  public ModelAndView id_find(HttpServletRequest request) {
+  public ModelAndView id_find(HttpSession session) {
 	  ModelAndView mav = new ModelAndView();
-	  String mname = request.getParameter("mname");
-  	  String tel = request.getParameter("tel");
+	  String mname = (String)session.getAttribute("mname");
+  	  String tel = (String)session.getAttribute("tel");
   
   	  System.out.println("사용자의 mname: " + mname);
   	  System.out.println("사용자의 tel: " + tel);
+  	  System.out.println("-> 안됨");
   	  return mav;
   }
   
