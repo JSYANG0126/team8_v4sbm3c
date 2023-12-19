@@ -13,7 +13,6 @@ import dev.mvc.tool.Tool;
 public class WebMvcConfiguration implements WebMvcConfigurer{
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-      
         // JSP 인식되는 경로: http://localhost:9093/movie/storage";
         registry.addResourceHandler("/movie/storage/**").addResourceLocations("file:///" +  Movie.getUploadDir());
         
