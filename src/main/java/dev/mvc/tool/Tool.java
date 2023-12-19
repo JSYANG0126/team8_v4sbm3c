@@ -1,4 +1,4 @@
-// version 1.0
+// version 0.9
 package dev.mvc.tool;
 
 import java.awt.Image;
@@ -126,6 +126,10 @@ public class Tool {
         || name.endsWith("gif")) {
       try {
         srcImg = ImageIO.read(src); // 메모리에 원본 이미지 생성
+        if (srcImg == null) {
+            System.out.println("Error: ImageIO.read returned null for file " + src.getAbsolutePath());
+            return null; // 예외 상황에서 메서드 종료
+        }
         int srcWidth = srcImg.getWidth(null); // 원본 이미지 너비 추출
         int srcHeight = srcImg.getHeight(null); // 원본 이미지 높이 추출
         int destWidth = -1, destHeight = -1; // 대상 이미지 크기 초기화
@@ -390,13 +394,13 @@ public class Tool {
           // path="C:\\kd\\ws_java\\resort_v2sbm3c\\src\\main\\resources\\static";
           
           // Windows 배포, 폴더 생성
-          path = "C:/kd/deploy/MR_v3sbm3c";
+          path = "C:/kd/deploy/computer_v3sbm3c";
 
       } else {
           // Linux 배포
           // 기본 명령어
           // pwd: 현재 경로 확인, mkdir deploy: 폴더 생성, cd deploy: 폴더 이동, rmdir resort_v2sbm3c: 폴더 삭제, cd ..: 상위 폴더로 이동 
-          path = "/home/ubuntu/deploy/MR_v3sbm3c";
+          path = "/home/ubuntu/deploy/computer_v3sbm3c";
       }
       // System.out.println("path: " + path);
       

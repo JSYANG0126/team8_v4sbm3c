@@ -25,8 +25,8 @@
       <div class="msg_warning">내용을 삭제하면 복구 할 수 없습니다.</div>
       <label>영화관 이름</label>: ${tname }
   
-      <button type="submit" id='submit' class='btn btn-info btn-sm' style='height: 28px; margin-bottom: 5px;'>삭제</button>
-      <button type="button" onclick="location.href='/cate/list_all.do'" class='btn btn-info btn-sm' style='height: 28px; margin-bottom: 5px;'>취소</button>
+      <button type="submit" id='submit' class='btn btn-secondary btn-sm' style='height: 28px; margin-bottom: 5px;'>삭제</button>
+      <button type="button" onclick="location.href='/theater/list_by_search_paging.do'" class='btn btn-secondary btn-sm' style='height: 28px; margin-bottom: 5px;'>취소</button>
     </form>
   </div>
 

@@ -3,10 +3,17 @@ DROP TABLE theater;
 CREATE TABLE theater(
 		theaterno                     		NUMBER(10)		 NULL 		 PRIMARY KEY,
 		memno                         		NUMBER(10)		 NOT NULL,
-		tname                        		VARCHAR2(30)		 NULL ,
-		tinfo                         		CHAR(100)		 NULL ,
-		tdate                         		DATE		 NULL ,
-		map                           		VARCHAR2(2000)		 NULL ,
+		tname                        		VARCHAR2(100)		 NULL ,
+		tinfo                         		CHAR(300)		 NULL ,
+        WORD                          		VARCHAR2(300)		 NULL ,
+		tdate                         		DATE		 NULL ,	
+        IMG1                         		VARCHAR2(100)		 NULL ,
+		IMG1SAVED                    		VARCHAR2(100)		 NULL ,
+		THUMBIMG1                        	VARCHAR2(300)		 NULL ,
+		SIZE1                         	    NUMBER(10)		 DEFAULT 0		 NULL ,
+        SIZE1_LABEL                         NUMBER(10)		 DEFAULT 0		 NULL ,
+        passwd                             VARCHAR2(100)		 DEFAULT 0		 NULL ,
+        map                           		VARCHAR2(2000)		 NULL ,
   FOREIGN KEY (memno) REFERENCES MEM (memno)
 );
 
@@ -22,19 +29,29 @@ CREATE SEQUENCE THEATER_SEQ
 COMMENT ON TABLE theater is '영화관 추천';
 COMMENT ON COLUMN theater.theaterno is '영화관 번호';
 COMMENT ON COLUMN theater.memno is '회원 번호';
-COMMENT ON COLUMN theater.ttitle is '영화관 이름';
+COMMENT ON COLUMN theater.tname is '영화관 이름';
 COMMENT ON COLUMN theater.tinfo is '영화관 설명';
+COMMENT ON COLUMN theater.word is '검색어';
 COMMENT ON COLUMN theater.tdate is '날짜';
+COMMENT ON COLUMN theater.img1 is '메인이미지';
+COMMENT ON COLUMN theater.img1saved is '실제 저장된 메인 이미지';
+COMMENT ON COLUMN theater.thumbimg1 is '메인 이미지 Preview';
+COMMENT ON COLUMN theater.size1 is '메인 이미지 크기';
+COMMENT ON COLUMN theater.size1_label is '메인 이미지 용량';
+COMMENT ON COLUMN theater.passwd is '메인 이미지 용량';
 COMMENT ON COLUMN theater.map is '지도';
 
 COMMIT;
 
-INSERT INTO theater(theaterno, memno, tname, tinfo, tdate, map) 
-VALUES(theater_seq.nextval, '1', 'abd' , 15,sysdate,0);  
+INSERT INTO theater(theaterno, memno, tname, tinfo, tdate) 
+VALUES(theater_seq.nextval, '1', 'cgv' , 15,sysdate);  
 
 -- READ: LIST
 SELECT * FROM theater;
-SELECT theaterno, memno, tname, tinfo, tdate, map FROM theater ORDER BY theaterno ASC;
+
+SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, imgsize1, map 
+FROM theater 
+ORDER BY theaterno ASC;
 
 -- READ
 SELECT theaterno, memno, tname, tinfo, tdate, map FROM theater WHERE theaterno=1;
