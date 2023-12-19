@@ -11,7 +11,7 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-.team8.erd
+src/main/webapp/WEB-INF/doc/Â¦Â¦²á
 
 ### IntelliJ IDEA ###
 .idea

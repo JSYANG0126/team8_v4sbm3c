@@ -57,74 +57,39 @@
     
   <div class="menu_line"></div> 
   
-  <table class="table table-hover">
-    <colgroup>
-      <col style="width: 5%;"></col>
-      <col style="width: 15%;"></col>
-      <col style="width: 20%;"></col>
-      <col style="width: 50%;"></col>
-      <col style="width: 10%;"></col>
-      </colgroup>
-      <thead>
-        <tr>
-          <th style='text-align: center;'>번호</th>
-          <th style='text-align: center;'>이미지</th>
-          <th style='text-align: center;'>추천인 이름</th>
-          <th style='text-align: center;'>영화관 소개</th>
-          <th style='text-align: center;'>기타</th>
-        </tr>
-      </thead>
-      <tbody>
-        <c:forEach var="theaterVO" items="${list }" varStatus="info">
+  <div style='width: 100%;'> <%-- 갤러리 Layout 시작 --%>
+        <c:forEach var="theaterVO" items="${list }" varStatus="status">
           <c:set var="theaterno" value="${theaterVO.theaterno }" />
+          <c:set var="tname" value="${theaterVO.tname }" />
           <c:set var="thumbimg1" value="${theaterVO.thumbimg1 }" />
           <c:set var="memno" value="${theaterVO.memno }" />
           <c:set var="mname" value="${memVO.mname }" />
           <c:set var="now_page" value="${param.now_page }" />
     
-          <tr onclick="location.href='./read.do?theaterno=${theaterno}&word=${param.word }&now_page=${param.now_page == null ? 1 : param.now_page }'" style="cursor: pointer;">
-            <td class="td_bs">
-               <span style="font-weight: bold;">${theaterno }</span><br>
-            </td>
-            <td>
-              <c:choose>
-                <c:when test="${thumbimg1.endsWith('jpg') || thumbimg1.endsWith('png') || thumbimg1.endsWith('gif')}"> <%-- 이미지인지 검사 --%>
-                  <%-- registry.addResourceHandler("/movie/storage/**").addResourceLocations("file:///" +  moviegetUploadDir()); --%>
-                  <img src="/theater/storage/${thumbimg1 }" style="width: 120px; height: 90px;">
-                </c:when>
-                <c:otherwise> <!-- 이미지가 없는 경우 기본 이미지 출력: /static/movie/images/none1.png -->
-                  <img src="/theater/images/none1.png" style="width: 120px; height: 90px;">
-                </c:otherwise>
-              </c:choose>
-            </td>
-            <td class="td_bs">
-               <span style="font-weight: bold;">${mname } </span><br>
-            </td>
-           <td class="td_bs_left">
-              <span style="font-weight: bold;">${theaterVO.tname }</span><br>
-              <c:choose>
-                <c:when test="${theaterVO.tinfo.length() > 160 }">
-                  ${theaterVO.tinfo.substring(0, 160) }
-                </c:when>
-                <c:otherwise>
-                  <DIV style='text-align: center; width:640px; height: 360px; margin: 0px auto;'>
-                  ${theaterVO.tinfo }
-                  </DIV>
-                </c:otherwise>
-              </c:choose><br>
-              (${theaterVO.tdate.substring(0, 16) })
-            </td>
-            <td class="td_bs">
-              <c:if test="${sessionScope.memno == theaterVO.memno }">
-                <a href="./update.do?theaterno=${theaterno }&now_page=${now_page}&word=${word}" title="수정"><img src="/theater/images/update.png" class="icon"></a>
-                <a href="./delete.do?theaterno=${theaterno }" title="삭제"><img src="/theater/images/delete.png" class="icon"></a>
-              </c:if>  
-            </td>
-          </tr>
-        </c:forEach>
-    </tbody>
-      
-  </table>
+          <!-- 4기준 하나의 이미지, 24 * 4 = 96% -->
+		      <!-- 5기준 하나의 이미지, 19.2 * 5 = 96% -->
+		      <div onclick="location.href='./read.do?theaterno=${theaterno}&word=${param.word }&now_page=${param.now_page == null ? 1 : param.now_page }'" 
+		             style='width: 19%; height: 200px; float: left; margin: 0.5%; padding: 0.5%; background-color: #EEEFFF; text-align: left; cursor: pointer;'>
+		        
+		        <c:choose> 
+		          <c:when test="${thumbimg1.endsWith('jpg') || thumbimg1.endsWith('png') || thumbimg1.endsWith('gif')}"> <%-- 이미지인지 검사 --%>
+		            <%-- registry.addResourceHandler("/movie/storage/**").addResourceLocations("file:///" +  Movie.getUploadDir()); --%>
+		            <img src="/theater/storage/${thumbimg1 }" style="width: 100%; height: 120px;">
+		          </c:when>
+		          <c:otherwise> <!-- 이미지가 없는 경우 기본 이미지 출력: /static/movie/images/none1.png -->
+		            <IMG src="/theater/images/none1.png" style="width: 100%; height: 120px;">
+		          </c:otherwise>
+		        </c:choose>
+		        ${tname}
+		        
+		      </div>
+		      
+		      <%-- 하나의 행에 이미지를 5개씩 출력후 행 변경, index는 0부터 시작 --%>
+		      <c:if test="${status.count % 5 == 0}"> 
+		        <HR class='menu_line'> <%-- 줄바꿈 --%>
+		      </c:if>
+        </c:forEach>  
+  </div>
   
   <!-- 페이지 목록 출력 부분 시작 -->
   <DIV class='bottom_menu'>${paging }</DIV> <%-- 페이지 리스트 --%>
