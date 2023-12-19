@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 자식 XML 태그들은 dev.mvc.genre.GenreDAOInter.java interface와 연결됨 -->
+<mapper namespace="dev.mvc.nice.NiceDAOInter">
+
+	<!-- 좋아요 등록! -->
+	<insert id="create" parameterType="dev.mvc.nice.NiceVO">
+		INSERT INTO nice(niceno, reviewno, memno, rdate) 
+		VALUES (nice_seq.nextval, #{reviewno}, #{memno}, sysdate)
+	</insert>
+	
+	<!-- 회원과 본문 내용에 따른 좋아요(좋아요 여부) -->
+	<select id="nice_by_mem_cnt" resultType="int" parameterType="dev.mvc.nice.NiceVO">
+		SELECT COUNT(*) as cnt 
+		FROM nice
+		WHERE reviewno=#{reviewno} AND memno=#{memno}
+	</select>
+
+	<!-- 본문 글의 총 조회수 -->
+	<select id="nice_cnt" resultType="int" parameterType="int">
+		SELECT COUNT(*) as cnt FROM nice
+		WHERE reviewno=#{reviewno}
+	</select>
+	
+	<!-- 좋아요 삭제 -->
+	<delete id="delete" parameterType="dev.mvc.nice.NiceVO">
+		DELETE FROM nice 
+		WHERE reviewno=#{reviewno} and memno=#{memno}
+	</delete>
+	
+</mapper>

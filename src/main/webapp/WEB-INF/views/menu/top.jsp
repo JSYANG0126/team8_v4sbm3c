@@ -66,13 +66,10 @@
             <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
               <a class="nav-link top_menu_link" href="/qna/list_all.do">질문/답변</a>
             </li>
-<<<<<<< HEAD
 
             <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
               <a class="nav-link top_menu_link" href="/review/list_paging.do">영화 리뷰</a>
             </li>
-=======
->>>>>>> b64c60613183a1acdf13c3e4fbb8810295df998b
 
             <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
               <a class="nav-link top_menu_link" href="/review/list_paging.do">영화 리뷰</a>

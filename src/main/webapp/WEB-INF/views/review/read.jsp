@@ -11,6 +11,7 @@
 <c:set var="file1" value="${reviewVO.file1 }" />
 <c:set var="size1_label" value="${reviewVO.size1_label }" />
 <c:set var="word" value="${reviewVO.word }" />
+<c:set var="nice_cnt" value="${nice_cnt }" />
  
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -20,7 +21,75 @@
 <title>Resort world</title>
 <link rel="shortcut icon" href="/images/star.png" /> <%-- /static 기준 --%>
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
-   
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script type="text/javascript">
+var nice_cnt = ${nice_cnt == null ? 0 : nice_cnt};
+var reviewno = ${reviewno};
+var memno = ${memno};
+
+$(document).ready(function () {
+    $.ajax({
+        type: 'GET',
+        url: '/nice/nice_by_mem_cnt.do',
+        cache: false,
+        data: { reviewno: ${reviewno}, memno: ${memno} },
+        dataType: 'json',
+        success: function (response) {
+            console.log(response.cnt);
+            var mem_cnt = response.cnt;
+            if (mem_cnt == 1) {
+                $('#nicebtn').hide();
+                $('#nicebtn2').show();
+            } else {
+                $('#nicebtn').show();
+                $('#nicebtn2').hide();
+            }
+            $('#nice_cnt').text(response.nice_cnt);
+        },
+        error: function (error) {
+            console.error('좋아요 확인 실패:', error);
+        }
+    });
+});
+
+function create() {
+    $.ajax({
+        type: 'POST',
+        url: '/nice/create.do',
+        data: { reviewno: reviewno, memno: memno },
+        success: function (response) {
+        	nice_cnt = response.nice_cnt;
+                $('#nicebtn').hide();
+                $('#nicebtn2').show();
+                $('#nice_cnt').text(nice_cnt);
+        },
+        error: function (error) {
+            console.error('좋아요 요청 실패:', error);
+        }
+    });
+}
+
+function unlike() {
+
+    // 서버로 좋아요 요청을 보냄
+    $.ajax({
+        type: 'POST',
+        url: '/nice/delete.do',
+        data: { reviewno: reviewno, memno: memno },
+        success: function (response) {
+        	nice_cnt = response.nice_cnt;
+                $('#nicebtn').show();
+                $('#nicebtn2').hide();
+                $('#nice_cnt').text(nice_cnt);
+        },
+        error: function (error) {
+            console.error('좋아요 요청 실패:', error);
+        }
+    });
+}
+</script>
+
 </head> 
  
 <body>
@@ -112,9 +181,18 @@
     </ul>
   </fieldset>
   
-<!--    <form name='frm' method='post' action='/comments/create.do'>
+   <form id="nice_form">						
+	  	<input type="hidden" name="reviewno" value="${reviewno}">			
+	  	<input type="hidden" name="memno" value="${memno}">			
+			<img src="/nice/images/nice1.png"  onclick="create();" id="nicebtn" >	
+			<img src="/nice/images/nice2.png"  onclick="unlike();" id="nicebtn2" style="display: none;">	
+			<span id= "nice_cnt" name="nice_cnt"></span>
+  </form>
+  
+  
+  <form name='frm' method='post' action='/reply/create.do'>
  		<input type='hidden' name='memno' value='${memno}'>
-    <input type='hidden' name='movieno' value='${movieno}'>
+    <input type='hidden' name='reviewno' value='${reviewno}'>
     <div style="text-align: center;">
       <label>댓글</label>
       <input type="text" name="reply" value="" required="required" autofocus="autofocus" 
@@ -133,25 +211,25 @@
       <col style="width: 10%;"></col>
       </colgroup>
       <tbody>
-      <c:forEach var="CommentsVO" items="${list_comments }" varStatus="info">
+      <c:forEach var="ReplyVO" items="${list_reply }" varStatus="info">
           <tr>
             <td>
-             ${CommentsVO.cname}
+             ${ReplyVO.cname}
             </td>
             <td>
-              <span>${CommentsVO.reply}</span><br>
+              <span>${ReplyVO.reply}</span><br>
             </td>
             <td>
-								${CommentsVO.cdate}
+								${ReplyVO.cdate}
             </td>
             <td>
-            <c:if test="${sessionScope.id != null && sessionScope.memno == CommentsVO.memno }">
-            <a href="/comments/delete.do?commentno=${CommentsVO.commentno }&movieno=${param.movieno}"><img src="/comments/delete.png" title="삭제"></a>
-            <a href="/comments/update.do?commentno=${CommentsVO.commentno }&movieno=${param.movieno}"><img src="/comments/update.png" title="수정"></a>
+            <c:if test="${sessionScope.id != null && sessionScope.memno == ReplyVO.memno }">
+            <a href="/reply/delete.do?replyno=${ReplyVO.replyno }&reviewno=${param.reviewno}"><img src="/reply/delete.png" title="삭제"></a>
+            <a href="/reply/update.do?replyno=${ReplyVO.replyno }&reviewno=${param.reviewno}"><img src="/reply/update.png" title="수정"></a>
             </c:if>
             <c:if test="${sessionScope.grade == 1 }">
-            <a href="/comments/delete.do?commentno=${CommentsVO.commentno }&movieno=${param.movieno}"><img src="/comments/delete.png" title="삭제"></a>
-            <a href="/comments/update.do?commentno=${CommentsVO.commentno }&movieno=${param.movieno}"><img src="/comments/update.png" title="수정"></a>
+            <a href="/reply/delete.do?replyno=${ReplyVO.replyno }&reviewno=${param.reviewno}"><img src="/reply/delete.png" title="삭제"></a>
+            <a href="/reply/update.do?replyno=${ReplyVO.replyno }&reviewno=${param.reviewno}"><img src="/reply/update.png" title="수정"></a>
             </c:if>
             </td>
             
@@ -160,11 +238,10 @@
          </c:forEach>
     </tbody>
       
-  </table> -->
+  </table> 
 </DIV>
  
 <jsp:include page="../menu/bottom.jsp" flush='false' />
 </body>
  
 </html>
-
