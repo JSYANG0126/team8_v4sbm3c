@@ -15,6 +15,12 @@
 	  FROM recommend    
 	  ORDER BY recommendno ASC  
 	</select>
+	
+	<select id="read" resultType="dev.mvc.recommend.RecommendVO">
+    SELECT recommendno, memno, genreno, seq, rdate
+    FROM recommend     
+    WHERE recommendno = #{recommendno}
+  </select>
 
   <!-- 1) 1번 회원 로그인시 관심분야를 가져오는 SQL -->
    <select id="mem_genre">

@@ -198,8 +198,6 @@ function unlike() {
       <input type="text" name="reply" value="" required="required" autofocus="autofocus" 
                  class="" style="width: 50%">
       <button type="submit" class="btn btn-secondary btn-sm" style="height: 28px; margin-bottom: 5px;">등록</button>
-      <button type="button" onclick="location.href='./list_all.do'" class="btn btn-secondary btn-sm" 
-                  style="height: 28px; margin-bottom: 5px;">목록</button> 
     </div>
   </form>
 	
