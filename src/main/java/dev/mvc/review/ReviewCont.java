@@ -21,6 +21,8 @@ import dev.mvc.genre.GenreVO;
 import dev.mvc.manager.ManagerProcInter;
 import dev.mvc.mem.MemProcInter;
 import dev.mvc.mem.MemVO;
+import dev.mvc.reply.ReplyProcInter;
+import dev.mvc.reply.ReplyVO;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 
@@ -37,6 +39,10 @@ public class ReviewCont {
   @Autowired
   @Qualifier("dev.mvc.review.ReviewProc") //@component("dev.mvc.genre.GerneProc")
   private ReviewProcInter reviewProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.reply.ReplyProc") //@component("dev.mvc.genre.GerneProc")
+  private ReplyProcInter replyProc;
 
   
   public ReviewCont () {
@@ -310,7 +316,8 @@ public class ReviewCont {
     reviewVO.setRinfo(rinfo);  
     reviewVO.setSize1_label(size1_label);
 
-
+    ArrayList<ReplyVO> list_reply = this.replyProc.list_by_reviewno(reviewno);
+    mav.addObject("list_reply", list_reply);
     mav.addObject("reviewVO", reviewVO);
     
     return mav;
