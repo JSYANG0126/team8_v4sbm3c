@@ -137,4 +137,10 @@ public int wd_check(MemVO memVO) {
 	return cnt;
 }
 
+@Override
+public int mem_unregister(int memno) {
+	int cnt = this.memDAO.mem_unregister(memno);
+	return cnt;
+}
+
 }

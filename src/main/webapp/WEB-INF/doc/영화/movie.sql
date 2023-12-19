@@ -71,6 +71,9 @@ SELECT movieno, managerno, genreno, title, content, recom, cnt, replycnt, passwd
 FROM movie
 ORDER BY movieno DESC;
 
+SELECT *
+FROM movie
+
 -- UPDATE
 UPDATE movie
 SET title = '트랜스포머3'

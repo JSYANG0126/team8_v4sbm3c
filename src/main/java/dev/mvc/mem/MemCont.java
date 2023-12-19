@@ -647,4 +647,36 @@ public class MemCont {
     return mav; // forward
   }
   
+  /**
+   * 회원탈퇴 폼
+   */
+  @RequestMapping(value="/mem/mem_unregister.do", method=RequestMethod.GET )
+  public ModelAndView mem_unregister(int memno) {
+    ModelAndView mav = new ModelAndView();
+    
+    MemVO memVO = memProc.read(memno);
+    mav.addObject("memVO", memVO);
+    
+    mav.setViewName("/mem/mem_unregister"); // /WEB-INF/views/mem/mem_unregister.jsp
+   
+    return mav; // forward
+  }
+  
+  /**
+   * 회원탈퇴 처리
+   */
+  @RequestMapping(value="/mem/mem_unregister.do", method=RequestMethod.POST )
+  public ModelAndView mem_unregister(@RequestParam("passwd") String passwd, int memno) {
+	  ModelAndView mav = new ModelAndView();
+	  MemVO memVO = memProc.read(memno);
+	  
+	  if(passwd == memVO.getPasswd()) {
+		  memProc.mem_unregister(memno);
+	  }
+	  
+	  
+  	  return mav;
+  }
+  
+  
 }

@@ -77,14 +77,21 @@
   <select id="sp_check" resultType="int" parameterType="dev.mvc.mem.MemVO">
     SELECT COUNT(*) as cnt
     FROM mem 
-    WHERE id={#id} AND grade >= 40 AND grade &lt;= 49;
+    WHERE id={#id} AND grade >= 40 AND grade &lt;= 49
   </select>
   
   <!-- 회원 탈퇴검사 -->
   <select id="wd_check" resultType="int" parameterType="dev.mvc.mem.MemVO">
     SELECT COUNT(*) as cnt
     FROM mem 
-    WHERE id={#id} AND grade = 99;
+    WHERE id={#id} AND grade = 99
   </select>
+  
+  <!-- 회원 탈퇴 -->
+  <update id="mem_unregister" parameterType="int">
+  UPDATE mem
+  set grade = 99
+  WHERE memno = #{memno}
+  </update>
   
 </mapper> 

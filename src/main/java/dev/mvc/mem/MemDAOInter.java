@@ -100,4 +100,12 @@ public interface MemDAOInter {
    * @return cnt
    */
   public int wd_check(MemVO memVO);
+  
+  /**
+   * 회원 탈퇴
+   * @param memno
+   * @return cnt
+   */
+  public int mem_unregister(int memno);
+  
 }
