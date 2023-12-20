@@ -18,6 +18,7 @@ import dev.mvc.mem.MemVO;
 import dev.mvc.movie.MovieProcInter;
 import dev.mvc.movie.MovieVO;
 import dev.mvc.qna.QnaVO;
+import dev.mvc.review.ReviewVO;
 
 
 @Controller
@@ -64,19 +65,22 @@ public class CommentsCont {
       MemVO memVO = this.memProc.read(memno);
       commentsVO.setCname(memVO.getMname());
       
+
+      MovieVO movieVO = this.movieProc.read(commentsVO.getMovieno());
+      
       mav.addObject("commentsVO", commentsVO);
       
       int cnt = this.commentsProc.create(commentsVO);
       System.out.println("-> cnt: " + cnt);
       
       if (cnt == 1) {
-        mav.addObject("code", "create_success");
+        mav.addObject("now_page", movieVO.getNow_page());
         mav.setViewName("redirect:/movie/read.do?movieno=" + commentsVO.getMovieno());
       } else {
         mav.addObject("code", "create_fail");
+        mav.addObject("cnt", cnt);
         mav.setViewName("/comments/msg");
       } 
-      mav.addObject("cnt", cnt);
     }  else {
         mav.setViewName("/mem/login_need"); // /WEB-INF/views/manager/login_need.jsp
     }
