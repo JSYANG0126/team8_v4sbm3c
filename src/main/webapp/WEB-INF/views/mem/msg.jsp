@@ -109,6 +109,32 @@
             </li>
         </c:when>
         
+        <c:when test="${param.code == 'unregister_success'}">
+            <li class='li_none'>
+              <span class="span_fail"> 회원 탈퇴에 성공하였습니다.</span>
+              <li class='li_none'>
+              <button type='button' 
+                    onclick="location.href='/'"
+                    class="btn btn-primary btn-sm">확인</button>
+          </li>  
+            </li>
+        </c:when>
+        
+        <c:when test="${param.code == 'unregister_fail'}">
+            <li class='li_none'>
+              <span class="span_fail"> 비밀번호를 다시 입력해주세요.</span>
+              <li class='li_none'>
+              <button type='button' 
+                    onclick="history.back();"
+                    class="btn btn-primary btn-sm">다시 입력</button>
+                    
+              <button type='button' 
+                    onclick="location.href='/'"
+                    class="btn btn-primary btn-sm">취소</button>
+          </li>  
+            </li>
+        </c:when>
+        
         <c:otherwise>
           <li class='li_none_left'>
             <span class="span_fail">알 수 없는 에러로 작업에 실패했습니다.</span>

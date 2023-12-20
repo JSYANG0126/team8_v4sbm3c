@@ -628,14 +628,13 @@ public class MemCont {
    * @param tel
    */
   @RequestMapping(value="/mem/id_find.do", method=RequestMethod.POST )
-  public ModelAndView id_find(HttpSession session) {
+  public ModelAndView id_find(@RequestParam("mname") String mname, @RequestParam("tel") String tel) {
 	  ModelAndView mav = new ModelAndView();
-	  String mname = (String)session.getAttribute("mname");
-  	  String tel = (String)session.getAttribute("tel");
   
-  	  System.out.println("사용자의 mname: " + mname);
-  	  System.out.println("사용자의 tel: " + tel);
-  	  System.out.println("-> 안됨");
+  	  mav.setViewName("redirect:/index.do");
+//  	  System.out.println("사용자의 mname: " + mname);
+//  	  System.out.println("사용자의 tel: " + tel);	/form에서 값을 받아왔는지 확인용
+
   	  return mav;
   }
   
@@ -657,10 +656,8 @@ public class MemCont {
    * 회원탈퇴 폼
    */
   @RequestMapping(value="/mem/mem_unregister.do", method=RequestMethod.GET )
-  public ModelAndView mem_unregister(HttpSession session) {
+  public ModelAndView mem_unregister(int memno) {
     ModelAndView mav = new ModelAndView();
-    
-    int memno = (int) session.getAttribute("memno");
     
     MemVO memVO = memProc.read(memno);
     mav.addObject("memVO", memVO);
@@ -682,9 +679,12 @@ public class MemCont {
 	  if(passwd.equals(memVO.getPasswd())) {
 		  memProc.mem_unregister(memno);
 		  
-		  mav.setViewName("redirect:/index.do"); // /WEB-INF/views/mem/mem_unregister.jsp
+		  mav.addObject("code", "unregister_success");
+		  mav.setViewName("redirect:/mem/msg.do"); 
 
-//		  mav.setViewName("redirect:/mem/msg.do");
+	  } else {
+		  mav.addObject("code", "unregister_fail");
+		  mav.setViewName("redirect:/mem/msg.do"); 
 	  }
 	  
 	  

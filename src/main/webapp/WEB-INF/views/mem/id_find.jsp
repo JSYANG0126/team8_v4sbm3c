@@ -16,25 +16,27 @@
 <body>
 <c:import url="/menu/top.do" />
     <div class="title_line">아이디 찾기</div>
-    
+
     <div style="width: 60%; margin: 0px auto ">
-        <div class="form-group" style ="padding-bottom: 5px">
-        <label>성명:
-            <input type='text' class="form-control form-control-sm" name='mname' id='mname' value='홍길동' required="required" placeholder="아이디" autofocus="autofocus">
-        </label>
-        </div>   
-    
+        <form method="post" action="/mem/id_find.do">
+            <div class="form-group" style="padding-bottom: 5px">
+                <label>성명:
+                    <input type='text' class="form-control form-control-sm" name='mname' id='mname' value='홍길동' required="required" placeholder="아이디" autofocus="autofocus">
+                </label>
+            </div>
         <div class="form-group">
-        <label>번호:
-            <input type='text' class="form-control form-control-sm" name='tel' id='tel' value='010-0000-0000' required="required" placeholder="전화번호" autofocus="autofocus">
-        </label>
-        </div>   
-    
+                <label>번호:
+                    <input type='text' class="form-control form-control-sm" name='tel' id='tel' value='010-0000-0000' required="required" placeholder="전화번호" autofocus="autofocus">
+                </label>
+            </div>
         <div class="bottom_menu">
-            <button type="button" id='btn_send' onclick="send()" class="btn btn-primary btn-sm">아이디 찾기</button>
-            <button type="button" onclick="history.back()" class="btn btn-primary btn-sm">취소</button>
-        </div>   
+                <button type="submit" class="btn btn-primary btn-sm">아이디 찾기</button>
+                <button type="button" onclick="history.back()" class="btn btn-primary btn-sm">취소</button>
+        </div>
+    </form>
+    
     </div>
+
 <jsp:include page="../menu/bottom.jsp" flush='false' /> 
 </body>
 </html>
