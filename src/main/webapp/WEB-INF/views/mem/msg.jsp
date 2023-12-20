@@ -101,29 +101,30 @@
         <c:when test="${param.code == 'wd_check_fail'}">
             <li class='li_none'>
               <span class="span_fail"> 이 계정은 탈퇴 처리된 계정입니다.</span>
-              <li class='li_none'>
+            </li>
+            <li class='li_none'>
               <button type='button' 
                     onclick="location.href='/'"
                     class="btn btn-primary btn-sm">확인</button>
-          </li>  
-            </li>
+               </li>  
         </c:when>
         
         <c:when test="${param.code == 'unregister_success'}">
             <li class='li_none'>
-              <span class="span_fail"> 회원 탈퇴에 성공하였습니다.</span>
-              <li class='li_none'>
+              <span class="span_success"> 회원 탈퇴에 성공하였습니다.</span>
+            </li>
+            <li class='li_none'>
               <button type='button' 
                     onclick="location.href='/'"
                     class="btn btn-primary btn-sm">확인</button>
-          </li>  
             </li>
         </c:when>
         
         <c:when test="${param.code == 'unregister_fail'}">
             <li class='li_none'>
               <span class="span_fail"> 비밀번호를 다시 입력해주세요.</span>
-              <li class='li_none'>
+            </li>
+            <li class='li_none'>
               <button type='button' 
                     onclick="history.back();"
                     class="btn btn-primary btn-sm">다시 입력</button>
@@ -131,7 +132,55 @@
               <button type='button' 
                     onclick="location.href='/'"
                     class="btn btn-primary btn-sm">취소</button>
-          </li>  
+            </li>
+        </c:when>
+        
+        <c:when test="${param.code == 'id_find_success'}">
+        <li class='li_none'>
+            <span class="span_success"> 회원님의 아이디는 
+                <script>
+                    var id = "${param.id}";
+                    var maskedID = id.substring(0, 8);
+                    for (var i = 8; i < id.length; i++) {
+                        maskedID += "*";
+                    }
+                    document.write(maskedID);
+                </script> 
+                입니다.
+            </span>
+        </li>
+            <li class='li_none'>
+                <button type='button' 
+                    onclick="location.href='/';"
+                    class="btn btn-primary btn-sm">확인</button>
+            </li>  
+        </c:when>
+        
+        <c:when test="${param.code == 'id_find_fail'}">
+            <li class='li_none'>
+              <span class="span_fail"> 이름/전화번호를 다시 입력해주세요.</span>
+            </li>
+            <li class='li_none'>
+              <button type='button' 
+                    onclick="history.back();"
+                    class="btn btn-primary btn-sm">다시 입력</button>
+              <button type='button' 
+                    onclick="location.href='/'"
+                    class="btn btn-primary btn-sm">취소</button>
+            </li>
+        </c:when>
+        
+        <c:when test="${param.code == 'passwd_find_fail'}">
+            <li class='li_none'>
+              <span class="span_fail"> 아이디/이름/전화번호를 다시 입력해주세요.</span>
+            </li>
+            <li class='li_none'>
+              <button type='button' 
+                    onclick="history.back();"
+                    class="btn btn-primary btn-sm">다시 입력</button>
+              <button type='button' 
+                    onclick="location.href='/'"
+                    class="btn btn-primary btn-sm">취소</button>
             </li>
         </c:when>
         

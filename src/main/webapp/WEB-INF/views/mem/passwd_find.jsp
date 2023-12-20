@@ -38,7 +38,7 @@
 
         
         <div class="bottom_menu">
-            <button type="button" id='btn_send' onclick="send()" class="btn btn-primary btn-sm">아이디 찾기</button>
+            <button type="button" id='btn_send' onclick="send()" class="btn btn-primary btn-sm">비밀번호 찾기</button>
             <button type="button" onclick="history.back()" class="btn btn-primary btn-sm">취소</button>
         </div>   
     </div>

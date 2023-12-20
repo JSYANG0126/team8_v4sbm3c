@@ -34,6 +34,13 @@
     WHERE id = #{id}
   </select>
   
+  <!-- 회원 이름으로 회원 정보 조회 -->
+  <select id="readByMname" resultType="dev.mvc.mem.MemVO" parameterType="String">
+    SELECT memno, id, passwd, mname, tel, zipcode, address1, address2, mdate, grade
+    FROM mem
+    WHERE mname = #{mname} AND grade != 99
+  </select>
+  
   <update id="update" parameterType="dev.mvc.mem.MemVO">
     UPDATE mem
     SET id=#{id}, mname=#{mname}, tel=#{tel}, zipcode=#{zipcode}, address1=#{address1}, address2=#{address2}

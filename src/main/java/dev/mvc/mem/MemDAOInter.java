@@ -48,6 +48,13 @@ public interface MemDAOInter {
   public MemVO readById(String id);
   
   /**
+   * 회원 이름으로 회원 정보 조회
+   * @param mname
+   * @return
+   */
+  public MemVO readByMname(String mname);
+  
+  /**
    * 수정 처리
    * @param memVO
    * @return

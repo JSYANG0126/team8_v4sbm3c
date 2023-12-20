@@ -630,11 +630,24 @@ public class MemCont {
   @RequestMapping(value="/mem/id_find.do", method=RequestMethod.POST )
   public ModelAndView id_find(@RequestParam("mname") String mname, @RequestParam("tel") String tel) {
 	  ModelAndView mav = new ModelAndView();
-  
-  	  mav.setViewName("redirect:/index.do");
-//  	  System.out.println("사용자의 mname: " + mname);
-//  	  System.out.println("사용자의 tel: " + tel);	/form에서 값을 받아왔는지 확인용
 
+	  MemVO memVO = this.memProc.readByMname(mname);
+
+//	  System.out.println("mname" + memVO.getMname());
+//	  System.out.println("사용자의 tel: " + tel);	//form에서 값을 받아왔는지 확인용
+//	  System.out.println("사용자의 찾은 tel: " + memVO.getTel());
+	  
+	  if(memVO != null &&memVO.getTel().equals(tel)) {
+		  
+		mav.addObject("id", memVO.getId());
+	    mav.addObject("code", "id_find_success");
+		mav.setViewName("redirect:/mem/msg.do"); 
+	  } else {
+		  
+		  mav.addObject("code", "id_find_fail");
+		  mav.setViewName("redirect:/mem/msg.do"); 
+	  }
+	  
   	  return mav;
   }
   
@@ -650,6 +663,32 @@ public class MemCont {
     mav.setViewName("/mem/passwd_find"); // /WEB-INF/views/mem/passwd_find.jsp
    
     return mav; // forward
+  }
+  
+  /**
+   * 아이디 찾기 처리
+   * @param mname
+   * @param tel
+   */
+  @RequestMapping(value="/mem/passwd_find.do", method=RequestMethod.POST )
+  public ModelAndView passwd_find(@RequestParam("id") String id, @RequestParam("mname") String mname, @RequestParam("tel") String tel) {
+	  ModelAndView mav = new ModelAndView();
+
+	  MemVO memVO = this.memProc.readById(id);
+
+//	  System.out.println("mname" + memVO.getMname());
+//	  System.out.println("사용자의 tel: " + tel);	//form에서 값을 받아왔는지 확인용
+//	  System.out.println("사용자의 찾은 tel: " + memVO.getTel());
+	  
+	  if(memVO != null &&memVO.getMname().equals(mname)&&memVO.getTel().equals(tel)) {
+		  
+	  } else {
+		  
+		  mav.addObject("code", "passwd_find_fail");
+		  mav.setViewName("redirect:/mem/msg.do"); 
+	  }
+	  
+  	  return mav;
   }
   
   /**
