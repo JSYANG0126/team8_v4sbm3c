@@ -30,8 +30,8 @@
                 </label>
             </div>
         <div class="bottom_menu">
-                <button type="submit" class="btn btn-primary btn-sm">아이디 찾기</button>
-                <button type="button" onclick="history.back()" class="btn btn-primary btn-sm">취소</button>
+                <button type="submit" class="btn btn-secondary btn-sm">아이디 찾기</button>
+                <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm">취소</button>
         </div>
     </form>
     

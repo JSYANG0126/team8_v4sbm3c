@@ -151,7 +151,7 @@ window.onload = function() {
       <label>아이디*:
         <input type='text' class="form-control form-control-sm" name='id' id='id' value='${memVO.id }' required="required" placeholder="아이디*" autofocus="autofocus">
       </label>
-      <button type='button' id="btn_checkID" onclick="checkID()" class="btn btn-primary btn-sm">중복확인</button>
+      <button type='button' id="btn_checkID" onclick="checkID()" class="btn btn-secondary btn-sm">중복확인</button>
       <span id='id_msg'></span>
     </div>   
   
@@ -173,7 +173,7 @@ window.onload = function() {
       <label>우편 번호:
         <input type='text' class="form-control form-control-sm" name='zipcode' id='zipcode' value='${memVO.zipcode }' placeholder="우편번호">
       </label>
-      <button type="button" id="btn_DaumPostcode" onclick="DaumPostcode()" class="btn btn-primary btn-sm">우편번호 찾기</button>
+      <button type="button" id="btn_DaumPostcode" onclick="DaumPostcode()" class="btn btn-secondary btn-sm">우편번호 찾기</button>
     </div>  
 
     <div class="form-group">
@@ -278,8 +278,8 @@ window.onload = function() {
     </div>
     
     <div class="form_input">
-      <button type="button" id='btn_send' onclick="send()" class="btn btn-primary btn-sm">저장</button>
-      <button type="button" onclick="history.back()" class="btn btn-primary btn-sm">취소</button>
+      <button type="button" id='btn_send' onclick="send()" class="btn btn-secondary btn-sm">저장</button>
+      <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm">취소</button>
     </div>   
   </FORM>
   </DIV>

@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import dev.mvc.manager.ManagerProcInter;
 import dev.mvc.mlogin.MloginProcInter;
 import dev.mvc.mlogin.MloginVO;
+import dev.mvc.tool.MailTool;
  
 @Controller
 public class MemCont {
@@ -666,7 +667,8 @@ public class MemCont {
   }
   
   /**
-   * 아이디 찾기 처리
+   * 비밀번호 찾기 처리
+   * @param id
    * @param mname
    * @param tel
    */
@@ -675,12 +677,24 @@ public class MemCont {
 	  ModelAndView mav = new ModelAndView();
 
 	  MemVO memVO = this.memProc.readById(id);
-
-//	  System.out.println("mname" + memVO.getMname());
-//	  System.out.println("사용자의 tel: " + tel);	//form에서 값을 받아왔는지 확인용
-//	  System.out.println("사용자의 찾은 tel: " + memVO.getTel());
+	  System.out.println("받은 id -> " + memVO.getId());
+	  System.out.println("받은 mname -> " + memVO.getMname());
+	  System.out.println("받은 tel -> " + memVO.getTel());
 	  
+	  System.out.println("내 id -> " + memVO.getId());
+	  System.out.println("내 mname -> " + memVO.getMname());
+	  System.out.println("내 tel -> " + memVO.getTel());
 	  if(memVO != null &&memVO.getMname().equals(mname)&&memVO.getTel().equals(tel)) {
+		  
+		  MailTool mailTool = new MailTool();
+		  
+	      String receiver = "alsehdgnl865869@gmail.com";
+		  String title = "회원님의 비밀번호입니다..";
+		  String content = "회원님의 비밀번호는 " + memVO.getPasswd() + " 입니다.";
+		  mailTool.send(receiver, memVO.getId(), title, content); // 메일 전송
+		  
+		  mav.addObject("code", "passwd_find_success");
+		  mav.setViewName("redirect:/mem/msg.do"); 
 		  
 	  } else {
 		  
