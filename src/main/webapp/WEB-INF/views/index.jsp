@@ -23,30 +23,26 @@
         <DIV style='width: 100%; margin: 30px auto; text-align: center;'> <%-- 로그인된 경우 추천 --%>
           <c:if test="${sessionScope.id != null}">
             <DIV style='width: 70%; margin: 10px auto; text-align: left;'>
-              <h4>${sessionScope.mname} 님을 위한 추천</h4>
+              <h4>${sessionScope.mname} 님을 위한 최근 등록 영화</h4>
               <c:import url="/recommend/list_all.do" />  <%-- 좋아요가 높은 상품 --%>
             </DIV>
             
             <DIV style="clear: both; height: 20px;"></DIV>
           
             <DIV style='width: 70%; margin: 10px auto; text-align: left;'>
-              <h4>${sessionScope.mname} 님을 위한 추천 상품</h4>
+              <h4>${sessionScope.mname} 님을 위한 추천 많은 영화</h4>
               <c:import url="/recommend/recom_good.do" />  <%-- 좋아요가 높은 상품 --%>
             </DIV>
             
             <DIV style="clear: both; height: 20px;"></DIV>
             
             <DIV style='width: 70%; margin: 10px auto; text-align: left;'>
-              <h4>평점이 높은 추천 상품</h4>
+              <h4>${sessionScope.mname} 님을 위한 평점이 높은 영화</h4>
               <c:import url="/recommend/recom_score.do" />
             </DIV>
             
             <DIV style="clear: both; height: 20px;"></DIV>
             
-            <DIV style='width: 70%; margin: 10px auto; text-align: left;'>
-              <h4>최신 상품 추천 상품</h4>
-              <c:import url="/recommend/recom_new.do" />
-            </DIV>
           </c:if>
         </DIV>
       </c:otherwise>

@@ -16,28 +16,33 @@
 	  ORDER BY recommendno ASC  
 	</select>
 	
-	<select id="read" resultType="dev.mvc.recommend.RecommendVO">
+	<select id="read" resultType="dev.mvc.recommend.RecommendVO" parameterType="int">
     SELECT recommendno, memno, genreno, seq, rdate
     FROM recommend     
     WHERE recommendno = #{recommendno}
   </select>
+  
+   <select id="read_by_memno" resultType="dev.mvc.recommend.RecommendVO" parameterType="int">
+    SELECT recommendno, memno, genreno, seq, rdate
+    FROM recommend     
+    WHERE memno = #{memno}
+  </select>
 
   <!-- 1) 1번 회원 로그인시 관심분야를 가져오는 SQL -->
-   <select id="mem_genre">
-   SELECT genreno FROM recommend WHERE memno=1
-   </select>
+  <select id="mem_genre" parameterType="int" >
+    SELECT genreno FROM recommend WHERE memno=1
+  </select>
+  
 	<!-- 관심분야의 카테고리 1번 상품중에 recom(추천수) 컬럼의 내림차순 정렬후 상품 목록 10건을 출력 -->
-	<select id="recom_good" resultType="dev.mvc.movie.MovieVO" parameterType="dev.mvc.movie.MovieVO"  >
+	<select id="recom_good" resultType="dev.mvc.movie.MovieVO" parameterType="int"  >
 	   SELECT movieno, managerno, genreno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, r
 		FROM (
 		           SELECT movieno, managerno, genreno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, rownum as r
 		           FROM (
 		                     SELECT movieno, managerno, genreno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1
 		                     FROM movie
-		                     WHERE genreno=#{genreno} AND (UPPER(title) LIKE '%' || UPPER(#{word}) || '%' 
-                                                              OR UPPER(content) LIKE '%' || UPPER(#{word}) || '%' 
-                                                              OR UPPER(word) LIKE '%' || UPPER(#{word}) || '%')
-                                                              ORDER BY recom DESC
+		                     WHERE genreno=#{genreno} 
+                         ORDER BY recom DESC
 		           )          
 		)
 		WHERE <![CDATA[ r >= 1 AND r <= 10 ]]>

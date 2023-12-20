@@ -63,19 +63,21 @@ public class ReplyCont {
       MemVO memVO = this.memProc.read(memno);
       replyVO.setCname(memVO.getMname());
       
+      ReviewVO reviewVO = this.reviewProc.read(replyVO.getReviewno());
+      
       mav.addObject("replyVO", replyVO);
       
       int cnt = this.replyProc.create(replyVO);
       System.out.println("-> cnt: " + cnt);
       
       if (cnt == 1) {
-        mav.addObject("code", "create_success");
+        mav.addObject("now_page", reviewVO.getNow_page());
         mav.setViewName("redirect:/review/read.do?reviewno=" + replyVO.getReviewno());
       } else {
         mav.addObject("code", "create_fail");
+        mav.addObject("cnt", cnt);
         mav.setViewName("/reply/msg");
       } 
-      mav.addObject("cnt", cnt);
     }  else {
         mav.setViewName("/mem/login_need"); // /WEB-INF/views/manager/login_need.jsp
     }
