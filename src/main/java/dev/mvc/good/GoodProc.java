@@ -32,4 +32,11 @@ public class GoodProc implements GoodProcInter {
     return cnt;
   }
 
+  @Override
+  public int delete_by_movieno(int movieno) {
+    int cnt = this.goodDAO.delete_by_movieno(movieno);
+    return cnt;
+  }
+
+  
 }

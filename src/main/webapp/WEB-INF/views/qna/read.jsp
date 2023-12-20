@@ -131,7 +131,7 @@
             <a href="/answer/delete.do?answerno=${AnswerVO.answerno }&qnano=${param.qnano}"><img src="/answer/delete.png" title="삭제"></a>
             <a href="/answer/update.do?answerno=${AnswerVO.answerno }&qnano=${param.qnano}"><img src="/answer/update.png" title="수정"></a>
             </c:if>
-            <c:if test="${sessionScope.memno == 5}">
+            <c:if test="${sessionScope.grade == 2}">
             <a href="/answer/delete.do?answerno=${AnswerVO.answerno }&qnano=${param.qnano}"><img src="/answer/delete.png" title="삭제"></a>
             <a href="/answer/update.do?answerno=${AnswerVO.answerno }&qnano=${param.qnano}"><img src="/answer/update.png" title="수정"></a></c:if>
             </td>

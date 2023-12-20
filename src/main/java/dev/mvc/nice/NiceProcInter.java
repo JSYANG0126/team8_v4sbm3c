@@ -9,4 +9,6 @@ public interface NiceProcInter {
   public int nice_cnt(int reviewno);
 
   public int delete(NiceVO niceVO);
+
+  public int delete_by_reviewno(int reviewno);
 }
