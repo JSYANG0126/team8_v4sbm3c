@@ -98,6 +98,17 @@
           </li>                                                                      
         </c:when>  
         
+        <c:when test="${param.code == 'wd_check_fail'}">
+            <li class='li_none'>
+              <span class="span_fail"> 이 계정은 탈퇴 처리된 계정입니다.</span>
+              <li class='li_none'>
+              <button type='button' 
+                    onclick="location.href='/'"
+                    class="btn btn-primary btn-sm">확인</button>
+          </li>  
+            </li>
+        </c:when>
+        
         <c:otherwise>
           <li class='li_none_left'>
             <span class="span_fail">알 수 없는 에러로 작업에 실패했습니다.</span>

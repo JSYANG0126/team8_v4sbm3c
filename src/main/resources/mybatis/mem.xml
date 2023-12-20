@@ -77,14 +77,14 @@
   <select id="sp_check" resultType="int" parameterType="dev.mvc.mem.MemVO">
     SELECT COUNT(*) as cnt
     FROM mem 
-    WHERE id={#id} AND grade >= 40 AND grade &lt;= 49
+    WHERE id=#{id} AND grade >= 40 AND grade &lt;= 49
   </select>
   
   <!-- 회원 탈퇴검사 -->
   <select id="wd_check" resultType="int" parameterType="dev.mvc.mem.MemVO">
     SELECT COUNT(*) as cnt
     FROM mem 
-    WHERE id={#id} AND grade = 99
+    WHERE id=#{id, jdbcType=VARCHAR} AND grade = 99
   </select>
   
   <!-- 회원 탈퇴 -->

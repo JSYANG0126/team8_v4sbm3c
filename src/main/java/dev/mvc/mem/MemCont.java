@@ -395,25 +395,24 @@ public class MemCont {
                              @RequestParam(value="passwd_save", defaultValue="") String passwd_save) {
      ModelAndView mav = new ModelAndView();
      
-     int memno = memProc.readByMemno(id);
-     System.out.println(memno);
-     MloginVO mloginVO = new MloginVO();
-     mloginVO.setMemno(memno);
-     String ip=request.getRemoteAddr();
-     mloginVO.setIp(ip);
-     System.out.println(ip);
-     this.mloginProc.create(mloginVO);
-     
      HashMap<String, Object> map = new HashMap<String, Object>();
      map.put("id", id);
      map.put("passwd", passwd);
      
-     
+     MemVO memVO = memProc.readById(id);
     
      int cnt = memProc.login(map);
-     if (cnt == 1) { // 로그인 성공
+     if (cnt == 1 && memProc.wd_check(memVO) == 0) { // 로그인 성공
        // System.out.println(id + " 로그인 성공");
-       MemVO memVO = memProc.readById(id);
+    	
+       // 로그인 내역 저장
+       int memno = memProc.readByMemno(id);
+       MloginVO mloginVO = new MloginVO();
+       mloginVO.setMemno(memno);
+       String ip=request.getRemoteAddr();
+       mloginVO.setIp(ip);
+       this.mloginProc.create(mloginVO);
+       
        session.setAttribute("memno", memVO.getMemno()); // 서버의 메모리에 기록
        session.setAttribute("id", id);
        session.setAttribute("mname", memVO.getMname());
@@ -463,7 +462,14 @@ public class MemCont {
        // -------------------------------------------------------------------
     
        mav.setViewName("redirect:/index.do");  
+     } else if(memProc.wd_check(memVO) == 1) {
+    	 
+    	 mav.addObject("code", "wd_check_fail");
+    	 mav.addObject("url", "/mem/msg");  // /mem/msg -> /mem/msg.jsp
+         
+         mav.setViewName("redirect:/mem/msg.do");
      } else {
+     
        mav.addObject("url", "/mem/login_fail_msg");
        mav.setViewName("redirect:/mem/msg.do"); 
      }
