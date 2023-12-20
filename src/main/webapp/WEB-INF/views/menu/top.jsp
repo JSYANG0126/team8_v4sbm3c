@@ -34,7 +34,7 @@
   </div> <!-- <div class='top_img'></div> 종료 -->
   
 
-  <nav class="navbar navbar-expand-md navbar-dark bg-warning">
+  <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #323232;">
       <a class="navbar-brand" href="/"><img src='/css/images/home.png' title="시작페이지" style='display: block; padding-left: 5px;'></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle Navigation">
         <span class="navbar-toggler-icon"></span>

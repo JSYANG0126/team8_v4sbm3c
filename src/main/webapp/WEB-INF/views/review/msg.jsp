@@ -83,7 +83,7 @@
             </c:when>
         </c:choose>
         
-        <button type='button' onclick="location.href='./create.do'" class="btn btn-secondary btn-sm">새로운 컨텐츠 등록</button>
+        <button type='button' onclick="location.href='./create.do'" class="btn btn-secondary btn-sm">새로운 글 등록</button>
         <button type='button' onclick="location.href='./list_paging.do'" class="btn btn-secondary btn-sm">목록</button>
       </li>
     </UL>
