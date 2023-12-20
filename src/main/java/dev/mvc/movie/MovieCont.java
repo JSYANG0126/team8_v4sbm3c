@@ -745,7 +745,8 @@ public class MovieCont {
       // -------------------------------------------------------------------
       // 파일 삭제 종료
       // -------------------------------------------------------------------
-        
+      
+      this.goodProc.delete_by_movieno(movieVO.getMovieno());
       this.commentsProc.delete_by_movieno(movieVO.getMovieno());
       this.movieProc.delete(movieVO.getMovieno()); // DBMS 삭제
           

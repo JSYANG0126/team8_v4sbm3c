@@ -32,4 +32,11 @@ public class NiceProc implements NiceProcInter {
     return cnt;
   }
 
+  @Override
+  public int delete_by_reviewno(int reviewno) {
+    int cnt = this.niceDAO.delete_by_reviewno(reviewno);
+    return cnt;
+  }
+
+  
 }

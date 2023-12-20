@@ -21,6 +21,7 @@ import dev.mvc.genre.GenreVO;
 import dev.mvc.manager.ManagerProcInter;
 import dev.mvc.mem.MemProcInter;
 import dev.mvc.mem.MemVO;
+import dev.mvc.nice.NiceProcInter;
 import dev.mvc.reply.ReplyProcInter;
 import dev.mvc.reply.ReplyVO;
 import dev.mvc.tool.Tool;
@@ -29,21 +30,24 @@ import dev.mvc.tool.Upload;
 @Controller
 public class ReviewCont {
   @Autowired
-  @Qualifier("dev.mvc.manager.ManagerProc") //@component("dev.mvc.manager.ManagerProc")
+  @Qualifier("dev.mvc.manager.ManagerProc") 
   private ManagerProcInter managerProc;
    
   @Autowired
-  @Qualifier("dev.mvc.mem.MemProc") //@component("dev.mvc.genre.GerneProc")
+  @Qualifier("dev.mvc.mem.MemProc") 
   private MemProcInter memProc;
   
   @Autowired
-  @Qualifier("dev.mvc.review.ReviewProc") //@component("dev.mvc.genre.GerneProc")
+  @Qualifier("dev.mvc.review.ReviewProc")
   private ReviewProcInter reviewProc;
   
   @Autowired
-  @Qualifier("dev.mvc.reply.ReplyProc") //@component("dev.mvc.genre.GerneProc")
+  @Qualifier("dev.mvc.reply.ReplyProc") 
   private ReplyProcInter replyProc;
 
+  @Autowired
+  @Qualifier("dev.mvc.nice.NiceProc") 
+  private NiceProcInter niceProc;
   
   public ReviewCont () {
     System.out.println("-> ReviewCont created.");
@@ -542,6 +546,7 @@ public class ReviewCont {
       // 파일 삭제 종료
       // -------------------------------------------------------------------
       
+      this.niceProc.delete_by_reviewno(reviewVO.getReviewno());
       this.replyProc.delete_by_reviewno(reviewVO.getReviewno());
       this.reviewProc.delete(reviewVO.getReviewno()); // DBMS 삭제
           

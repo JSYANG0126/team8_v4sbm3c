@@ -9,4 +9,6 @@ public interface GoodDAOInter {
   public int good_cnt(int movieno);
 
   public int delete(GoodVO goodVO);
+  
+  public int delete_by_movieno(int movieno);
 }

@@ -29,4 +29,9 @@
 		WHERE movieno=#{movieno} and memno=#{memno}
 	</delete>
 	
+	<!-- movie에 있는 좋아요 모두 삭제 -->
+	<delete id="delete_by_movieno" parameterType="int">
+		DELETE FROM good 
+		WHERE movieno=#{movieno} 
+	</delete>
 </mapper>
