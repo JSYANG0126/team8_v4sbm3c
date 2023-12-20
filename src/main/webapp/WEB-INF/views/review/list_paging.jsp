@@ -15,6 +15,7 @@
 <body>
 <c:import url="/menu/top.do" />
 
+
   <div class='title_line'>
     영화 리뷰 게시판
     <c:if test="${param.word.length() > 0 }">
@@ -45,9 +46,9 @@
           <input type='text' name='word' id='word' value=''>
         </c:otherwise>
       </c:choose>
-      <button type='submit' class='btn btn-secondary btn-sm' style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px;">검색</button>
+      <button type='submit' class='btn btn-sm' style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px; background-color: #323232; color: white;">검색</button>
       <c:if test="${param.word.length() > 0 }"> <%-- 검색 상태하면 '검색 취소' 버튼을 출력 --%>
-        <button type='button' class='btn btn-secondary btn-sm' style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px;"
+        <button type='button' class='btn btn-secondary btn-sm' style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px; background-color: #323232; color: white;"
                     onclick="location.href='./list_paging.do?word='">검색 취소</button>  
       </c:if>    
     </form>
@@ -55,7 +56,7 @@
     
   <div class="menu_line"></div> 
   
-  <table class="table table-hover">
+  <table class="table table-hover" >
     <colgroup>
       <col style="width: 10%;"></col>
       <col style="width: 70%;"></col>

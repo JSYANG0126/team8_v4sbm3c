@@ -286,6 +286,7 @@
     color: #7777FF;
   }
   
+    
   a:active{  /* A 태그를 클릭한 상태 */
     text-decoration: underline; /* 밑줄 출력 */
     color: #7777FF;

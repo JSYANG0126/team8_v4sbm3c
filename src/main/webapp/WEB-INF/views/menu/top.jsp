@@ -25,6 +25,10 @@
     color: #FFFFFF;
     font-size: 1.05em;
   }
+  
+	.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+	  background-color: #cdcdcd;
+	}
 </style> 
 
 
