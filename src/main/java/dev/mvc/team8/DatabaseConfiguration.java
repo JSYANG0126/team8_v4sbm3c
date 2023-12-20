@@ -33,8 +33,6 @@ import com.zaxxer.hikari.HikariDataSource;
 									   "dev.mvc.answer",
 									   "dev.mvc.chat",
 									   "dev.mvc.reply",
-									   "dev.mvc.nice", // DAO interface를 찾는 위치
-									   "dev.mvc.mlogin",
 									   "dev.mvc.nice", 
 									   "dev.mvc.mlogin"}) // DAO interface를 찾는 위치
 
