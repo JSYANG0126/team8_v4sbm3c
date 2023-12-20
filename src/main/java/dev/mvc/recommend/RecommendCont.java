@@ -71,7 +71,7 @@ public class RecommendCont {
   // http://localhost:9092/movie/create.do?genreno=3
   @RequestMapping(value="/recommend/create.do", method = RequestMethod.GET)
   public ModelAndView create(int memno, int genreno) {
-//  public ModelAndView create(HttpServletRequest request,  int genreno) {
+    //  public ModelAndView create(HttpServletRequest request,  int genreno) {
     ModelAndView mav = new ModelAndView();
 
     //RecommendVO recommendVO = this.recommendProc.read(memno, genreno); // create.jsp에 카테고리 정보를 출력하기위한 목적
@@ -138,6 +138,24 @@ public class RecommendCont {
         }
         mav.addObject("list", list);
       }
+      return mav;
+  }
+  
+  /**
+   * 전체 목록 (조회수 순)
+   * http://localhost:9093/recommend/recom_cnt.do
+   * @return
+   */
+  @RequestMapping(value="/recommend/recom_cnt.do", method = RequestMethod.GET)
+  public ModelAndView recom_cnt(HttpSession session) {
+    ModelAndView mav = new ModelAndView();
+
+      mav.setViewName("/recommend/recom_cnt"); // /WEB-INF/views/reservation/list_all.jsp
+      
+      ArrayList<MovieVO> list = this.recommendProc.recom_cnt(); 
+      System.out.println("<<<<<<<<<<<<<<< listcnt " + list);
+      mav.addObject("list", list);
+
       return mav;
   }
   

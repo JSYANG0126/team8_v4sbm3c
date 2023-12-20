@@ -33,7 +33,7 @@
     SELECT genreno FROM recommend WHERE memno=1
   </select>
   
-	<!-- 관심분야의 카테고리 1번 상품중에 recom(추천수) 컬럼의 내림차순 정렬후 상품 목록 10건을 출력 -->
+	<!-- 관심분야의 카테고리 1번 상품중에 recom(추천수) 컬럼의 내림차순 정렬후 상품 목록 5건을 출력 -->
 	<select id="recom_good" resultType="dev.mvc.movie.MovieVO" parameterType="int"  >
 	   SELECT movieno, managerno, genreno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, r
 		FROM (
@@ -45,8 +45,22 @@
                          ORDER BY recom DESC
 		           )          
 		)
-		WHERE <![CDATA[ r >= 1 AND r <= 10 ]]>
+		WHERE <![CDATA[ r >= 1 AND r <= 5 ]]>
 	</select>
+	
+	 <!-- 조회수가 높은 영화 목록 5건을 출력 -->
+  <select id="recom_cnt" resultType="dev.mvc.movie.MovieVO" >
+     SELECT movieno, managerno, genreno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, r
+    FROM (
+               SELECT movieno, managerno, genreno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, rownum as r
+               FROM (
+                         SELECT movieno, managerno, genreno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1
+                         FROM movie
+                         ORDER BY cnt DESC
+               )          
+    )
+    WHERE <![CDATA[ r >= 1 AND r <= 5 ]]>
+  </select>
 	
 	
 	<delete id="delete" parameterType="int">
