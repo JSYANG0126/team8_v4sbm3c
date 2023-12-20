@@ -1,6 +1,7 @@
 package dev.mvc.recommend;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -42,6 +43,12 @@ public class RecommendProc implements RecommendProcInter {
   public int delete(int recommendno) {
     int cnt = this.recommendDAO.delete(recommendno);
     return cnt;
+  }
+
+  @Override
+  public ArrayList<RecommendVO> recom_good(MovieVO movieVO) {
+    ArrayList<RecommendVO> list = this.recommendDAO.recom_good(movieVO);
+    return list;
   }
 
 

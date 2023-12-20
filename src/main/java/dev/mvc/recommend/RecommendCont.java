@@ -17,6 +17,8 @@ import dev.mvc.genre.GenreVO;
 import dev.mvc.manager.ManagerProcInter;
 import dev.mvc.genre.GenreProcInter;
 import dev.mvc.mem.MemProcInter;
+import dev.mvc.movie.MovieProcInter;
+import dev.mvc.movie.MovieVO;
 
 
 
@@ -33,6 +35,10 @@ public class RecommendCont {
   @Autowired
   @Qualifier("dev.mvc.mem.MemProc")
   private MemProcInter memProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.movie.MovieProc")
+  private MovieProcInter movieProc;
   
   @Autowired
   @Qualifier("dev.mvc.recommend.RecommendProc") 
@@ -102,12 +108,36 @@ public class RecommendCont {
   
   
   /**
+   * 전체 목록 (좋아요 순)
+   * http://localhost:9093/recommend/recom_good.do
+   * @return
+   */
+  @RequestMapping(value="/recommend/recom_good.do", method = RequestMethod.GET)
+  public ModelAndView recom_good(HttpSession session) {
+    ModelAndView mav = new ModelAndView();
+
+      mav.setViewName("/recommend/recom_good"); // /WEB-INF/views/reservation/list_all.jsp
+      
+      int memno = (int)session.getAttribute("memno");
+      mav.addObject("memno", memno);
+      
+      MovieVO movieVO = this.movieProc.read(memno);
+      mav.addObject("movieVO", movieVO);
+      
+      ArrayList<RecommendVO> list = this.recommendProc.recom_good(movieVO);
+      mav.addObject("list", list);
+      
+    
+    return mav;
+  }
+  
+  /**
    * 전체 목록
    * http://localhost:9092/recommend/list_all.do
    * @return
    */
-  @RequestMapping(value="/recommend/list_all.do", method = RequestMethod.GET)
-  public ModelAndView list(HttpSession session) {
+  @RequestMapping(value="/recommend/list_recom.do", method = RequestMethod.GET)
+  public ModelAndView list_recom(HttpSession session) {
     ModelAndView mav = new ModelAndView();
 
       mav.setViewName("/recommend/list_all"); // /WEB-INF/views/reservation/list_all.jsp

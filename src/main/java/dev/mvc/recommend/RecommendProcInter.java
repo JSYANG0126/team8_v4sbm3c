@@ -1,6 +1,7 @@
 package dev.mvc.recommend;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import dev.mvc.movie.MovieVO;
 
@@ -24,6 +25,13 @@ public interface RecommendProcInter {
    * @return
    */
   public ArrayList<RecommendVO> list_recom(MovieVO movieVO);
+  
+  /**
+   * 좋아요 순
+   * @param hashMap
+   * @return
+   */
+  public ArrayList<RecommendVO> recom_good(MovieVO movieVO);
   
   /**
    * 조회
