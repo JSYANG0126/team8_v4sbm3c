@@ -657,14 +657,16 @@ public class MemCont {
    * 회원탈퇴 폼
    */
   @RequestMapping(value="/mem/mem_unregister.do", method=RequestMethod.GET )
-  public ModelAndView mem_unregister(int memno) {
+  public ModelAndView mem_unregister(HttpSession session) {
     ModelAndView mav = new ModelAndView();
+    
+    int memno = (int) session.getAttribute("memno");
     
     MemVO memVO = memProc.read(memno);
     mav.addObject("memVO", memVO);
     
     mav.setViewName("/mem/mem_unregister"); // /WEB-INF/views/mem/mem_unregister.jsp
-   
+
     return mav; // forward
   }
   
@@ -674,10 +676,15 @@ public class MemCont {
   @RequestMapping(value="/mem/mem_unregister.do", method=RequestMethod.POST )
   public ModelAndView mem_unregister(@RequestParam("passwd") String passwd, int memno) {
 	  ModelAndView mav = new ModelAndView();
+
 	  MemVO memVO = memProc.read(memno);
 	  
-	  if(passwd == memVO.getPasswd()) {
+	  if(passwd.equals(memVO.getPasswd())) {
 		  memProc.mem_unregister(memno);
+		  
+		  mav.setViewName("redirect:/index.do"); // /WEB-INF/views/mem/mem_unregister.jsp
+
+//		  mav.setViewName("redirect:/mem/msg.do");
 	  }
 	  
 	  
