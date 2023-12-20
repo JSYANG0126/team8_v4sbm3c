@@ -34,6 +34,12 @@ public interface RecommendProcInter {
   public ArrayList<MovieVO> recom_good(int genreno);
   
   /**
+   * 전체 리스트
+   * @return
+   */
+  public ArrayList<MovieVO> recom_cnt();
+  
+  /**
    * 조회
    * @param recommendno
    * @return

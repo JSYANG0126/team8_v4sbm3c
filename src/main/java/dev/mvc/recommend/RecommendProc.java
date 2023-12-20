@@ -31,6 +31,12 @@ public class RecommendProc implements RecommendProcInter {
     ArrayList<RecommendVO> list = this.recommendDAO.list_recom(movieVO);
     return list;
   }
+  
+  @Override
+  public ArrayList<MovieVO> recom_cnt() {
+    ArrayList<MovieVO> list = this.recommendDAO.recom_cnt();
+    return list;
+  }
 
   
   @Override
@@ -56,6 +62,8 @@ public class RecommendProc implements RecommendProcInter {
     RecommendVO recommendVO = this.recommendDAO.read_by_memno(memno);
     return recommendVO;
   }
+
+
 
 
 

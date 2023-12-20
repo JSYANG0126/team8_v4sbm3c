@@ -37,8 +37,8 @@
             <DIV style="clear: both; height: 20px;"></DIV>
             
             <DIV style='width: 70%; margin: 10px auto; text-align: left;'>
-              <h4>${sessionScope.mname} 님을 위한 평점이 높은 영화</h4>
-              <c:import url="/recommend/recom_score.do" />
+              <h4>${sessionScope.mname} 님을 위한 조회수가 높은 영화</h4>
+              <c:import url="/recommend/recom_cnt.do" />
             </DIV>
             
             <DIV style="clear: both; height: 20px;"></DIV>
