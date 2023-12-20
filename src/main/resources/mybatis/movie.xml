@@ -21,6 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ORDER BY movieno DESC
   </select> 
   
+  
   <!-- 특정 카테고리의 등록된 글목록 -->
   <select id="list_by_genreno" resultType="dev.mvc.movie.MovieVO" parameterType="int">
     SELECT movieno, managerno, genreno, title, content, recom, cnt, replycnt, rdate,

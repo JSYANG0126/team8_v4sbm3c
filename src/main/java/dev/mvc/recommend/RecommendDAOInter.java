@@ -31,7 +31,7 @@ public interface RecommendDAOInter {
    * @param hashMap
    * @return
    */
-  public ArrayList<RecommendVO> recom_good(MovieVO movieVO);
+  public ArrayList<MovieVO> recom_good(int genreno);
   
   /**
    * 조회
@@ -39,6 +39,13 @@ public interface RecommendDAOInter {
    * @return
    */
   public RecommendVO read(int recommendno);
+  
+  /**
+   * 조회 (회원 번호)
+   * @param memno
+   * @return
+   */
+  public RecommendVO read_by_memno(int memno);
   
   /**
    * 삭제

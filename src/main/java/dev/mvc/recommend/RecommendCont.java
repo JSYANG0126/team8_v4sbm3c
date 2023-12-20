@@ -121,14 +121,24 @@ public class RecommendCont {
       int memno = (int)session.getAttribute("memno");
       mav.addObject("memno", memno);
       
-      MovieVO movieVO = this.movieProc.read(memno);
-      mav.addObject("movieVO", movieVO);
-      
-      ArrayList<RecommendVO> list = this.recommendProc.recom_good(movieVO);
-      mav.addObject("list", list);
-      
-    
-    return mav;
+      RecommendVO recommendVO = this.recommendProc.read_by_memno(memno);
+     
+      if (recommendVO != null) {
+        int genreno = recommendVO.getGenreno();
+        ArrayList<MovieVO> list = this.recommendProc.recom_good(genreno);    
+        if (list.size() > 5) {
+           list = new ArrayList<>(list.subList(0, 5));
+           System.out.println("<<<<<<<<< test1" + list);          
+         }
+        mav.addObject("list", list);         
+      } else {
+        ArrayList<MovieVO> list = this.movieProc.list_all();
+        if (list.size() > 5) {
+          list = new ArrayList<>(list.subList(0, 5));
+        }
+        mav.addObject("list", list);
+      }
+      return mav;
   }
   
   /**
@@ -136,16 +146,20 @@ public class RecommendCont {
    * http://localhost:9092/recommend/list_all.do
    * @return
    */
-  @RequestMapping(value="/recommend/list_recom.do", method = RequestMethod.GET)
-  public ModelAndView list_recom(HttpSession session) {
+  @RequestMapping(value="/recommend/list_all.do", method = RequestMethod.GET)
+  public ModelAndView list_all(HttpSession session) {
     ModelAndView mav = new ModelAndView();
 
       mav.setViewName("/recommend/list_all"); // /WEB-INF/views/reservation/list_all.jsp
       
-      ArrayList<RecommendVO> list = this.recommendProc.list_all();
+      ArrayList<MovieVO> list = this.movieProc.list_all();
+      
+      if (list.size() > 5) {
+        list = new ArrayList<>(list.subList(0, 5));
+      }
+
       mav.addObject("list", list);
       
-    
     return mav;
   }
   

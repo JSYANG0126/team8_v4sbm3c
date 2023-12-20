@@ -25,6 +25,7 @@ public class MovieProc implements MovieProcInter {
 	  ArrayList<MovieVO> list = this.movieDAO.list_all();
 	  return list;
   }
+  
 
   @Override
   public ArrayList<MovieVO> list_by_genreno(int genreno) {
@@ -274,5 +275,7 @@ public class MovieProc implements MovieProcInter {
 			int cnt = this.movieDAO.delete_by_genreno(genreno);
 		      return cnt;
 		}
+
+
 	
 }
