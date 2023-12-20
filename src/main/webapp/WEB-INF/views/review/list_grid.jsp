@@ -49,9 +49,9 @@
           <input type='text' name='word' id='word' value=''>
         </c:otherwise>
       </c:choose>
-      <button type='submit' class='btn btn-secondary btn-sm' style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px;">검색</button>
+      <button type='submit' class='btn btn-sm' style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px; background-color: #323232; color: white;">검색</button>
       <c:if test="${param.word.length() > 0 }"> <%-- 검색 상태하면 '검색 취소' 버튼을 출력 --%>
-        <button type='button' class='btn btn-secondary btn-sm' style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px;"
+        <button type='button' class='btn btn-sm' style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px; background-color: #323232; color: white;"
                     onclick="location.href='./list_grid.do?word='">검색 취소</button>  
       </c:if>    
     </form>
@@ -70,7 +70,7 @@
       <!-- 4기준 하나의 이미지, 24 * 4 = 96% -->
       <!-- 5기준 하나의 이미지, 19.2 * 5 = 96% -->
       <div onclick="location.href='./read.do?reviewno=${reviewno}&word=${param.word }&now_page=${param.now_page == null ? 1 : param.now_page }'" 
-             style='width: 19%; height: 200px; float: left; margin: 0.5%; padding: 0.5%; background-color: #EEEFFF; text-align: left; cursor: pointer;'>
+             style='width: 19%; height: 200px; float: left; margin: 0.5%; padding: 0.5%; background-color: #d3d3d3; text-align: left; cursor: pointer;'>
         
         <c:choose> 
           <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}"> <%-- 이미지인지 검사 --%>
@@ -82,7 +82,7 @@
           </c:otherwise>
         </c:choose>
         <span style="font-weight: bold;">${rtitle }</span><br>
-        <span style="font-weight:lighter;">작성자: ${reviewVO.rname }</span>       
+        <span style="font-weight: BOLD;">작성자: ${reviewVO.rname }</span>       
       </div>
       
       <%-- 하나의 행에 이미지를 5개씩 출력후 행 변경, index는 0부터 시작 --%>

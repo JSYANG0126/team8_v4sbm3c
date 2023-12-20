@@ -197,7 +197,7 @@ function unlike() {
       <label>댓글</label>
       <input type="text" name="reply" value="" required="required" autofocus="autofocus" 
                  class="" style="width: 50%">
-      <button type="submit" class="btn btn-secondary btn-sm" style="height: 28px; margin-bottom: 5px;">등록</button>
+      <button type="submit" class="btn btn-sm" style="height: 28px; margin-bottom: 5px; background-color: #323232; color: white;">등록</button>
     </div>
   </form>
 	

@@ -24,24 +24,6 @@
 	    <a href="javascript:location.reload();">새로고침</a>
 	  </aside> 
 	  
-	  <div style="text-align: right; clear: both;">  
-	    <form name='frm' id='frm' method='get' action='./list_by_genreno_search_paging.do'>
-	     
-	      <c:choose>
-	        <c:when test="${param.word != '' }"> <%-- 검색하는 경우 --%>
-	          <input type='text' name='word' id='word' value='${param.word }' class='input_word'>
-	        </c:when>
-	        <c:otherwise> <%-- 검색하지 않는 경우 --%>
-	          <input type='text' name='word' id='word' value='' class='input_word'>
-	        </c:otherwise>
-	      </c:choose>
-	      <button type='submit' class='btn btn-info btn-sm'>검색</button>
-	      <c:if test="${param.word.length() > 0 }">
-	        <button type='button' class='btn btn-info btn-sm' 
-	                    onclick="location.href='./list_by_genreno_search.do?word='">검색 취소</button>  
-	      </c:if>    
-	    </form>
-	  </div>
 	  
 	  <div class='menu_line'></div>
 	  
@@ -58,8 +40,8 @@
 	       <textarea name='qnainfo' required="required" class="form-control" rows="12" style='width: 100%;'>문의사항</textarea>
 	    </div>
 	    <div class="content_body_bottom">
-	      <button type="submit" class="btn btn-primary">등록</button>
-	      <button type="button" onclick="location.href='./list_all.do" class="btn btn-primary">목록</button>
+	      <button type="submit" class="btn btn-sm" style="background-color: #323232; color: white;">등록</button>
+	      <button type="button" onclick="history.back();" class="btn btn-sm" style="background-color: #323232; color: white;">목록</button>
 	    </div>
 	  
 	  </form>
