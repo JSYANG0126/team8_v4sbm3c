@@ -36,6 +36,12 @@ public class TheaterProc implements TheaterProcInter {
   }
   
   @Override
+  public TheaterVO read_name(int memno) {
+    TheaterVO theaterVO = this.theaterDAO.read_name(memno);
+    return theaterVO;
+  }
+  
+  @Override
   public ArrayList<TheaterVO> list_by_search(HashMap<String, Object> hashMap) {
     ArrayList<TheaterVO> list = this.theaterDAO.list_by_search(hashMap);
     return list;
@@ -217,6 +223,8 @@ public class TheaterProc implements TheaterProcInter {
     int cnt = this.theaterDAO.password_check(hashMap);
     return cnt;
   }
+
+
 
   
 

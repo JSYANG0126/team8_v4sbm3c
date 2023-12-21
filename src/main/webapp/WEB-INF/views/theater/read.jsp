@@ -2,7 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:set var="memno" value="${Param.memno }" />
+<c:set var="memno1" value="${sessionScope.memno }" />
+<c:set var="memno2" value="${theaterVO.memno }" />
 <c:set var="tinfo" value="${theaterVO.tinfo }" />
 <c:set var="theaterno" value="${theaterVO.theaterno }" />
 <c:set var="tdate" value="${theaterVO.tdate }" />
@@ -27,11 +28,11 @@
  
 <body>
 <c:import url="/menu/top.do" />
-  <DIV class='title_line'>${theaterVO.tname }</A></DIV>
+  <DIV class='title_line'>${theaterVO.tname } </A></DIV>
 
   <aside class="aside_right">
 
-    <c:if test="${sessionScope.id != null }">
+    <c:if test="${sessionScope.id != null && memno1 == memno2}">
       <a href="./update.do?theaterno=${theaterno}&now_page=${param.now_page}&word=${param.word }">글 수정</a>
       <span class='menu_divide' >│</span>
       <a href="./update_file.do?theaterno=${theaterno}&now_page=${param.now_page}">파일 수정</a>  

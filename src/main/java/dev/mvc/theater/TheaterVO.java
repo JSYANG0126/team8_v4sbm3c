@@ -11,7 +11,7 @@ public class TheaterVO {
   private String tdate;
   private String map = "";
   private String passwd = "";
-  
+  private String mname = "";
   
 //파일 업로드 관련
   // -----------------------------------------------------------------------------------
@@ -85,6 +85,13 @@ public MultipartFile getFile1MF() {
   }
   public void setPasswd(String passwd) {
     this.passwd = passwd;
+  }
+
+  public String getMname() {
+    return mname;
+  }
+  public void setMname(String mname) {
+    this.mname = mname;
   }
 
 

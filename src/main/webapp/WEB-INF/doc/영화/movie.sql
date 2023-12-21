@@ -79,6 +79,23 @@ UPDATE movie
 SET title = '트랜스포머3'
 WHERE title = '트랜스포머2';
 
+	   SELECT movieno, managerno, genreno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, r
+		FROM (
+		           SELECT movieno, managerno, genreno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, rownum as r
+		           FROM (
+		                     SELECT movieno, managerno, genreno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1
+		                     FROM movie
+		                     WHERE genreno=1 
+                         ORDER BY recom DESC
+		           )          
+		)
+		WHERE  r >= 1 AND r <= 5; 
+
+-- UPDATE
+UPDATE movie
+SET recom = 3
+WHERE movieno = 10;
+
 -- DELETE
 DELETE FROM movie
 WHERE movieno = 10;

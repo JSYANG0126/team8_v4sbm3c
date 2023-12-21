@@ -24,6 +24,18 @@
     WHERE theaterno = #{theaterno}
   </select> 
   
+  <!-- 작성자명 찾기 JOIN -->
+  <select id="read_name" resultType="dev.mvc.theater.TheaterVO" parameterType="HashMap">
+     SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, passwd, map, mname
+			    FROM (
+			      SELECT t.theaterno, t.memno, t.tname, t.tinfo, t.word, t.tdate, t.img1, t.img1saved, t.thumbimg1, t.size1, t.size1_label, t.passwd, t.map, m.mname
+			      FROM theater t
+			      LEFT JOIN mem m ON t.memno = m.memno
+			      WHERE m.memno = #{memno}
+			    )
+			 WHERE <![CDATA[ rownum <= 1 ]]>
+  </select> 
+  
     <!-- 검색 목록 -->
   <select id="list_by_search" resultType="dev.mvc.theater.TheaterVO" parameterType="HashMap">
     SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, passwd, map
@@ -58,22 +70,23 @@
   
   <!-- 카테고리별 검색 + 페이징 목록 -->
   <select id="list_by_search_paging" resultType="dev.mvc.theater.TheaterVO" parameterType="dev.mvc.theater.TheaterVO">
-   SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, passwd, map, r
+   SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, passwd, map, mname, r
    FROM (
-              SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, passwd, map, rownum as r
+              SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, passwd, map, mname, rownum as r
               FROM (
-                        SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, passwd, map
-                        FROM theater
+                        SELECT  t.theaterno, t.memno, t.tname, t.tinfo, t.word, t.tdate, t.img1, t.img1saved, t.thumbimg1, t.size1, t.size1_label, t.passwd, t.map, m.mname
+                        FROM theater t   
+                        LEFT JOIN mem m ON t.memno = m.memno                    
                         <choose>
 											      <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
 											      </when>
 											      <otherwise> <!-- 검색하는 경우 -->
-											        WHERE (UPPER(tname) LIKE '%' || UPPER(#{word}) || '%' 
-														        OR UPPER(tinfo) LIKE '%' || UPPER(#{word}) || '%'  
-														        OR UPPER(word) LIKE '%' || UPPER(#{word}) || '%')                
+											        WHERE (UPPER(t.tname) LIKE '%' || UPPER(#{word}) || '%' 
+														        OR UPPER(t.tinfo) LIKE '%' || UPPER(#{word}) || '%'  
+														        OR UPPER(t.word) LIKE '%' || UPPER(#{word}) || '%')                
 											      </otherwise>
 											    </choose>
-											ORDER BY theaterno DESC
+											ORDER BY t.theaterno DESC
                )
     )
     WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>

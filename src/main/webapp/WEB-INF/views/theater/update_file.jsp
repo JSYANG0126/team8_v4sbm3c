@@ -3,8 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="theaterno" value="${theaterVO.theaterno }" />
-<c:set var="genreno" value="${theaterVO.genreno }" />
-<c:set var="title" value="${theaterVO.title }" />
+<c:set var="tname" value="${theaterVO.tname }" />
 <c:set var="img1" value="${theaterVO.img1 }" />
 <c:set var="img1saved" value="${theaterVO.img1saved }" />
 <c:set var="thumbimg1" value="${theaterVO.thumbimg1.toLowerCase() }" />
@@ -22,37 +21,15 @@
 </head>
 <body>
 <c:import url="/menu/top.do" />
-  <DIV class='title_line'> ${genreVO.name } > ${title } >파일 수정</DIV>
+  <DIV class='title_line'>  ${tname } >파일 수정</DIV>
   
   <aside class="aside_right">
-    <a href="./create.do?genreno=${genreno }">등록</a>
-    <span class='menu_divide' >│</span>
     <a href="javascript:location.reload();">새로고침</a>
     <span class='menu_divide' >│</span>    
-    <a href="./list_by_genreno.do?genreno=${genreno }&now_page=${param.now_page}&word=${param.word }">목록형</a>    
+    <a href="./list_by_search_paging.do?now_page=${param.now_page}&word=${param.word }">목록형</a>    
     <span class='menu_divide' >│</span>
-    <a href="./list_by_genreno_grid.do?genreno=${genreno }&now_page=${param.now_page}&word=${param.word }">갤러리형</a>
+    <a href="./list_by_grid.do?now_page=${param.now_page}&word=${param.word }">갤러리형</a>
   </aside>
-  
-  <div style="text-align: right; clear: both;">  
-    <form name='frm' id='frm' method='get' action='./list_by_genreno_search_paging.do'>
-      <input type='hidden' name='genreno' value='${genreVO.genreno }'>  <%-- 게시판의 구분 --%>
-      
-      <c:choose>
-        <c:when test="${param.word != '' }"> <%-- 검색하는 경우 --%>
-          <input type='text' name='word' id='word' value='${param.word }' class='input_word'>
-        </c:when>
-        <c:otherwise> <%-- 검색하지 않는 경우 --%>
-          <input type='text' name='word' id='word' value='' class='input_word'>
-        </c:otherwise>
-      </c:choose>
-      <button type='submit' class='btn btn-secondary btn-sm' style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px;">검색</button>
-      <c:if test="${param.word.length() > 0 }">
-        <button type='button' class='btn btn-secondary btn-sm' 
-                    onclick="location.href='./list_by_genreno.do?genreno=${genreVO.genreno}&word='" style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px;">검색 취소</button>  
-      </c:if>    
-    </form>
-  </div>
   
   <div class='menu_line'></div>
 
@@ -72,7 +49,7 @@
         </DIV>
 
         <DIV style='text-align: left; width: 47%; float: left;'>
-          <span style='font-size: 1.5em;'>${title}</span>
+          <span style='font-size: 1.5em;'>${tname}</span>
           <br>
           <FORM name='frm' method='POST' action='./update_file.do' enctype="multipart/form-data">
             <input type="hidden" name="theaterno" value="${theaterno }">

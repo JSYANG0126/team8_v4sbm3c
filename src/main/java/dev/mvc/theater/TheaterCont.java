@@ -191,7 +191,7 @@ public class TheaterCont {
    * @return
    */
   @RequestMapping(value="/theater/read.do", method = RequestMethod.GET)
-  public ModelAndView read(int theaterno) { // int genreno = (int)request.getParameter("genreno");
+  public ModelAndView read(HttpSession session, int theaterno) { // int genreno = (int)request.getParameter("genreno");
     ModelAndView mav = new ModelAndView();
     
     TheaterVO theaterVO = this.theaterProc.read(theaterno);
@@ -208,11 +208,10 @@ public class TheaterCont {
     long size1 = theaterVO.getSize1();
     String size1_label = Tool.unit(size1);
     theaterVO.setSize1_label(size1_label);
-    
-
+    int memno1 = (int) session.getAttribute("memno");
+    mav.addObject("memno1", memno1);
     mav.setViewName("/theater/read"); // /WEB-INF/views/movie/read.jsp
-      
-      
+
     mav.addObject("theaterVO", theaterVO);
      
     return mav;
@@ -233,7 +232,7 @@ public class TheaterCont {
       if (this.memProc.isMem(session) == true) {
        
         // 검색 목록
-        ArrayList<TheaterVO> list = theaterProc.list_by_search_paging(theaterVO);
+        ArrayList<TheaterVO> list = theaterProc.list_by_search_paging(theaterVO);        
         
         // for문을 사용하여 객체를 추출, Call By Reference 기반의 원본 객체 값 변경
         for (TheaterVO vo : list) {
@@ -459,14 +458,14 @@ public class TheaterCont {
   public ModelAndView update_file(HttpSession session, int theaterno) {
     ModelAndView mav = new ModelAndView();
     
-    if (managerProc.isManager(session)) { // 관리자로 로그인한경우
+    if (memProc.isMem(session)) { // 관리자로 로그인한경우
       TheaterVO theaterVO = this.theaterProc.read(theaterno);
       mav.addObject("theaterVO", theaterVO);
       
       mav.setViewName("/theater/update_file"); // /WEB-INF/views/theater/update_file.jsp
       
     } else {
-      mav.addObject("url", "/manager/login_need"); // /WEB-INF/views/manager/login_need.jsp
+      mav.addObject("url", "/mem/login_need"); // /WEB-INF/views/manager/login_need.jsp
       mav.setViewName("redirect:/theater/msg.do"); 
     }
 

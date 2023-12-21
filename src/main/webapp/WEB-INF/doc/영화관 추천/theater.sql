@@ -53,6 +53,19 @@ SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, 
 FROM theater 
 ORDER BY theaterno ASC;
 
+SELECT t.theaterno, t.memno, t.tname, t.tinfo, t.word, t.tdate, t.img1, t.img1saved, t.thumbimg1, t.size1, t.size1_label, t.passwd, t.map, m.mname
+      FROM theater t
+      LEFT JOIN mem m ON t.memno = m.memno
+      
+SELECT theaterno, memno, tname, tinfo, word, tdate, img1, img1saved, thumbimg1, size1, size1_label, passwd, map, mname
+    FROM (
+      SELECT t.theaterno, t.memno, t.tname, t.tinfo, t.word, t.tdate, t.img1, t.img1saved, t.thumbimg1, t.size1, t.size1_label, t.passwd, t.map, m.mname
+      FROM theater t
+      LEFT JOIN mem m ON t.memno = m.memno
+      WHERE t.memno = 3
+    )
+WHERE ROWNUM <= 1;
+
 -- READ
 SELECT theaterno, memno, tname, tinfo, tdate, map FROM theater WHERE theaterno=1;
 

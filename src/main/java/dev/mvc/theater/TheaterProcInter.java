@@ -28,6 +28,13 @@ public interface TheaterProcInter {
   public TheaterVO read(int theaterno);
   
   /**
+   * 작성자명 찾기
+   * @param memno
+   * @return
+   */
+  public TheaterVO read_name(int memno);
+  
+  /**
    * 카테고리별 검색 목록
    * @param hashMap
    * @return

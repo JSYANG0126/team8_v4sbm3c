@@ -127,8 +127,7 @@ public class RecommendCont {
         int genreno = recommendVO.getGenreno();
         ArrayList<MovieVO> list = this.recommendProc.recom_good(genreno);    
         if (list.size() > 5) {
-           list = new ArrayList<>(list.subList(0, 5));
-           System.out.println("<<<<<<<<< test1" + list);          
+           list = new ArrayList<>(list.subList(0, 5));      
          }
         mav.addObject("list", list);         
       } else {
@@ -153,7 +152,6 @@ public class RecommendCont {
       mav.setViewName("/recommend/recom_cnt"); // /WEB-INF/views/reservation/list_all.jsp
       
       ArrayList<MovieVO> list = this.recommendProc.recom_cnt(); 
-      System.out.println("<<<<<<<<<<<<<<< listcnt " + list);
       mav.addObject("list", list);
 
       return mav;

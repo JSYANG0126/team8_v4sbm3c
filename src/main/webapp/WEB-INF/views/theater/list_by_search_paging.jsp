@@ -79,7 +79,7 @@
           <c:set var="theaterno" value="${theaterVO.theaterno }" />
           <c:set var="thumbimg1" value="${theaterVO.thumbimg1 }" />
           <c:set var="memno" value="${theaterVO.memno }" />
-          <c:set var="mname" value="${memVO.mname }" />
+          <c:set var="mname" value="${theaterVO.mname }" />
           <c:set var="now_page" value="${param.now_page }" />
     
           <tr onclick="location.href='./read.do?theaterno=${theaterno}&word=${param.word }&now_page=${param.now_page == null ? 1 : param.now_page }'" style="cursor: pointer;">

@@ -22,7 +22,7 @@
     <aside class="aside_right">
       <a href="javascript:location.reload();">새로고침</a>
       <span class='menu_divide' >│</span>
-      <a href="./list_by_page.do?nowpage=1">기본 목록형</a>    
+      <a href="./list_by_search_paging.do?nowpage=1">목록형</a>    
       <span class='menu_divide' >│</span>
       <a href="./list_by_grid.do?nowpage=1">갤러리형</a>
     </aside> 
