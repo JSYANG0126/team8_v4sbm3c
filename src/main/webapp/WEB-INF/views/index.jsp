@@ -30,7 +30,7 @@
             <DIV style="clear: both; height: 20px;"></DIV>
           
             <DIV style='width: 70%; margin: 10px auto; text-align: left;'>
-              <h4>${sessionScope.mname} 님을 위한 추천 많은 영화</h4>
+              <h4>${sessionScope.mname} 님을 위한 추천 영화</h4>
               <c:import url="/recommend/recom_good.do" />  <%-- 좋아요가 높은 상품 --%>
             </DIV>
             

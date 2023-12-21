@@ -189,7 +189,7 @@ function unlike() {
   <form id="good_form">						
 	  	<input type="hidden" name="movieno" value="${movieno}">			
 	  	<input type="hidden" name="memno" value="${memno}">			
-			<img src="/good/images/good1.png"  onclick="create();" id="goodbtn" style="display: none;">	
+			<img src="/good/images/good1.png"  onclick="create();" id="goodbtn">	
 			<img src="/good/images/good2.png"  onclick="unlike();" id="goodbtn2" style="display: none;">	
 			<span id= "good_cnt" name="good_cnt">${good_cnt }</span>
   </form>
