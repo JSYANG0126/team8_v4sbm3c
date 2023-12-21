@@ -690,10 +690,11 @@ public class MemCont {
 		  
 		  MailTool mailTool = new MailTool();
 		  
-	      String receiver = "dong865869@gmail.com";
+	      String receiver = memVO.getId();
+	      String from = "dong865869@gmail.com";
 		  String title = "회원님의 비밀번호입니다.";
 		  String content = "회원님의 비밀번호는 " + memVO.getPasswd() + " 입니다.";
-		  mailTool.send(receiver, memVO.getId(), title, content); // 메일 전송
+		  mailTool.send(receiver, from, title, content); // 메일 전송
 		  
 		  mav.addObject("code", "passwd_find_success");
 		  mav.setViewName("redirect:/mem/msg.do"); 

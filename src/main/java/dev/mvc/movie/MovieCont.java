@@ -85,6 +85,7 @@ public class MovieCont {
 
     GenreVO genreVO = this.genreProc.read(genreno); // create.jsp에 카테고리 정보를 출력하기위한 목적
     mav.addObject("genreVO", genreVO);
+    genreVO.setCnt(this.movieProc.count_by_genreno(genreno));
 //    request.setAttribute("genreVO", genreVO);
     
     mav.setViewName("/movie/create"); // /webapp/WEB-INF/views/movie/create.jsp
@@ -294,6 +295,8 @@ public class MovieCont {
     GenreVO genreVO = genreProc.read(movieVO.getGenreno());
     mav.addObject("genreVO", genreVO);
   
+    genreVO.setCnt(this.movieProc.count_by_genreno(movieVO.getGenreno()));
+    
     HashMap<String, Object> hashMap = new HashMap<String, Object>();
     hashMap.put("genreno", movieVO.getGenreno());
     hashMap.put("word", movieVO.getWord());
@@ -354,6 +357,7 @@ public class MovieCont {
       mav.addObject("list", list);
     
       GenreVO genreVO = genreProc.read(movieVO.getGenreno());
+      genreVO.setCnt(this.movieProc.count_by_genreno(movieVO.getGenreno()));
       mav.addObject("genreVO", genreVO);
       
       HashMap<String, Object> hashMap = new HashMap<String, Object>();
@@ -525,6 +529,7 @@ public class MovieCont {
       mav.addObject("movieVO", movieVO);
       
       GenreVO genreVO = this.genreProc.read(movieVO.getGenreno());
+      genreVO.setCnt(this.movieProc.count_by_genreno(movieVO.getGenreno()));
       mav.addObject("genreVO", genreVO);
       
       mav.setViewName("/movie/update_text"); // /WEB-INF/views/movie/update_text.jsp
@@ -708,6 +713,7 @@ public class MovieCont {
         mav.addObject("movieVO", movieVO);
         
         GenreVO genreVO = this.genreProc.read(movieVO.getGenreno());
+        genreVO.setCnt(this.movieProc.count_by_genreno(movieVO.getGenreno()));
         mav.addObject("genreVO", genreVO);
         
         mav.setViewName("/movie/delete"); // /WEB-INF/views/movie/delete.jsp
@@ -735,7 +741,9 @@ public class MovieCont {
       // -------------------------------------------------------------------
       // 삭제할 파일 정보를 읽어옴.
       MovieVO movieVO_read = movieProc.read(movieVO.getMovieno());
-          
+      GenreVO genreVO = this.genreProc.read(movieVO.getGenreno());
+      genreVO.setCnt(this.movieProc.count_by_genreno(movieVO.getGenreno()));
+      
       String file1saved = movieVO.getFile1saved();
       String thumb1 = movieVO.getThumb1();
       
