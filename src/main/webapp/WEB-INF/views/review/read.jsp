@@ -186,7 +186,7 @@ function unlike() {
 	  	<input type="hidden" name="memno" value="${memno}">			
 			<img src="/nice/images/nice1.png"  onclick="create();" id="nicebtn" >	
 			<img src="/nice/images/nice2.png"  onclick="unlike();" id="nicebtn2" style="display: none;">	
-			<span id= "nice_cnt" name="nice_cnt"></span>
+			<span id= "nice_cnt" name="nice_cnt">${nice_cnt} </span>
   </form>
   
   

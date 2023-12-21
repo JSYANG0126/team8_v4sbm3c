@@ -17,6 +17,16 @@
 		ORDER BY replyno DESC	
 	</select>
 	
+	<!-- 작성자 
+  <select id="writer" resultType="dev.mvc.reply.ReplyVO" parameterType="int">
+     SELECT replyno, reviewno, memno, reply, cdate, mname
+		 FROM (
+			  SELECT r.replyno, r.reviewno, r.memno, r.reply, r.cdate, m.mname
+			  FROM reply r LEFT JOIN mem m ON r.memno = m.memno
+			  WHERE m.memno = #{memno}
+		 )
+  </select> -->
+  
 	  <!-- 리뷰의 등록된 댓글목록 -->
   <select id="list_by_reviewno" resultType="dev.mvc.reply.ReplyVO" parameterType="int">
     SELECT replyno, reviewno, memno, reply, cdate, cname
