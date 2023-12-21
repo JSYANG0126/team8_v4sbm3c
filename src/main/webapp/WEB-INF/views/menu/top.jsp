@@ -100,7 +100,7 @@
                     <a class="dropdown-item" href="/mem/passwd_update.do">비밀번호 변경</a>
                     <a class="dropdown-item" href="/mem/read.do">회원 정보 수정</a>
                     <a class="dropdown-item" href="/mlogin/list_mlogin.do">로그인 내역</a>
-                    <a class="dropdown-item" href="mem/mem_unregister.do?memno=${sessionScope.memno }">회원 탈퇴</a>
+                    <a class="dropdown-item" href="/mem/mem_unregister.do?memno=${sessionScope.memno }">회원 탈퇴</a>
                   </c:otherwise>
                 </c:choose>
               </div>
