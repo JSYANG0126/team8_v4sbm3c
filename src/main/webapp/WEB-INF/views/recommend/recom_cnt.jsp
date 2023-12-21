@@ -15,7 +15,7 @@
       <!-- 4기준 하나의 이미지 widrh, 24% * 4 = 96% -->
       <!-- 5기준 하나의 이미지 widrh, 19.2% * 5 = 96% -->
       <!-- 5기준 하나의 이미지 widrh, 16% * 6 = 96% -->
-      <div onclick="location.href='/movie/read.do?movienono=${movieno }&word=${param.word }&now_page=${param.now_page == null ? 1 : param.now_page }'" class='hover'  
+      <div onclick="location.href='/movie/read.do?movieno=${movieno }&word=${param.word }&now_page=${param.now_page == null ? 1 : param.now_page }'" class='hover'  
              style='width: 16%; height: 168px; float: left; margin: 0.5%; padding: 0.1%; background-color: #EEEFFF; text-align: left;'>
 
             <c:choose>
