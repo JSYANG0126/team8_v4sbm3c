@@ -48,6 +48,12 @@ public class MemProc implements MemProcInter {
 	MemVO memVO = this.memDAO.readById(id);
     return memVO;
   }
+  
+  @Override
+  public MemVO readByMname(String mname) {
+  	MemVO memVO = this.memDAO.readByMname(mname);
+  	return memVO;
+  }
 
   @Override
   public boolean isMem(HttpSession session) {

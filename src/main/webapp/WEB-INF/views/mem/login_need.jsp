@@ -23,8 +23,8 @@
   <DIV class='message'>
     <H3>회원 로그인이 필요한 페이지입니다.</H3>
     <BR><BR>
-    <button type='button' onclick="location.href='/mem/login.do'" class="btn btn-primary btn-sm">로그인</button>       
-    <button type='button' onclick="location.href='/mem/create.do'" class="btn btn-primary btn-sm">회원 가입</button>       
+    <button type='button' onclick="location.href='/mem/login.do'" class="btn btn-secondary btn-sm">로그인</button>       
+    <button type='button' onclick="location.href='/mem/create.do'" class="btn btn-secondary btn-sm">회원 가입</button>       
   </DIV>
  
 <jsp:include page="../menu/bottom.jsp" flush='false' />
