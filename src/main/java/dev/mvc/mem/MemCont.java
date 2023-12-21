@@ -727,7 +727,7 @@ public class MemCont {
    * 회원탈퇴 처리
    */
   @RequestMapping(value="/mem/mem_unregister.do", method=RequestMethod.POST )
-  public ModelAndView mem_unregister(@RequestParam("passwd") String passwd, int memno) {
+  public ModelAndView mem_unregister(@RequestParam("passwd") String passwd, int memno, HttpSession session) {
 	  ModelAndView mav = new ModelAndView();
 
 	  MemVO memVO = memProc.read(memno);
@@ -736,6 +736,8 @@ public class MemCont {
 		  memProc.mem_unregister(memno);
 		  
 		  mav.addObject("code", "unregister_success");
+		  session.invalidate(); // 모든 session 변수 삭제
+
 		  mav.setViewName("redirect:/mem/msg.do"); 
 
 	  } else {
