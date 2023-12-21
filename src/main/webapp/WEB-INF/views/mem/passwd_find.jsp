@@ -20,7 +20,7 @@
         <form method="post" action="/mem/passwd_find.do">
             <div class="form-group" style ="padding-bottom: 5px">
                 <label>아이디(이메일):
-                    <input type='text' class="form-control form-control-sm" name='id' id='id' value='alsehdgnl865869@gmail.com' required="required" placeholder="아이디" autofocus="autofocus">
+                    <input type='text' class="form-control form-control-sm" name='id' id='id' value='dong865869@gmail.com' required="required" placeholder="아이디" autofocus="autofocus">
                 </label>
             </div>  
         

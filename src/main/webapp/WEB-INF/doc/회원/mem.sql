@@ -72,6 +72,9 @@ WHERE mname = '질문관리자';
 delete from mem
 where memno = 1;
 
+delete from mem
+where ID = 'alsehdgnl865869@gmail.com';
+
 SELECT memno, id, passwd, mname, tel, zipcode, address1, address2, mdate, grade
 FROM mem
 WHERE mname = '홍길동' AND grade = 99;

@@ -677,19 +677,21 @@ public class MemCont {
 	  ModelAndView mav = new ModelAndView();
 
 	  MemVO memVO = this.memProc.readById(id);
-	  System.out.println("받은 id -> " + memVO.getId());
-	  System.out.println("받은 mname -> " + memVO.getMname());
-	  System.out.println("받은 tel -> " + memVO.getTel());
 	  
-	  System.out.println("내 id -> " + memVO.getId());
-	  System.out.println("내 mname -> " + memVO.getMname());
-	  System.out.println("내 tel -> " + memVO.getTel());
+//	  System.out.println("받은 id -> " + memVO.getId());
+//	  System.out.println("받은 mname -> " + memVO.getMname());
+//	  System.out.println("받은 tel -> " + memVO.getTel());
+//	  
+//	  System.out.println("내 id -> " + memVO.getId());
+//	  System.out.println("내 mname -> " + memVO.getMname());
+//	  System.out.println("내 tel -> " + memVO.getTel());
+	  
 	  if(memVO != null &&memVO.getMname().equals(mname)&&memVO.getTel().equals(tel)) {
 		  
 		  MailTool mailTool = new MailTool();
 		  
-	      String receiver = "alsehdgnl865869@gmail.com";
-		  String title = "회원님의 비밀번호입니다..";
+	      String receiver = "dong865869@gmail.com";
+		  String title = "회원님의 비밀번호입니다.";
 		  String content = "회원님의 비밀번호는 " + memVO.getPasswd() + " 입니다.";
 		  mailTool.send(receiver, memVO.getId(), title, content); // 메일 전송
 		  
