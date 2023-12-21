@@ -321,6 +321,8 @@ public class ReviewCont {
     reviewVO.setSize1_label(size1_label);
 
     ArrayList<ReplyVO> list_reply = this.replyProc.list_by_reviewno(reviewno);
+    int nice_cnt = this.niceProc.nice_cnt(reviewno);
+    mav.addObject("nice_cnt", nice_cnt);
     mav.addObject("list_reply", list_reply);
     mav.addObject("reviewVO", reviewVO);
     

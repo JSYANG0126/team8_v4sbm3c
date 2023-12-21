@@ -7,7 +7,6 @@ public class ReplyVO {
   private int memno;
   private String reply;
   private String cdate;
-  private int favorite;
   private String cname;
 
   
@@ -41,12 +40,7 @@ public class ReplyVO {
   public void setCdate(String cdate) {
     this.cdate = cdate;
   }
-  public int getFavorite() {
-    return favorite;
-  }
-  public void setFavorite(int favorite) {
-    this.favorite = favorite;
-  }
+
   public String getCname() {
     return cname;
   }
