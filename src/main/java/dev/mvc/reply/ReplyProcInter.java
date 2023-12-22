@@ -1,13 +1,14 @@
 package dev.mvc.reply;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface ReplyProcInter {
   public int create(ReplyVO replyVO);
   
   public ArrayList<ReplyVO>list();
   
-  public ArrayList<ReplyVO> list_by_reviewno(int reviewno);
+  public ArrayList<ReplyVO> list_by_reviewno(HashMap<Object,Object> hashMap);
   
   public ReplyVO read(int replyno);
   

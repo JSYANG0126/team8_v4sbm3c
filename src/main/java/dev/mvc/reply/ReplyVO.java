@@ -7,7 +7,7 @@ public class ReplyVO {
   private int memno;
   private String reply;
   private String cdate;
-  private String cname;
+  private String mname;
 
   
   public int getReplyno() {
@@ -40,13 +40,14 @@ public class ReplyVO {
   public void setCdate(String cdate) {
     this.cdate = cdate;
   }
+  public String getMname() {
+    return mname;
+  }
+  public void setMname(String mname) {
+    this.mname = mname;
+  }
 
-  public String getCname() {
-    return cname;
-  }
-  public void setCname(String cname) {
-    this.cname = cname;
-  }
+
   
   
   
