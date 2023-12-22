@@ -6,14 +6,15 @@
 
 	<!--  댓글 작성 -->
 	<insert id="create" parameterType="dev.mvc.reply.ReplyVO">
-    INSERT INTO reply(replyno, reviewno, memno, reply, cdate, cname)
-    VALUES (reply_seq.nextval, #{reviewno}, #{memno}, #{reply}, sysdate, #{cname})
+    INSERT INTO reply(replyno, reviewno, memno, reply, cdate)
+    VALUES (reply_seq.nextval, #{reviewno}, #{memno}, #{reply}, sysdate)
 </insert>
 
 	 <!--  댓글 리스트 -->
 	<select id="list" resultType="dev.mvc.reply.ReplyVO">	
-		SELECT replyno, reviewno, memno, reply, cdate, cname
-		FROM reply 
+		SELECT r.replyno, r.reviewno, r.memno, r.reply, r.cdate, m.mname
+		FROM reply r, mem m
+		WHERE m.memno = r.memno
 		ORDER BY replyno DESC	
 	</select>
 	
@@ -28,16 +29,16 @@
   </select> -->
   
 	  <!-- 리뷰의 등록된 댓글목록 -->
-  <select id="list_by_reviewno" resultType="dev.mvc.reply.ReplyVO" parameterType="int">
-    SELECT replyno, reviewno, memno, reply, cdate, cname
-    FROM reply 
+  <select id="list_by_reviewno" resultType="dev.mvc.reply.ReplyVO" parameterType="HashMap">
+    SELECT r.replyno, r.reviewno, r.memno, r.reply, r.cdate, m.mname
+    FROM reply r LEFT JOIN mem m ON (m.memno = r.memno)
     WHERE reviewno = #{reviewno}
     ORDER BY replyno DESC
   </select> 
   
 	<!-- 삭제/수정용 -->
 	<select id="read" parameterType="int" resultType="dev.mvc.reply.ReplyVO">
-		SELECT replyno, reviewno, memno, reply, cdate, cname FROM reply
+		SELECT replyno, reviewno, memno, reply, cdate FROM reply
 		WHERE replyno=#{replyno}
 	</select>
 	

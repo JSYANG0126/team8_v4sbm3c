@@ -183,6 +183,9 @@ function unlike() {
           </c:if>
         </div>
       </li>   
+      <li class="li_none">
+      	조회수: ${cnt}
+      </li>  
     </ul>
   </fieldset>
   

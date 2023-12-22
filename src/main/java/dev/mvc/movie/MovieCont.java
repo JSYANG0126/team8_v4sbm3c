@@ -395,9 +395,11 @@ public class MovieCont {
   public ModelAndView read(HttpSession session, int movieno) { // int genreno = (int)request.getParameter("genreno");
     ModelAndView mav = new ModelAndView();
     if (this.managerProc.isManager(session) == true || this.memProc.isMem(session)) {
+      
       mav.setViewName("/movie/read"); // /WEB-INF/views/movie/read.jsp
       
       MovieVO movieVO = this.movieProc.read(movieno);
+      
       
       String title = movieVO.getTitle();
       String content = movieVO.getContent();

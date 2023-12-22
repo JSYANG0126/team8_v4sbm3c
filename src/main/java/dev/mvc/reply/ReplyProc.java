@@ -1,6 +1,7 @@
 package dev.mvc.reply;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,8 +24,8 @@ public class ReplyProc implements ReplyProcInter {
   }
   
   @Override
-  public ArrayList<ReplyVO> list_by_reviewno(int reviewno) {
-    ArrayList<ReplyVO> list_by_reviewno = this.replyDAO.list_by_reviewno(reviewno);
+  public ArrayList<ReplyVO> list_by_reviewno(HashMap<Object,Object> hashMap) {
+    ArrayList<ReplyVO> list_by_reviewno = this.replyDAO.list_by_reviewno(hashMap);
     return list_by_reviewno;
   }
 

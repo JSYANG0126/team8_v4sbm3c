@@ -193,6 +193,7 @@ function unlike() {
   <form name='frm' method='post' action='/reply/create.do'>
  		<input type='hidden' name='memno' value='${memno}'>
     <input type='hidden' name='reviewno' value='${reviewno}'>
+    <input type='hidden' name='now_page' value='${reviewVO.now_page}'>
     <div style="text-align: center;">
       <label>댓글</label>
       <input type="text" name="reply" value="" required="required" autofocus="autofocus" 
@@ -212,7 +213,7 @@ function unlike() {
       <c:forEach var="ReplyVO" items="${list_reply }" varStatus="info">
           <tr>
             <td>
-             ${ReplyVO.cname}
+             ${ReplyVO.mname}
             </td>
             <td>
               <span>${ReplyVO.reply}</span><br>

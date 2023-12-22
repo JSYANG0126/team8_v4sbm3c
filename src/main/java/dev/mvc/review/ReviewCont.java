@@ -302,11 +302,12 @@ public class ReviewCont {
    * @return
    */
   @RequestMapping(value="/review/read.do", method = RequestMethod.GET)
-  public ModelAndView read(int reviewno) { // int genreno = (int)request.getParameter("genreno");
+  public ModelAndView read(HttpSession session, int reviewno) { // int genreno = (int)request.getParameter("genreno");
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/review/read"); // /WEB-INF/views/movie/read.jsp
     
     ReviewVO reviewVO = this.reviewProc.read(reviewno);
+    int memno = (int)session.getAttribute("memno");
     
     String rtitle = reviewVO.getRtitle();
     String rinfo = reviewVO.getRinfo();
@@ -319,9 +320,15 @@ public class ReviewCont {
     reviewVO.setRtitle(rtitle);
     reviewVO.setRinfo(rinfo);  
     reviewVO.setSize1_label(size1_label);
-
-    ArrayList<ReplyVO> list_reply = this.replyProc.list_by_reviewno(reviewno);
+    
+    HashMap<Object, Object> hashMap = new HashMap<Object, Object>();
+    hashMap.put("reviewno", reviewVO.getReviewno());
+    hashMap.put("memno", memno);
+    
+    ArrayList<ReplyVO> list_reply = this.replyProc.list_by_reviewno(hashMap);  // 검색된 레코드 갯수 ->  전체 페이지 규모 파악
+    
     int nice_cnt = this.niceProc.nice_cnt(reviewno);
+    mav.addObject("memno", memno);
     mav.addObject("nice_cnt", nice_cnt);
     mav.addObject("list_reply", list_reply);
     mav.addObject("reviewVO", reviewVO);

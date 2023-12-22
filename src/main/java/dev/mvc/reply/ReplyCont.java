@@ -1,6 +1,7 @@
 package dev.mvc.reply;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
@@ -60,18 +61,17 @@ public class ReplyCont {
       int memno = (int)session.getAttribute("memno");
       replyVO.setMemno(memno);
       
-      MemVO memVO = this.memProc.read(memno);
-      replyVO.setCname(memVO.getMname());
       
       ReviewVO reviewVO = this.reviewProc.read(replyVO.getReviewno());
-      
+      int now_page = reviewVO.getNow_page();
+      System.out.println("현재 페이지" + now_page);
       mav.addObject("replyVO", replyVO);
       
       int cnt = this.replyProc.create(replyVO);
       System.out.println("-> cnt: " + cnt);
       
       if (cnt == 1) {
-        mav.addObject("now_page", reviewVO.getNow_page());
+        mav.addObject("now_page", now_page);
         mav.setViewName("redirect:/review/read.do?reviewno=" + replyVO.getReviewno());
       } else {
         mav.addObject("code", "create_fail");
@@ -155,24 +155,24 @@ public class ReplyCont {
     return mav;
   }
   
-  @RequestMapping(value="/reply/list_by_reviewno.do", method = RequestMethod.GET)
-  public ModelAndView list_by_reviewno(int reviewno) {
-    ModelAndView mav = new ModelAndView();
-
-    mav.setViewName("/reply/list_by_reviewno"); // /WEB-INF/views/movie/list_by_genreno.jsp
-    
-    ReviewVO reviewVO = this.reviewProc.read(reviewno); // create.jsp에 카테고리 정보를 출력하기위한 목적
-    mav.addObject("reviewVO", reviewVO);
-
-    
-    // 검색하지 않는 경우
-    ArrayList<ReplyVO> list = this.replyProc.list_by_reviewno(reviewno);
-
-    
-    mav.addObject("list", list);
-    
-    return mav;
-  }  
+//  @RequestMapping(value="/reply/list_by_reviewno.do", method = RequestMethod.GET)
+//  public ModelAndView list_by_reviewno(HashMap<Object,Object> hashMap) {
+//    ModelAndView mav = new ModelAndView();
+//    
+//    mav.setViewName("/reply/list_by_reviewno"); // /WEB-INF/views/movie/list_by_genreno.jsp
+//    
+////    ReviewVO reviewVO = this.reviewProc.read(); // create.jsp에 카테고리 정보를 출력하기위한 목적
+////    mav.addObject("reviewVO", reviewVO);
+//
+//    
+//    // 검색하지 않는 경우
+////    ArrayList<ReplyVO> list = this.replyProc.list_by_reviewno(replyVO);
+//
+//    
+////    mav.addObject("list", list);
+//    
+//    return mav;
+//  }  
   
   // 삭제폼
   @RequestMapping(value="/reply/delete.do", method = RequestMethod.GET)
