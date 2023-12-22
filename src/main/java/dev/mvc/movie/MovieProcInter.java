@@ -121,4 +121,7 @@ public interface MovieProcInter {
    */
   public int delete_by_genreno(int genreno);
   
+
+  public int read_count(MovieVO movieVO);
+  
 }

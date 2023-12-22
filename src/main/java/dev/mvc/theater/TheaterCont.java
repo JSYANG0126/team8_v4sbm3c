@@ -490,10 +490,10 @@ public class TheaterCont {
       // 파일 삭제 시작
       // -------------------------------------------------------------------
       String img1saved = theaterVO_old.getImg1saved();  // 실제 저장된 파일명
-      String thumbimg1 = theaterVO_old.getThumbimg1();       // 실제 저장된 povie 이미지 파일명
+      String thumbimg1 = theaterVO_old.getThumbimg1();       // 실제 저장된 movie 이미지 파일명
       long size1 = 0;
          
-      String upDir =  Movie.getUploadDir(); // C:/kd/deploy/resort_v3sbm3c/theater/storage/
+      String upDir =  Theater.getUploadDir(); // C:/kd/deploy/resort_v3sbm3c/theater/storage/
       
       Tool.deleteFile(upDir, img1saved);  // 실제 저장된 파일삭제
       Tool.deleteFile(upDir, thumbimg1);     // povie 이미지 삭제

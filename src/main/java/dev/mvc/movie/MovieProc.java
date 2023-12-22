@@ -276,6 +276,13 @@ public class MovieProc implements MovieProcInter {
 		      return cnt;
 		}
 
+    @Override
+    public int read_count(MovieVO movieVO) {
+      int cnt = this.movieDAO.read_count(movieVO);
+      return cnt;
+    }
+		
+		
 
 	
 }

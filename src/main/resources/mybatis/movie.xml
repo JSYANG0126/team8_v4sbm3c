@@ -56,6 +56,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </choose>
     ORDER BY movieno DESC   
   </select>
+  
+  <!-- 조회수 up -->
+  <update id="read_count" parameterType="dev.mvc.movie.MovieVO">
+  	UPDATE movie
+		SET cnt = cnt + 1
+		WHERE movieno = #{movieno}
+  </update>
    
   <!-- 카테고리별 검색 레코드 갯수 -->
   <select id="search_count" resultType="int" parameterType="HashMap">
