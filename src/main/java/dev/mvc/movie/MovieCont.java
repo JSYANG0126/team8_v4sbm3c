@@ -414,7 +414,8 @@ public class MovieCont {
       movieVO.setSize1_label(size1_label);
       
       ArrayList<CommentsVO> list_comments = this.commentsProc.list_by_movieno(movieno);
-      
+
+      this.movieProc.read_count(movieVO); // 조회수 카운팅
       
       int good_cnt = this.goodProc.good_cnt(movieno);
       mav.addObject("good_cnt", good_cnt);

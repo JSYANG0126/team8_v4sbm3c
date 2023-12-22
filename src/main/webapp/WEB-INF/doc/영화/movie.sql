@@ -96,6 +96,11 @@ UPDATE movie
 SET recom = 3
 WHERE movieno = 10;
 
+
+UPDATE movie
+SET cnt = cnt + 1
+WHERE movieno = 13;
+
 -- DELETE
 DELETE FROM movie
 WHERE movieno = 10;
