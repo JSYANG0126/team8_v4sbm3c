@@ -93,8 +93,8 @@ WHERE title = '트랜스포머2';
 
 -- UPDATE
 UPDATE movie
-SET recom = 3
-WHERE movieno = 10;
+SET genreno = 2
+WHERE movieno = 2;
 
 -- DELETE
 DELETE FROM movie
