@@ -184,7 +184,7 @@ function unlike() {
         </div>
       </li>   
       <li class="li_none">
-      	조회수: ${cnt}
+      	조회수: ${movieVO.cnt}
       </li>  
     </ul>
   </fieldset>

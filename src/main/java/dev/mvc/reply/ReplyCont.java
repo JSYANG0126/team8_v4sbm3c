@@ -64,7 +64,6 @@ public class ReplyCont {
       
       ReviewVO reviewVO = this.reviewProc.read(replyVO.getReviewno());
       int now_page = reviewVO.getNow_page();
-      System.out.println("현재 페이지" + now_page);
       mav.addObject("replyVO", replyVO);
       
       int cnt = this.replyProc.create(replyVO);
