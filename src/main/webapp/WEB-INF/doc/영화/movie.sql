@@ -74,6 +74,24 @@ ORDER BY movieno DESC;
 SELECT *
 FROM movie
 
+SELECT
+    g.genreno,
+    g.name AS genre_name,
+    g.rdate AS rdate,
+    COUNT(m.movieno) AS total_movies_in_genre
+FROM
+    genre g
+LEFT JOIN
+    movie m ON g.genreno = m.genreno
+GROUP BY
+    g.genreno, g.name, g.rdate
+ORDER BY
+    g.genreno ASC;
+
+SELECT COUNT(*)as cnt
+FROM movie
+WHERE genreno=1;
+
 -- UPDATE
 UPDATE movie
 SET title = '트랜스포머3'

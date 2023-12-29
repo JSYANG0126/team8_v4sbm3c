@@ -16,7 +16,7 @@
       <!-- 5기준 하나의 이미지 widrh, 19.2% * 5 = 96% -->
       <!-- 5기준 하나의 이미지 widrh, 16% * 6 = 96% -->
       <div onclick="location.href='/movie/read.do?movieno=${movieno }&word=${param.word }&now_page=${param.now_page == null ? 1 : param.now_page }'" class='hover'  
-             style='width: 16%; height: 168px; float: left; margin: 0.5%; padding: 0.1%; background-color: #EEEFFF; text-align: left;'>
+             style='width: 16%; height: 168px; float: left; margin: 0.5%; padding: 0.1%; background-color: #E5E5E5; text-align: left;'>
 
             <c:choose>
               <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
