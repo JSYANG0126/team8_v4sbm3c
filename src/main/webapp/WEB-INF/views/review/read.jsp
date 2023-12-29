@@ -189,7 +189,7 @@ function unlike() {
 			<span id= "nice_cnt" name="nice_cnt">${nice_cnt} </span>
   </form>
   
-  
+  <c:if test="${sessionScope.id != null}">
   <form name='frm' method='post' action='/reply/create.do'>
  		<input type='hidden' name='memno' value='${memno}'>
     <input type='hidden' name='reviewno' value='${reviewno}'>
@@ -201,6 +201,7 @@ function unlike() {
       <button type="submit" class="btn btn-sm" style="height: 28px; margin-bottom: 5px; background-color: #323232; color: white;">등록</button>
     </div>
   </form>
+  </c:if>
 	
 	<table class="table table">
     <colgroup>
