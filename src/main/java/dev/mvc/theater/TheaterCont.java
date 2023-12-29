@@ -208,12 +208,15 @@ public class TheaterCont {
     long size1 = theaterVO.getSize1();
     String size1_label = Tool.unit(size1);
     theaterVO.setSize1_label(size1_label);
+    String newSize1_label = theaterVO.getSize1_label();
     int memno1 = (int) session.getAttribute("memno");
+    
+    mav.addObject("size1_label", newSize1_label);
     mav.addObject("memno1", memno1);
     mav.setViewName("/theater/read"); // /WEB-INF/views/movie/read.jsp
-
     mav.addObject("theaterVO", theaterVO);
-     
+    System.out.println("<<<<<<<<<<<<" +mav);
+    
     return mav;
   }
    
