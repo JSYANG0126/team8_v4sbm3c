@@ -125,7 +125,6 @@ public class MovieVO {
 		return cnt;
 	}
 	public void setCnt(int cnt) {
-	  System.out.println("SET CNT --> " + cnt);
 		this.cnt = cnt;
 	}
 	public int getReprycnt() {
