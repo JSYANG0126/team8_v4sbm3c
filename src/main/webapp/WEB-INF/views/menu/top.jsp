@@ -30,6 +30,30 @@
 	  background-color: #cdcdcd;
 	}
 </style> 
+<script type="text/javascript">
+  function chatbot() {
+    // 챗봇을 개발한 사람의 AWS IP
+    // "http://localhost:5000/chatbot/?memberno=${sessionScope.memberno }"  
+    var url = 'http://43.203.63.165:5000/chatbot/?memno=${sessionScope.memno }';
+    var win = window.open(url, '챗봇', 'width=1300px, height=850px');
+       
+    var x = (screen.width - 1300) / 2;
+    var y = (screen.height - 850) / 2;
+       
+    win.moveTo(x, y); // 화면 중앙으로 이동
+  }
+  function recommend() {
+    // 추천을 개발한 사람의 AWS IP
+    // "http://localhost:8000/ais/recommend_form/?memberno=${sessionScope.memberno }"  
+    var url = 'http://43.203.63.165:8000/ais/recommend_form/?memno=${sessionScope.memno }';
+    var win = window.open(url, '공지 사항', 'width=1300px, height=850px');
+       
+    var x = (screen.width - 1300) / 2;
+    var y = (screen.height - 850) / 2;
+       
+    win.moveTo(x, y); // 화면 중앙으로 이동
+  }
+</script>
 
 
 <div class='container_main'>
@@ -81,7 +105,7 @@
             </li>
             
             <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
-              <a class="nav-link top_menu_link" href="http://localhost:5000/chatbot?memno=${sessionScope.memno }">챗봇</a>
+              <a class="nav-link top_menu_link" href="javascript: chatbot();">챗봇</a>
             </li>
 
             <li class="nav-item dropdown"> <%-- 회원 서브 메뉴 --%>
@@ -94,7 +118,7 @@
                     <a class="dropdown-item" href="/mem/passwd_find.do">비밀번호 찾기</a>
                   </c:when>
                   <c:otherwise>
-                    <a class="dropdown-item" href="http://localhost:8000/ais/recommend_form/?memno=${sessionScope.memno }">관심분야 등록하고 추천받기</a>
+                    <a class="dropdown-item" href="javascript: recommend();">관심분야 등록하고 추천받기</a>
                     <a class="dropdown-item" href="/chat/list.do">챗봇 채팅 내역</a>
                     <a class="dropdown-item" href="/mem/read.do">가입 정보</a>
                     <a class="dropdown-item" href="/mem/passwd_update.do">비밀번호 변경</a>

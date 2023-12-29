@@ -75,11 +75,11 @@ String name = (String)request.getAttribute("name");
           <%
           if (cnt == 0) {
           %>
-            <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm">다시 시도</button>
+            <button type="button" onclick="history.back()" class="btn btn-sm" style="background-color: #323232; color: white;">다시 시도</button>
           <%  
           }
           %>
-          <button type="button" onclick="location.href='./list_all.do'" class="btn btn-secondary btn-sm">전체 목록</button>
+          <button type="button" onclick="location.href='./list_all.do'" class="btn btn-sm" style="background-color: #323232; color: white;">전체 목록</button>
         </li>
         
     </ul>
