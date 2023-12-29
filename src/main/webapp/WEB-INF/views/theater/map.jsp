@@ -35,8 +35,8 @@
     </div>
     <div class="content_body_bottom">
       <button type="submit" class="btn btn-secondary btn-sm">저장</button>
-      <button type="button" onclick="frm_map.map.value=''; frm_map.submit();" class="btn btn-secondary btn-sm">지도 삭제</button>
-      <button type="button" onclick="history.back();" class="btn btn-secondary btn-sm">취소</button>
+      <button type="button" onclick="frm_map.map.value=''; frm_map.submit();"class="btn btn-sm" style="background-color: #323232; color: white;">지도 삭제</button>
+      <button type="button" onclick="history.back();" class="btn btn-sm" style="background-color: #323232; color: white;">취소</button>
     </div>
   
   </FORM>
