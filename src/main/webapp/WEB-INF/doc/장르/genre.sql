@@ -54,4 +54,16 @@ SELECT * FROM genre WHERE genreno=3;
 DELETE FROM genre WHERE genreno=7;
 DELETE FROM genre WHERE genreno >= 10;
 
+SELECT
+    g.genreno,
+    g.name AS genre_name,
+    COUNT(m.movieno) AS total_movies_in_genre
+FROM
+    genre g
+LEFT JOIN
+    movie m ON g.genreno = m.genreno
+GROUP BY
+    g.genreno, g.name, g.cnt
+ORDER BY GENRENO ASC;
+
 COMMIT;

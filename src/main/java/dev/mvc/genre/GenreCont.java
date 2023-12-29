@@ -86,9 +86,7 @@ public class GenreCont {
     
     if (this.managerProc.isManager(session) == true) {
       mav.setViewName("/genre/list_all"); // /WEB-INF/views/genre/list_all.jsp
-      int cnt = this.movieProc.count_by_genreno(1);
-      System.out.println(" --->> 장르1 cnt 확인: " + cnt);
-      ArrayList<GenreVO> list = this.genreProc.list_all();
+      ArrayList<GenreVO> list = this.genreProc.list_all_cnt();
       mav.addObject("list", list);
       
     } else {

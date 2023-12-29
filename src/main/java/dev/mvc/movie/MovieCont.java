@@ -85,10 +85,6 @@ public class MovieCont {
 
     GenreVO genreVO = this.genreProc.read(genreno); // create.jsp에 카테고리 정보를 출력하기위한 목적
     mav.addObject("genreVO", genreVO);
-    genreVO.setCnt(this.movieProc.count_by_genreno(genreno));
-    int cnt = genreVO.getCnt(); 
-    System.out.println(" -> 장르 cnt 확인: " + cnt);
-    mav.addObject(cnt);
 //    request.setAttribute("genreVO", genreVO);
     
     mav.setViewName("/movie/create"); // /webapp/WEB-INF/views/movie/create.jsp
@@ -432,94 +428,94 @@ public class MovieCont {
     return mav;
   }
   
-  /**
-   * 맵 등록/수정/삭제 폼
-   * http://localhost:9092/movie/map.do?movieno=1
-   * @return
-   */
-  @RequestMapping(value="/movie/map.do", method=RequestMethod.GET )
-  public ModelAndView map(int movieno) {
-    ModelAndView mav = new ModelAndView();
-
-    MovieVO movieVO = this.movieProc.read(movieno); // map 정보 읽어 오기
-    mav.addObject("movieVO", movieVO); // request.setAttribute("movieVO", movieVO);
-
-    GenreVO genreVO = this.genreProc.read(movieVO.getGenreno()); // 그룹 정보 읽기
-    mav.addObject("genreVO", genreVO); 
-
-    mav.setViewName("/movie/map"); // /WEB-INF/views/movie/map.jsp
-        
-    return mav;
-  }
+//  /**
+//   * 맵 등록/수정/삭제 폼
+//   * http://localhost:9092/movie/map.do?movieno=1
+//   * @return
+//   */
+//  @RequestMapping(value="/movie/map.do", method=RequestMethod.GET )
+//  public ModelAndView map(int movieno) {
+//    ModelAndView mav = new ModelAndView();
+//
+//    MovieVO movieVO = this.movieProc.read(movieno); // map 정보 읽어 오기
+//    mav.addObject("movieVO", movieVO); // request.setAttribute("movieVO", movieVO);
+//
+//    GenreVO genreVO = this.genreProc.read(movieVO.getGenreno()); // 그룹 정보 읽기
+//    mav.addObject("genreVO", genreVO); 
+//
+//    mav.setViewName("/movie/map"); // /WEB-INF/views/movie/map.jsp
+//        
+//    return mav;
+//  }
   
-  /**
-   * MAP 등록/수정/삭제 처리
-   * http://localhost:9092/movie/map.do
-   * @param movieVO
-   * @return
-   */
-  @RequestMapping(value="/movie/map.do", method = RequestMethod.POST)
-  public ModelAndView map_update(int movieno, String map) {
-    ModelAndView mav = new ModelAndView();
-    
-    HashMap<String,Object> hashMap = new HashMap<String,Object>();
-    hashMap.put("movieno", movieno);
-    hashMap.put("map", map);
-    
-    this.movieProc.map(hashMap);
-    
-    mav.setViewName("redirect:/movie/read.do?movieno=" + movieno); 
-    // /webapp/WEB-INF/views/movie/read.jsp
-    
-    return mav;
-  }
-  
-  /**
-   * Youtube 등록/수정/삭제 폼
-   * http://localhost:9092/movie/youtube.do?movieno=1
-   * @return
-   */
-  @RequestMapping(value="/movie/youtube.do", method=RequestMethod.GET )
-  public ModelAndView youtube(int movieno) {
-    ModelAndView mav = new ModelAndView();
+//  /**
+//   * MAP 등록/수정/삭제 처리
+//   * http://localhost:9092/movie/map.do
+//   * @param movieVO
+//   * @return
+//   */
+//  @RequestMapping(value="/movie/map.do", method = RequestMethod.POST)
+//  public ModelAndView map_update(int movieno, String map) {
+//    ModelAndView mav = new ModelAndView();
+//    
+//    HashMap<String,Object> hashMap = new HashMap<String,Object>();
+//    hashMap.put("movieno", movieno);
+//    hashMap.put("map", map);
+//    
+//    this.movieProc.map(hashMap);
+//    
+//    mav.setViewName("redirect:/movie/read.do?movieno=" + movieno); 
+//    // /webapp/WEB-INF/views/movie/read.jsp
+//    
+//    return mav;
+//  }
 
-    MovieVO movieVO = this.movieProc.read(movieno); // youtube 정보 읽어 오기
-    mav.addObject("movieVO", movieVO); // request.setAttribute("movieVO", movieVO);
+//  /**
+//   * Youtube 등록/수정/삭제 폼
+//   * http://localhost:9092/movie/youtube.do?movieno=1
+//   * @return
+//   */
+//  @RequestMapping(value="/movie/youtube.do", method=RequestMethod.GET )
+//  public ModelAndView youtube(int movieno) {
+//    ModelAndView mav = new ModelAndView();
+//
+//    MovieVO movieVO = this.movieProc.read(movieno); // youtube 정보 읽어 오기
+//    mav.addObject("movieVO", movieVO); // request.setAttribute("movieVO", movieVO);
+//
+//    GenreVO genreVO = this.genreProc.read(movieVO.getGenreno()); // 그룹 정보 읽기
+//    mav.addObject("genreVO", genreVO); 
+//
+//    mav.setViewName("/movie/youtube"); // /WEB-INF/views/movie/youtube.jsp
+//        
+//    return mav;
+//  }
 
-    GenreVO genreVO = this.genreProc.read(movieVO.getGenreno()); // 그룹 정보 읽기
-    mav.addObject("genreVO", genreVO); 
-
-    mav.setViewName("/movie/youtube"); // /WEB-INF/views/movie/youtube.jsp
-        
-    return mav;
-  }
-  
-  /**
-   * Youtube 등록/수정/삭제 처리
-   * http://localhost:9092/movie/youtube.do
-   * @param movieno 글 번호
-   * @param youtube Youtube url의 소스 코드
-   * @return
-   */
-  @RequestMapping(value="/movie/youtube.do", method = RequestMethod.POST)
-  public ModelAndView youtube_update(int movieno, String youtube) {
-    ModelAndView mav = new ModelAndView();
-    
-    if (youtube.trim().length() > 0) {  // 삭제 중인지 확인, 삭제가 아니면 youtube 크기 변경
-      youtube = Tool.youtubeResize(youtube, 640);  // youtube 영상의 크기를 width 기준 640 px로 변경
-    }    
-    
-    HashMap<String, Object> hashMap = new HashMap<String, Object>();
-    hashMap.put("movieno", movieno);
-    hashMap.put("youtube", youtube);
-    
-    this.movieProc.youtube(hashMap);
-    
-    mav.setViewName("redirect:/movie/read.do?movieno=" + movieno); 
-    // /webapp/WEB-INF/views/movie/read.jsp
-    
-    return mav;
-  }
+//  /**
+//   * Youtube 등록/수정/삭제 처리
+//   * http://localhost:9092/movie/youtube.do
+//   * @param movieno 글 번호
+//   * @param youtube Youtube url의 소스 코드
+//   * @return
+//   */
+//  @RequestMapping(value="/movie/youtube.do", method = RequestMethod.POST)
+//  public ModelAndView youtube_update(int movieno, String youtube) {
+//    ModelAndView mav = new ModelAndView();
+//    
+//    if (youtube.trim().length() > 0) {  // 삭제 중인지 확인, 삭제가 아니면 youtube 크기 변경
+//      youtube = Tool.youtubeResize(youtube, 640);  // youtube 영상의 크기를 width 기준 640 px로 변경
+//    }    
+//    
+//    HashMap<String, Object> hashMap = new HashMap<String, Object>();
+//    hashMap.put("movieno", movieno);
+//    hashMap.put("youtube", youtube);
+//    
+//    this.movieProc.youtube(hashMap);
+//    
+//    mav.setViewName("redirect:/movie/read.do?movieno=" + movieno); 
+//    // /webapp/WEB-INF/views/movie/read.jsp
+//    
+//    return mav;
+//  }
   
   /**
    * 수정 폼
@@ -536,7 +532,6 @@ public class MovieCont {
       mav.addObject("movieVO", movieVO);
       
       GenreVO genreVO = this.genreProc.read(movieVO.getGenreno());
-      genreVO.setCnt(this.movieProc.count_by_genreno(movieVO.getGenreno()));
       mav.addObject("genreVO", genreVO);
       
       mav.setViewName("/movie/update_text"); // /WEB-INF/views/movie/update_text.jsp
@@ -720,7 +715,6 @@ public class MovieCont {
         mav.addObject("movieVO", movieVO);
         
         GenreVO genreVO = this.genreProc.read(movieVO.getGenreno());
-        genreVO.setCnt(this.movieProc.count_by_genreno(movieVO.getGenreno()));
         mav.addObject("genreVO", genreVO);
         
         mav.setViewName("/movie/delete"); // /WEB-INF/views/movie/delete.jsp

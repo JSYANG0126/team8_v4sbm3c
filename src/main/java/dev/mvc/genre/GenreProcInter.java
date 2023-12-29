@@ -17,6 +17,12 @@ public interface GenreProcInter {
 	  public ArrayList<GenreVO> list_all();
 	  
 	  /**
+	   * cnt 반영된 전체 목록
+	   * @return
+	   */
+	  public ArrayList<GenreVO> list_all_cnt();
+	  
+	  /**
 	   * 조회
 	   * @param genreno
 	   * @return

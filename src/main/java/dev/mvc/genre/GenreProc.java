@@ -25,6 +25,13 @@ public class GenreProc implements GenreProcInter {
 	    return list;
 	  }
 
+	@Override
+	  public ArrayList<GenreVO> list_all_cnt() {
+	    ArrayList<GenreVO> list = this.genreDAO.list_all_cnt();
+	    
+	    return list;
+	  }
+	
 	  @Override
 	  public GenreVO read(int genreno) {
 	    GenreVO genreVO  = this.genreDAO.read(genreno);

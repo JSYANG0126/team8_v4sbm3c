@@ -12,6 +12,15 @@
     SELECT genreno, name, cnt, rdate, seqno, visible FROM genre ORDER BY seqno ASC
   </select>
 
+  <!-- 출력모드 cnt 반영 -->
+  <select id="list_all_cnt" resultType="dev.mvc.genre.GenreVO">
+    SELECT g.genreno AS genreno, g.name, COUNT(m.movieno) AS cnt, g.rdate AS rdate, g.visible AS visible
+    FROM genre g
+    LEFT JOIN movie m ON g.genreno = m.genreno
+    GROUP BY g.genreno, g.name, g.rdate, g.visible
+    ORDER BY g.genreno ASC
+  </select>
+  
   <!-- 비회원/회원 SELECT LIST -->
   <select id="list_all_y" resultType="dev.mvc.genre.GenreVO">
     SELECT genreno, name, cnt, rdate, seqno, visible 
