@@ -86,6 +86,9 @@ public class MovieCont {
     GenreVO genreVO = this.genreProc.read(genreno); // create.jsp에 카테고리 정보를 출력하기위한 목적
     mav.addObject("genreVO", genreVO);
     genreVO.setCnt(this.movieProc.count_by_genreno(genreno));
+    int cnt = genreVO.getCnt(); 
+    System.out.println(" -> 장르 cnt 확인: " + cnt);
+    mav.addObject(cnt);
 //    request.setAttribute("genreVO", genreVO);
     
     mav.setViewName("/movie/create"); // /webapp/WEB-INF/views/movie/create.jsp
@@ -376,9 +379,10 @@ public class MovieCont {
    * @param list_file 목록 파일명
    * @return 페이징용으로 생성된 HTML/CSS tag 문자열
    */
+    int now_page = movieVO.getNow_page();
     String paging = movieProc.pagingBox(movieVO.getGenreno(), movieVO.getNow_page(), movieVO.getWord(), "list_by_genreno_grid.do", search_count);
     mav.addObject("paging", paging);
-    
+    mav.addObject("now_page", now_page);
       // mav.addObject("now_page", now_page);
     
     mav.setViewName("/movie/list_by_genreno_grid");  // /movie/list_by_genreno_grid.jsp

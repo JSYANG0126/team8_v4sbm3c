@@ -43,7 +43,7 @@ SELECT genreno, name, cnt, rdate, seqno, visible FROM genre ORDER BY genreno ASC
          3 영화3                                   0 23/11/10          1 N
 
 -- UPDATE
-UPDATE genre SET name='영화4', cnt=1 WHERE genreno=3;
+UPDATE genre SET cnt=6 WHERE genreno=1;
 SELECT * FROM genre WHERE genreno=3;
    GENRENO NAME                                  CNT RDATE         SEQNO V
 ---------- ------------------------------ ---------- -------- ---------- -
