@@ -82,7 +82,7 @@
           <c:set var="mname" value="${theaterVO.mname }" />
           <c:set var="now_page" value="${param.now_page }" />
     
-          <tr onclick="location.href='./read.do?theaterno=${theaterno}&word=${param.word }&now_page=${param.now_page == null ? 1 : param.now_page }'" style="cursor: pointer;">
+          <tr onclick="location.href='./read_cookie_reply.do?theaterno=${theaterno}&word=${param.word }&now_page=${param.now_page == null ? 1 : param.now_page }'" style="cursor: pointer;">
             <td class="td_bs">
                <span style="font-weight: bold;">${theaterno }</span><br>
             </td>

@@ -3,6 +3,7 @@ package dev.mvc.theater;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -22,6 +23,7 @@ import dev.mvc.movie.Movie;
 import dev.mvc.movie.MovieVO;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
+import dev.mvc.treply.TreplyProcInter;
 
 
 @Controller
@@ -37,6 +39,10 @@ public class TheaterCont {
   @Autowired
   @Qualifier("dev.mvc.mem.MemProc") // @Component("dev.mvc.contents.ContentsProc")
   private MemProcInter memProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.treply.TreplyProc") // @Component("dev.mvc.contents.ContentsProc")
+  private TreplyProcInter treplyProc;
   
   public TheaterCont() {
     System.out.println("-> TheaterCont created.");  
@@ -185,13 +191,48 @@ public class TheaterCont {
     return mav;
   }
   
+//  /**
+//   * 조회
+//   * http://localhost:9093/theater/read.do?theaterno=17
+//   * @return
+//   */
+//  @RequestMapping(value="/theater/read.do", method = RequestMethod.GET)
+//  public ModelAndView read(HttpSession session, int theaterno) { // int genreno = (int)request.getParameter("genreno");
+//    ModelAndView mav = new ModelAndView();
+//    
+//    TheaterVO theaterVO = this.theaterProc.read(theaterno);
+//    
+//    String tname = theaterVO.getTname();
+//    String tinfo = theaterVO.getTinfo();
+//    
+//    tname = Tool.convertChar(tname);  // 특수 문자 처리
+//    tinfo = Tool.convertChar(tinfo); 
+//    
+//    theaterVO.setTname(tname);
+//    theaterVO.setTinfo(tinfo);  
+//    
+//    long size1 = theaterVO.getSize1();
+//    String size1_label = Tool.unit(size1);
+//    theaterVO.setSize1_label(size1_label);
+//    String newSize1_label = theaterVO.getSize1_label();
+//    int memno1 = (int) session.getAttribute("memno");
+//    
+//    mav.addObject("size1_label", newSize1_label);
+//    mav.addObject("memno1", memno1);
+//    mav.setViewName("/theater/read"); // /WEB-INF/views/movie/read.jsp
+//    mav.addObject("theaterVO", theaterVO);
+//    System.out.println("<<<<<<<<<<<<" +mav);
+//    
+//    return mav;
+//  }
+  
   /**
    * 조회
-   * http://localhost:9093/theater/read.do?movieno=17
+   * http://localhost:9093/theater/read.do?theaterno=17
    * @return
    */
-  @RequestMapping(value="/theater/read.do", method = RequestMethod.GET)
-  public ModelAndView read(HttpSession session, int theaterno) { // int genreno = (int)request.getParameter("genreno");
+  @RequestMapping(value="/theater/read_cookie_reply.do", method = RequestMethod.GET)
+  public ModelAndView read_ajax(HttpServletRequest request, HttpSession session, int theaterno) { // int genreno = (int)request.getParameter("genreno");
     ModelAndView mav = new ModelAndView();
     
     TheaterVO theaterVO = this.theaterProc.read(theaterno);
@@ -215,7 +256,44 @@ public class TheaterCont {
     mav.addObject("memno1", memno1);
     mav.setViewName("/theater/read"); // /WEB-INF/views/movie/read.jsp
     mav.addObject("theaterVO", theaterVO);
-    System.out.println("<<<<<<<<<<<<" +mav);
+    
+    // 댓글 기능 추가 
+    mav.setViewName("/theater/read_cookie_reply"); // /WEB-INF/views/contents/read_cookie_reply.jsp
+    
+    // -------------------------------------------------------------------------------
+    // 쇼핑 카트 장바구니에 상품 등록전 로그인 폼 출력 관련 쿠기  
+    // -------------------------------------------------------------------------------
+    Cookie[] cookies = request.getCookies();
+    Cookie cookie = null;
+
+    String ck_id = ""; // id 저장
+    String ck_id_save = ""; // id 저장 여부를 체크
+    String ck_passwd = ""; // passwd 저장
+    String ck_passwd_save = ""; // passwd 저장 여부를 체크
+
+    if (cookies != null) {  // Cookie 변수가 있다면
+      for (int i=0; i < cookies.length; i++){
+        cookie = cookies[i]; // 쿠키 객체 추출
+        
+        if (cookie.getName().equals("ck_id")){
+          ck_id = cookie.getValue();                                 // Cookie에 저장된 id
+        }else if(cookie.getName().equals("ck_id_save")){
+          ck_id_save = cookie.getValue();                          // Cookie에 id를 저장 할 것인지의 여부, Y, N
+        }else if (cookie.getName().equals("ck_passwd")){
+          ck_passwd = cookie.getValue();                          // Cookie에 저장된 password
+        }else if(cookie.getName().equals("ck_passwd_save")){
+          ck_passwd_save = cookie.getValue();                  // Cookie에 password를 저장 할 것인지의 여부, Y, N
+        }
+      }
+    }
+    
+    System.out.println("-> ck_id: " + ck_id);
+    
+    mav.addObject("ck_id", ck_id); 
+    mav.addObject("ck_id_save", ck_id_save);
+    mav.addObject("ck_passwd", ck_passwd);
+    mav.addObject("ck_passwd_save", ck_passwd_save);
+    // -------------------------------------------------------------------------------
     
     return mav;
   }
