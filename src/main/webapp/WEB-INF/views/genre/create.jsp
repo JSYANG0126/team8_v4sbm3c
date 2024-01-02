@@ -21,8 +21,8 @@
     </div>
     
     <div class = "content_body_bottom">
-        <button type="submit" class="btn btn-secondary btn-sm">등록</button>
-        <button type="button" onclick="location.href='./list_all.do'"class="btn btn-secondary btn-sm">목록</button>
+        <button type="submit" class="btn btn-sm" style="background-color: #323232;">등록</button>
+        <button type="button" onclick="location.href='./list_all.do'"class="btn btn-sm" style="background-color: #323232;">목록</button>
     </div>
 </form>
  

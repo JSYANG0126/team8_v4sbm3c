@@ -29,9 +29,9 @@
       <label>카테고리 이름</label>
       <input type="text" name="name" value="" required="required" autofocus="autofocus" 
                  class="" style="width: 50%">
-      <button type="submit" class="btn btn-secondary btn-sm" style="height: 28px; margin-bottom: 5px;">등록</button>
-      <button type="button" onclick="location.href='./list_all.do'" class="btn btn-secondary btn-sm" 
-                  style="height: 28px; margin-bottom: 5px;">목록</button> 
+      <button type="submit" class="btn btn-sm" style="height: 28px; margin-bottom: 5px; background-color: #323232; color:white;">등록</button>
+      <button type="button" onclick="location.href='./list_all.do'" class="btn btn-sm" 
+                  style="height: 28px; margin-bottom: 5px; background-color: #323232; color:white;">목록</button> 
     </div>
   </form>
   

@@ -28,7 +28,7 @@
           <li class='li_none'>
             <button type='button' 
                          onclick="location.href='./login.do?id=${param.id}'"
-                         class="btn btn-secondary btn-sm">로그인</button>
+                         class="btn btn-sm" style="background-color: #323232; color: white;">로그인</button>
           </li> 
         </c:when>
         
@@ -51,10 +51,10 @@
           <li class='li_none'>
             <button type='button' 
                          onclick="location.href='/'"
-                         class="btn btn-secondary btn-sm">시작 화면</button>
+                         class="btn btn-sm" style="background-color: #323232; color: white;">시작 화면</button>
             <button type='button' 
                          onclick="location.href='/mem/list.do'"
-                         class="btn btn-secondary btn-sm">회원 목록</button>                   
+                         class="btn btn-sm" style="background-color: #323232; color: white;">회원 목록</button>                   
           </li>                                                                       
         </c:when>
                 
@@ -71,7 +71,7 @@
           <li class='li_none'>
             <button type='button' 
                          onclick="location.href='/mem/list.do'"
-                         class="btn btn-secondary btn-sm">회원 목록</button>
+                         class="btn btn-sm" style="background-color: #323232; color: white;">회원 목록</button>
           </li>                                                                     
         </c:when>    
             
@@ -88,7 +88,7 @@
           <li class='li_none'>
             <button type='button' 
                          onclick="location.href='/'"
-                         class="btn btn-secondary btn-sm">확인</button>
+                         class="btn btn-sm" style="background-color: #323232; color: white;">확인</button>
           </li>                                                                     
         </c:when>   
         
@@ -105,7 +105,7 @@
             <li class='li_none'>
               <button type='button' 
                     onclick="location.href='/'"
-                    class="btn btn-secondary btn-sm">확인</button>
+                    class="btn btn-sm" style="background-color: #323232; color: white;">확인</button>
                </li>  
         </c:when>
         
@@ -116,7 +116,7 @@
             <li class='li_none'>
               <button type='button' 
                     onclick="location.href='/'"
-                    class="btn btn-secondary btn-sm">확인</button>
+                    class="btn btn-sm" style="background-color: #323232; color: white;">확인</button>
             </li>
         </c:when>
         
@@ -127,11 +127,11 @@
             <li class='li_none'>
               <button type='button' 
                     onclick="history.back();"
-                    class="btn btn-secondary btn-sm">다시 입력</button>
+                    class="btn btn-sm" style="background-color: #323232; color: white;">다시 입력</button>
                     
               <button type='button' 
                     onclick="location.href='/'"
-                    class="btn btn-secondary btn-sm">취소</button>
+                    class="btn btn-sm" style="background-color: #323232; color: white;">취소</button>
             </li>
         </c:when>
         
@@ -152,7 +152,7 @@
             <li class='li_none'>
                 <button type='button' 
                     onclick="location.href='/';"
-                    class="btn btn-secondary btn-sm">확인</button>
+                    class="btn btn-sm" style="background-color: #323232; color: white;">확인</button>
             </li>  
         </c:when>
         
@@ -163,10 +163,10 @@
             <li class='li_none'>
               <button type='button' 
                     onclick="history.back();"
-                    class="btn btn-secondary btn-sm">다시 입력</button>
+                    class="btn btn-sm" style="background-color: #323232; color: white;">다시 입력</button>
               <button type='button' 
                     onclick="location.href='/'"
-                    class="btn btn-secondary btn-sm">취소</button>
+                    class="btn btn-sm" style="background-color: #323232; color: white;">취소</button>
             </li>
         </c:when>
         
@@ -177,7 +177,7 @@
             <li class='li_none'>
               <button type='button' 
                     onclick="location.href='/'"
-                    class="btn btn-secondary btn-sm">확인</button>
+                    class="btn btn-sm" style="background-color: #323232; color: white;">확인</button>
              </li>
         </c:when>
         
@@ -188,10 +188,10 @@
             <li class='li_none'>
               <button type='button' 
                     onclick="history.back();"
-                    class="btn btn-secondary btn-sm">다시 입력</button>
+                    class="btn btn-sm" style="background-color: #323232; color: white;">다시 입력</button>
               <button type='button' 
                     onclick="location.href='/'"
-                    class="btn btn-secondary btn-sm">취소</button>
+                    class="btn btn-sm" style="background-color: #323232; color: white;">취소</button>
              </li>
         </c:when>
         
@@ -209,7 +209,7 @@
         <br>
         <c:choose>
             <c:when test="${param.cnt == 0 }">
-                <button type='button' onclick="history.back()" class="btn btn-secondary btn-sm">다시 시도</button>    
+                <button type='button' onclick="history.back()" class="btn btn-sm" style="background-color: #323232; color: white;">다시 시도</button>    
             </c:when>
         </c:choose>
         

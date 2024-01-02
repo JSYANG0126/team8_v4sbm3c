@@ -38,8 +38,8 @@
 
         
             <div class="bottom_menu">
-                <button type="submit" class="btn btn-secondary btn-sm">비밀번호 찾기</button>
-                <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm">취소</button>
+                <button type="submit" class="btn btn-sm" style="background-color: #323232; color: white;">비밀번호 찾기</button>
+                <button type="button" onclick="history.back()" class="btn btn-sm" style="background-color: #323232; color: white;">취소</button>
             </div>   
         </form>
     </div>

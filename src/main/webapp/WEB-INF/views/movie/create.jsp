@@ -40,9 +40,9 @@
 	          <input type='text' name='word' id='word' value='' class='input_word'>
 	        </c:otherwise>
 	      </c:choose>
-	      <button type='submit' class='btn btn-info btn-sm'>검색</button>
+	      <button type='submit' class='btn btn-sm' style="background-color: #323232; color: white;">검색</button>
 	      <c:if test="${param.word.length() > 0 }">
-	        <button type='button' class='btn btn-info btn-sm' 
+	        <button type='button' class='btn btn-sm' style="background-color: #323232; color: white;"
 	                    onclick="location.href='./list_by_genreno_search.do?genreno=${genreVO.genreno}&word='">검색 취소</button>  
 	      </c:if>    
 	    </form>
@@ -78,8 +78,8 @@
 	                 class="form-control" style='width: 50%;'>
 	    </div>   
 	    <div class="content_body_bottom">
-	      <button type="submit" class="btn btn-secondary">등록</button>
-	      <button type="button" onclick="location.href='./list_by_genreno_search_paging.do?genreno=${param.genreno}'" class="btn btn-secondary">목록</button>
+	      <button type="submit" class="btn" style="background-color: #323232; color: white;">등록</button>
+	      <button type="button" onclick="location.href='./list_by_genreno_search_paging.do?genreno=${param.genreno}'" class="btn" style="background-color: #323232; color: white;">목록</button>
 	    </div>
 	  
 	  </form>

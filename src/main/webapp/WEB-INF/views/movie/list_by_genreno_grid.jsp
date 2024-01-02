@@ -47,9 +47,9 @@
           <input type='text' name='word' id='word' value=''>
         </c:otherwise>
       </c:choose>
-      <button type='submit' class='btn btn-secondary btn-sm' style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px;">검색</button>
+      <button type='submit' class='btn btn-sm' style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px; background-color: #323232; color: white;">검색</button>
       <c:if test="${param.word.length() > 0 }"> <%-- 검색 상태하면 '검색 취소' 버튼을 출력 --%>
-        <button type='button' class='btn btn-secondary btn-sm' style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px;"
+        <button type='button' class='btn btn-sm' style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px; background-color: #323232; color: white;"
                     onclick="location.href='./list_by_genreno.do?genreno=${param.genreno}&word='">검색 취소</button>  
       </c:if>    
     </form>
@@ -69,7 +69,7 @@
       <!-- 4기준 하나의 이미지, 24 * 4 = 96% -->
       <!-- 5기준 하나의 이미지, 19.2 * 5 = 96% -->
       <div onclick="location.href='./read.do?movieno=${movieno}&word=${param.word }&now_page=${param.now_page == null ? 1 : param.now_page }&genreno=${param.genreno }'" 
-             style='width: 19%; height: 200px; float: left; margin: 0.5%; padding: 0.5%; background-color: #EEEFFF; text-align: left; cursor: pointer;'>
+             style='width: 19%; height: 200px; float: left; margin: 0.5%; padding: 0.5%; background-color: #E5E5E5; text-align: left; cursor: pointer;'>
         
         <c:choose> 
           <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}"> <%-- 이미지인지 검사 --%>

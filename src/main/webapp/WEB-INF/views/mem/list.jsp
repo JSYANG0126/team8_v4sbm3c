@@ -97,8 +97,8 @@
   </TABLE>
    
   <DIV class='bottom_menu'>
-    <button type='button' onclick="location.href='./create.do'" class="btn btn-secondary btn-sm">등록</button>
-    <button type='button' onclick="location.reload();" class="btn btn-secondary btn-sm">새로 고침</button>
+    <button type='button' onclick="location.href='./create.do'" class="btn btn-sm" style="background-color: #323232; color: white;">등록</button>
+    <button type='button' onclick="location.reload();" class="btn btn-sm" style="background-color: #323232; color: white;">새로 고침</button>
   </DIV>
 
  

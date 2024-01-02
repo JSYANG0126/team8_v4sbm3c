@@ -54,9 +54,9 @@
         </div>   
      
         <div class="bottom_menu">
-          <button type="submit" class="btn btn-secondary btn-sm">로그인</button>
-          <button type='button' id='btn_create' class="btn btn-secondary btn-sm">회원가입</button>
-          <button type='button' id='btn_loadDefault' class="btn btn-secondary btn-sm">테스트 계정</button>
+          <button type="submit" class="btn btn-sm" style="background-color: #323232; color: white;">로그인</button>
+          <button type='button' id='btn_create' class="btn btn-sm" style="background-color: #323232; color: white;">회원가입</button>
+          <button type='button' id='btn_loadDefault' class="btn btn-sm" style="background-color: #323232; color: white;">테스트 계정</button>
         </div>   
         
       </FORM>

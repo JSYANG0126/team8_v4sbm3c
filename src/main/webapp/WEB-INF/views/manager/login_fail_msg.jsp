@@ -22,8 +22,8 @@
         <li class='li_none'>관리자 로그인에 실패했습니다.</li>
         <li class='li_none'>ID 또는 패스워드가 일치하지 않습니다.</li>
         <li class='li_none'>
-          <button type="button" id="btn_retry" class="btn btn-secondary" onclick="location.href='./login.do'">로그인 다시 시도</button>
-          <button type="button" id="btn_home" class="btn btn-secondary" onclick="location.href='/index.do'">확인</button>
+          <button type="button" id="btn_retry" class="btn" style="background-color: #323232; color: white;" onclick="location.href='./login.do'">로그인 다시 시도</button>
+          <button type="button" id="btn_home" class="btn" style="background-color: #323232; color: white;" onclick="location.href='/index.do'">확인</button>
         </li>
         
       </ul>

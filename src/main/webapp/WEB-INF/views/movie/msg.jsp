@@ -80,13 +80,13 @@
         <br>
         <c:choose>
             <c:when test="${cnt == 0 }">
-                <button type='button' onclick="history.back()" class="btn btn-secondary btn-sm">다시 시도</button>    
+                <button type='button' onclick="history.back()" class="btn btn-sm " style="background-color: #323232; color: white;">다시 시도</button>    
             </c:when>
         </c:choose>
         
-        <button type='button' onclick="location.href='./create.do?genreno=${genreno}'" class="btn btn-secondary btn-sm">새로운 컨텐츠 등록</button>
-        <button type='button' onclick="location.href='./list_by_genreno.do?genreno=${genreno}'" class="btn btn-secondary btn-sm">목록</button>
-        <button type='button' onclick="location.href='./list_by_genreno_grid.do?genreno=${genreno}'" class="btn btn-secondary btn-sm">갤러리 목록</button>
+        <button type='button' onclick="location.href='./create.do?genreno=${genreno}'" class="btn btn-sm" style="background-color: #323232; color: white;">새로운 컨텐츠 등록</button>
+        <button type='button' onclick="location.href='./list_by_genreno.do?genreno=${genreno}'" class="btn btn-sm" style="background-color: #323232; color: white;">목록</button>
+        <button type='button' onclick="location.href='./list_by_genreno_grid.do?genreno=${genreno}'" class="btn btn-sm" style="background-color: #323232; color: white;">갤러리 목록</button>
       </li>
     </UL>
   </fieldset>

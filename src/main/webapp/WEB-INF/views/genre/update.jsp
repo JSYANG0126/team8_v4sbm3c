@@ -35,8 +35,8 @@ int genreno = genreVO.getGenreno();
   </div>
   
   <div class="content_body_bottom">
-    <button type="submit" class="btn btn-secondary btn-sm">저장</button>
-    <button type="button" onclick="history.back();" class="btn btn-secondary btn-sm">취소</button> 
+    <button type="submit" class="btn btn-secondary btn-sm" style="background-color: #323232; color: white;">저장</button>
+    <button type="button" onclick="history.back();" class="btn btn-secondary btn-sm" style="background-color: #323232; color: white;">취소</button> 
   </div>
 </form>
 

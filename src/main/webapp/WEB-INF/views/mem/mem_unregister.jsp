@@ -63,8 +63,8 @@
   </label>
 </div>  
       
-<button type="button" onclick="unregisterMember(${memVO.memno});" class="btn btn-secondary btn-sm">탈퇴</button>
-<button type="button" onclick="history.back();" class="btn btn-secondary btn-sm">취소(목록)</button>
+<button type="button" onclick="unregisterMember(${memVO.memno});" class="btn btn-sm" style="background-color: #323232; color: white;">탈퇴</button>
+<button type="button" onclick="history.back();" class="btn btn-sm" style="background-color: #323232; color: white;">취소(목록)</button>
   </div>
   </body>
 </html>

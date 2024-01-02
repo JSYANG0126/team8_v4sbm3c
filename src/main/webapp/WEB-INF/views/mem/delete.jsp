@@ -36,8 +36,8 @@
       정말로 삭제하시겠습니까?<br><br>         
       <input type='hidden' name='memno' value='${memVO.memno}'>     
           
-      <button type="submit" class="btn btn-secondary btn-sm">삭제</button>
-      <button type="button" onclick="location.href='./list.do'" class="btn btn-secondary btn-sm">취소(목록)</button>
+      <button type="submit" class="btn btn-sm" style="background-color: #323232; color: white;">삭제</button>
+      <button type="button" onclick="location.href='./list.do'" class="btn btn-sm" style="background-color: #323232; color: white;">취소(목록)</button>
    
     </form>
   </div>

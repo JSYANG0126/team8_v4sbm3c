@@ -46,10 +46,10 @@
           <input type='text' name='word' id='word' value='' class='input_word'>
         </c:otherwise>
       </c:choose>
-      <button type='submit' class='btn btn-secondary btn-sm' style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px;">검색</button>
+      <button type='submit' class='btn btn-sm' style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px; background-color: #323232; color: white;">검색</button>
       <c:if test="${param.word.length() > 0 }">
-        <button type='button' class='btn btn-secondary btn-sm' 
-                    onclick="location.href='./list_by_genreno.do?genreno=${genreVO.genreno}&word='" style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px;">검색 취소</button>  
+        <button type='button' class='btn btn-sm' 
+                    onclick="location.href='./list_by_genreno.do?genreno=${genreVO.genreno}&word='" style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px; background-color: #323232; color: white;">검색 취소</button>  
       </c:if>    
     </form>
   </div>
@@ -83,8 +83,8 @@
     </div>
        
     <div class="content_body_bottom">
-      <button type="submit" class="btn btn-secondary btn-sm">저장</button>
-      <button type="button" onclick="history.back();" class="btn btn-secondary btn-sm">취소</button>
+      <button type="submit" class="btn btn-sm" style="background-color: #323232; color: white;">저장</button>
+      <button type="button" onclick="history.back();" class="btn btn-sm" style="background-color: #323232; color: white;">취소</button>
     </div>
   
   </FORM>

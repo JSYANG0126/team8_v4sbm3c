@@ -188,7 +188,7 @@ public class MovieProc implements MovieProcInter {
 	      str.append("  }"); 
 	      str.append("  .span_box_2{"); 
 	      str.append("    text-align: center;");    
-	      str.append("    background-color: #668db4;"); 
+	      str.append("    background-color: #323232;"); 
 	      str.append("    color: #FFFFFF;"); 
 	      str.append("    font-size: 1em;"); 
 	      str.append("    border: 1px;"); 

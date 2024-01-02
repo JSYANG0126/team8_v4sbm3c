@@ -107,8 +107,8 @@
     <div id='new_passwd2_msg' style="width: 100%; text-align: center;"></div>
   
     <div class="bottom_menu">
-      <button type="button" id='btn_send' class="btn btn-secondary btn-sm">변경</button>
-      <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm">취소</button>
+      <button type="button" id='btn_send' class="btn btn-sm" style="background-color: #323232; color: white;">변경</button>
+      <button type="button" onclick="history.back()" class="btn btn-sm" style="background-color: #323232; color: white;">취소</button>
     </div>   
 
   </FORM>

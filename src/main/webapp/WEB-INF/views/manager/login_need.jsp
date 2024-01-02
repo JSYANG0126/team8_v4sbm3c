@@ -18,7 +18,7 @@
   <DIV class='message'>
     <H4>관리자 로그인이 필요한 페이지입니다.</H4>
     <BR><BR>
-    <button type='button' onclick="location.href='/manager/login.do'" class="btn btn-secondary">관리자 로그인</button>       
+    <button type='button' onclick="location.href='/manager/login.do'" class="btn" style="background-color: #323232; color: white;">관리자 로그인</button>       
   </DIV>
  
 <jsp:include page="../menu/bottom.jsp" flush='false' />

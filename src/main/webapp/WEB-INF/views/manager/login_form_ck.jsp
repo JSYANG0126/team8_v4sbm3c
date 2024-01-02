@@ -40,8 +40,8 @@
       </div>   
    
       <div class="form_input_bottom">
-        <button type="submit" class="btn btn-secondary">로그인</button>
-        <button type="button" onclick="history.back();" class="btn btn-secondary">취소</button>
+        <button type="submit" class="btn" style="background-color: #323232; color: white;">로그인</button>
+        <button type="button" onclick="history.back();" class="btn" style="background-color: #323232; color: white;">취소</button>
       </div>
       
     </FORM>
