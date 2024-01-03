@@ -49,7 +49,7 @@ public class ManagerContRest {
 //      session.setAttribute("admin_grade", adminVO_read.getGrade());
 
       json.put("sw", true);
-      json.put("adminno", managerVO_read.getManagerno());
+      json.put("managerno", managerVO_read.getManagerno());
     } else {
       json.put("sw", false);
     }
