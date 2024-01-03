@@ -7,7 +7,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>갤러리 형 목록</title>
+<title>영화 리뷰 블로그</title>
  
 <link rel="shortcut icon" href="/css/images/shortcut.png" /> <%-- /static 기준 --%>
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
