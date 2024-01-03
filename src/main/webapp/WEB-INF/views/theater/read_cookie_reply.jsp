@@ -21,28 +21,22 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>영화 추천 블로그</title>
+<title>영화 리뷰 블로그</title>
 <link rel="shortcut icon" href="/images/star.png" /> <%-- /static 기준 --%>
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
 
+<!-- Bootstrap 3.4.1 관련 코드 -->
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-<!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<!-- Bootstrap JS -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
 
 <script type="text/javascript">
-  
+
 
   $(document).ready(function () {
-     // Modal 초기화
-     $('#modal_panel').modal();
+    
 
     // ---------------------------------------- 댓글 관련 시작 ----------------------------------------
     var frm_reply = $('#frm_reply');
@@ -52,172 +46,173 @@
     list_by_theaterno_join();
     // ---------------------------------------- 댓글 관련 종료 ----------------------------------------
 
-    }) // 끝
+  }) // 끝
 
-    // 댓글 작성시 로그인 여부 확인
-    function check_login() {
-      var frm_reply = $('#frm_reply');
-      if ($('#memno', frm_reply).val().length == 0 ) {
+  // 댓글 작성시 로그인 여부 확인
+  function check_login() {
+    var frm_reply = $('#frm_reply');
+    if ($('#memno', frm_reply).val().length == 0 ) {
+      $('#modal_title').html('댓글 등록'); // 제목 
+      $('#modal_content').html("로그인해야 등록 할 수 있습니다."); // 내용
+      $('#modal_panel').modal();            // 다이얼로그 출력
+      return false;  // 실행 종료
+    }
+    return true;
+  }
+
+  // 댓글 등록
+  function reply_create() {
+    var frm_reply = $('#frm_reply');
+
+    if (check_login() != false ) { // 로그인 한 경우만 처리
+      var params = frm_reply.serialize(); // 직렬화: 키=값&키=값&...
+
+      console.log($('#treply', frm_reply).val().length );
+      if ($('#treply', frm_reply).val().length > 300) {
         $('#modal_title').html('댓글 등록'); // 제목 
-        $('#modal_content').html("로그인해야 등록 할 수 있습니다."); // 내용
-        $('#modal_panel').modal();            // 다이얼로그 출력
-        return false;  // 실행 종료
+        $('#modal_content').html("댓글 내용은 300자이상 입력 할 수 없습니다."); // 내용
+        $('#modal_panel').modal();           // 다이얼로그 출력
+        return;  // 실행 종료
       }
-      return true;
-    }
 
-    // 댓글 등록
-    function reply_create() {
-      var frm_reply = $('#frm_reply');
-
-      if (check_login() != false ) { // 로그인 한 경우만 처리
-        var params = frm_reply.serialize(); // 직렬화: 키=값&키=값&...
-
-        console.log($('#treply', frm_reply).val().length );
-        if ($('#treply', frm_reply).val().length > 300) {
+      $.ajax({
+        url: "../treply/create.do", // action 대상 주소
+        type: "post",          // get, post
+        cache: false,          // 브러우저의 캐시영역 사용안함.
+        async: true,           // true: 비동기
+        dataType: "json",   // 응답 형식: json, xml, html...
+        data: params,        // 서버로 전달하는 데이터
+        success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
+          var msg = ""; // 메시지 출력
+          var tag = ""; // 글목록 생성 태그
+          console.log(rdata.cnt);
+          ncnt = parseInt(rdata.cnt);
+          if (ncnt > 0) {
+            $('#modal_content').attr('class', 'alert alert-success'); // CSS 변경
+            msg = "댓글을 등록했습니다.";
+            $('#treply', frm_reply).val('');
+            $('#pw', frm_reply).val('');
+            
+            $('#reply_list').html(''); // 댓글 목록 패널 초기화, val(''): 안됨
+            $("#reply_list").attr("data-replypage", 1);  // 댓글이 새로 등록됨으로 1로 초기화
+            
+            list_by_theaterno_join(); // 페이징 댓글, 페이징 문제 있음.
+            // alert('댓글 목록 읽기 시작');
+            // global_rdata = new Array(); // 댓글을 새로 등록했음으로 배열 초기화
+            // global_rdata_cnt = 0; // 목록 출력 글수
+            
+            // list_by_theaterno_join(); // 페이징 댓글
+          } else {
+            $('#modal_content').attr('class', 'alert alert-danger'); // CSS 변경
+            msg = "댓글 등록에 실패했습니다.";
+          }
+          
           $('#modal_title').html('댓글 등록'); // 제목 
-          $('#modal_content').html("댓글 내용은 300자이상 입력 할 수 없습니다."); // 내용
-          $('#modal_panel').modal();           // 다이얼로그 출력
-          return;  // 실행 종료
-        }
-
-        $.ajax({
-          url: "../treply/create.do", // action 대상 주소
-          type: "post",          // get, post
-          cache: false,          // 브러우저의 캐시영역 사용안함.
-          async: true,           // true: 비동기
-          dataType: "json",   // 응답 형식: json, xml, html...
-          data: params,        // 서버로 전달하는 데이터
-          success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
-            var msg = ""; // 메시지 출력
-            var tag = ""; // 글목록 생성 태그
-            console.log(rdata.cnt);
-            ncnt = parseInt(rdata.cnt);
-            if (ncnt > 0) {
-              $('#modal_content').attr('class', 'alert alert-success'); // CSS 변경
-              msg = "댓글을 등록했습니다.";
-              $('#treply', frm_reply).val('');
-              $('#pw', frm_reply).val('');
-              
-              $('#reply_list').html(''); // 댓글 목록 패널 초기화, val(''): 안됨
-              $("#reply_list").attr("data-replypage", 1);  // 댓글이 새로 등록됨으로 1로 초기화
-              
-              list_by_theaterno_join(); // 페이징 댓글, 페이징 문제 있음.
-              // alert('댓글 목록 읽기 시작');
-              // global_rdata = new Array(); // 댓글을 새로 등록했음으로 배열 초기화
-              // global_rdata_cnt = 0; // 목록 출력 글수
-              
-              // list_by_theaterno_join(); // 페이징 댓글
-            } else {
-              $('#modal_content').attr('class', 'alert alert-danger'); // CSS 변경
-              msg = "댓글 등록에 실패했습니다.";
-            }
-            
-            $('#modal_title').html('댓글 등록'); // 제목 
-            $('#modal_content').html(msg);     // 내용
-            $('#modal_panel').modal();           // 다이얼로그 출력
-          },
-          // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
-          error: function(request, status, error) { // callback 함수
-            var msg = 'ERROR request.status: '+request.status + '/ ' + error;
-            console.log(msg); // Chrome에 출력
-          }
-        });
-      }
-    }
-
-    //theaterno 별 소속된 댓글 목록
-    function list_by_theaterno_join() {
-    var params = 'theaterno=' + ${theaterno };
-      console.log(params);
-      $.ajax({
-        url: "../treply/list_by_theaterno_join.do", // action 대상 주소
-        type: "get",           // get, post
-        cache: false,          // 브러우저의 캐시영역 사용안함.
-        async: true,           // true: 비동기
-        dataType: "json",   // 응답 형식: json, xml, html...
-        data: params,        // 서버로 전달하는 데이터
-        success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
-          //alert(rdata);
-          var msg = '';
-          
-          $('#reply_list').html(''); // 패널 초기화, val(''): 안됨
-          
-          for (i=0; i < rdata.list.length; i++) {
-            var row = rdata.list[i];
-            
-            msg += "<DIV id='"+row.treplyno+"' style='border-bottom: solid 1px #EEEEEE; margin-bottom: 10px;'>";
-            msg += "<span style='font-weight: bold;'>" + row.id + "</span>";
-            msg += "  " + row.cdate;
-            
-            if ('${sessionScope.memno}' == row.memno) { // 글쓴이 일치여부 확인, 본인의 글만 삭제 가능함 ★
-              msg += " <A href='javascript:reply_delete(" + row.treplyno + ")'><IMG src='/treply/images/delete.png'></A>";
-            }
-            msg += "  " + "<br>";
-            msg += row.treply;
-            msg += "</DIV>";
-          }
-          // alert(msg);
-          $('#reply_list').append(msg);
+          $('#modal_content').html(msg);     // 내용
+          $('#modal_panel').modal('show');           // 다이얼로그 출력
         },
         // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
         error: function(request, status, error) { // callback 함수
-          console.log(error);
-        }
-    });}
-
-    // 댓글 삭제 레이어 출력
-    function reply_delete(treplyno) {
-      var frm_reply_delete = $('#frm_reply_delete');
-      $('#treplyno', frm_reply_delete).val(treplyno); // 삭제할 댓글 번호 저장
-      $('#modal_panel_delete').modal();             // 삭제폼 다이얼로그 출력
-    }
-    
-    // 댓글 삭제 처리
-    function reply_delete_proc() {
-      var treplyno = $('#treplyno').val(); // treplyno 가져오기
-      alert('treplyno: ' + treplyno);
-      var params = $('#frm_reply_delete').serialize();
-      $.ajax({
-        url: "../treply/delete.do", // action 대상 주소
-        type: "post",           // get, post
-        cache: false,          // 브러우저의 캐시영역 사용안함.
-        async: true,           // true: 비동기
-        dataType: "json",   // 응답 형식: json, xml, html...
-        data: params,        // 서버로 전달하는 데이터
-        success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
-          // alert(rdata);
-          var msg = "";
-          
-          if (rdata.passwd_cnt ==1) { // 패스워드 일치
-            if (rdata.delete_cnt == 1) { // 삭제 성공
-
-              $('#btn_frm_reply_delete_close').trigger("click"); // 삭제폼 닫기, click 발생 
-              
-              $('#' + treplyno).remove(); // 태그 삭제
-                
-              return; // 함수 실행 종료
-            } else {  // 삭제 실패
-              msg = "패스 워드는 일치하나 댓글 삭제에 실패했습니다. <br>";
-              msg += " 다시한번 시도해주세요."
-            }
-          } else { // 패스워드 일치하지 않음.
-            // alert('패스워드 불일치');
-            // return;
-            
-            msg = "패스워드가 일치하지 않습니다.";
-            $('#modal_panel_delete_msg').html(msg);
-
-            $('#passwd', '#frm_reply_delete').focus();  // frm_reply_delete 폼의 passwd 태그로 focus 설정
-            
-          }
-        },
-        // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
-        error: function(request, status, error) { // callback 함수
-          console.log(error);
+          var msg = 'ERROR request.status: '+request.status + '/ ' + error;
+          console.log(msg); // Chrome에 출력
         }
       });
     }
+  }
+
+  //theaterno 별 소속된 댓글 목록
+  function list_by_theaterno_join() {
+  var params = 'theaterno=' + ${theaterno };
+    console.log(params);
+    $.ajax({
+      url: "../treply/list_by_theaterno_join.do", // action 대상 주소
+      type: "get",           // get, post
+      cache: false,          // 브러우저의 캐시영역 사용안함.
+      async: true,           // true: 비동기
+      dataType: "json",   // 응답 형식: json, xml, html...
+      data: params,        // 서버로 전달하는 데이터
+      success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
+        //alert(rdata);
+        var msg = '';
+        
+        $('#reply_list').html(''); // 패널 초기화, val(''): 안됨
+        
+        for (i=0; i < rdata.list.length; i++) {
+          var row = rdata.list[i];
+          
+          msg += "<DIV id='"+row.treplyno+"' style='border-bottom: solid 1px #EEEEEE; margin-bottom: 10px;'>";
+          msg += "<span style='font-weight: bold;'>" + row.id + "</span>";
+          msg += "  " + row.cdate;
+          
+          if ('${sessionScope.memno}' == row.memno) { // 글쓴이 일치여부 확인, 본인의 글만 삭제 가능함 ★
+            msg += " <A href='javascript:reply_delete(" + row.treplyno + ")'><IMG src='/treply/images/delete.png'></A>";
+          }
+          msg += "  " + "<br>";
+          msg += row.treply;
+          msg += "</DIV>";
+        }
+        // alert(msg);
+        $('#reply_list').append(msg);
+      },
+      // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
+      error: function(request, status, error) { // callback 함수
+        console.log(error);
+      }
+  });}
+
+  // 댓글 삭제 레이어 출력
+  function reply_delete(treplyno) {
+    var frm_reply_delete = $('#frm_reply_delete');
+    $('#treplyno', frm_reply_delete).val(treplyno); // 삭제할 댓글 번호 저장
+    $('#modal_panel_delete').modal('show');             // 삭제폼 다이얼로그 출력
+  }
+  
+  // 댓글 삭제 처리
+  function reply_delete_proc() {
+    var treplyno = $('#treplyno').val(); // treplyno 가져오기
+    console.log(treplyno);
+    //alert('treplyno: ' + treplyno);
+    var params = $('#frm_reply_delete').serialize();
+    console.log(params);
+    $.ajax({
+      url: "../treply/delete.do", // action 대상 주소
+      type: "post",           // get, post
+      cache: false,          // 브러우저의 캐시영역 사용안함.
+      async: true,           // true: 비동기
+      dataType: "json",   // 응답 형식: json, xml, html...
+      data: params,        // 서버로 전달하는 데이터
+      success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
+        var msg = "";
+        console.log(rdata);
+        if (rdata.passwd_cnt ==1) { // 패스워드 일치
+          if (rdata.delete_cnt == 1) { // 삭제 성공
+
+            $('#btn_frm_reply_delete_close').trigger("click"); // 삭제폼 닫기, click 발생 
+            
+            $('#' + treplyno).remove(); // 태그 삭제
+              
+            return; // 함수 실행 종료
+          } else {  // 삭제 실패
+            msg = "패스 워드는 일치하나 댓글 삭제에 실패했습니다. <br>";
+            msg += " 다시한번 시도해주세요."
+          }
+        } else { // 패스워드 일치하지 않음.
+          // alert('패스워드 불일치');
+          // return;
+          
+          msg = "패스워드가 일치하지 않습니다.";
+          $('#modal_panel_delete_msg').html(msg);
+
+          $('#pw', '#frm_reply_delete').focus();  // frm_reply_delete 폼의 passwd 태그로 focus 설정
+          
+        }
+      },
+      // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
+      error: function(request, status, error) { // callback 함수
+        console.log(error);
+      }
+    });
+  }
     
     
 </script>
@@ -227,48 +222,50 @@
 <body>
 <c:import url="/menu/top.do" />
 <!-- Modal 알림창 시작 -->
-<div class="modal fade" id="modal_panel" role="dialog">
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal_panel_delete">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modal_panel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">×</button>
-        <h4 class="modal-title" id='modal_title'></h4><!-- 제목 -->
+        <h1 class="modal-title fs-5" id="modal-title">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>       
       </div>
       <div class="modal-body">
-        <p id='modal_content'></p>  <!-- 내용 -->
+        댓글 등록 성공
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
+</div>
 </div> <!-- Modal 알림창 종료 -->
 
 <!-- -------------------- 댓글 삭제폼 시작 -------------------- -->
-<div class="modal fade" id="modal_panel_delete" role="dialog">
+<div class="modal fade" id="modal_panel_delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">×</button>
-        <h4 class="modal-title">댓글 삭제</h4><!-- 제목 -->
+        <h1 class="modal-title fs-5" >댓글 삭제</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form name='frm_reply_delete' id='frm_reply_delete'>
           <input type='hidden' name='treplyno' id='treplyno' value=''>
           
-          <label>패스워드</label>
-          <input type='password' name='passwd' id='passwd' class='form-control'>
-          <DIV id='modal_panel_delete_msg' style='color: #AA0000; font-size: 1.1em;'></DIV>
+          <label for="pw">패스워드</label>
+          <input type='password' name='pw' id='pw' class='form-control'>
+          <div id='modal_panel_delete_msg' style='color: #AA0000; font-size: 1.1em;'></div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type='button' class='btn btn-danger' 
-        onclick="reply_delete_proc(${treplyno});">삭제</button>
-
-        <button type="button" class="btn btn-default" data-dismiss="modal" 
-                     id='btn_frm_reply_delete_close'>Close</button>
+        <button type='button' class='btn btn-danger' onclick="reply_delete_proc();">삭제</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='btn_frm_reply_delete_close'>Close</button>
       </div>
     </div>
   </div>
