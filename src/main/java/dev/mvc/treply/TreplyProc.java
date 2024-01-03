@@ -45,19 +45,42 @@ public class TreplyProc implements TreplyProcInter {
 
   @Override
   public int checkPw(Map<String, Object> map) {
-    int count = treplyDAO.checkPw(map);
-    return count;
+    int cnt = treplyDAO.checkPw(map);
+    return cnt;
   }
 
   @Override
   public int delete(int treplyno) {
-    int count = treplyDAO.delete(treplyno);
-    return count;
+    int cnt = treplyDAO.delete(treplyno);
+    return cnt;
   }
 
   @Override
-  public List<MemVO> list_by_theaterno_join(int theaterno) {
-    List<MemVO> list = treplyDAO.list_by_theaterno_join(theaterno);
+  public List<TreplyVO> list_by_theaterno_join(int theaterno) {
+    List<TreplyVO> list = treplyDAO.list_by_theaterno_join(theaterno);
+    String treply = "";
+    
+    // 특수 문자 변경
+    for (TreplyVO treplyVO:list) {
+      treply = treplyVO.getTreply();
+      treply = Tool.convertChar(treply);
+      treplyVO.setTreply(treply);
+    }
+    return list;
+  }
+
+  @Override
+  public List<TreplyVO> list_by_theaterno_join_add(int theaterno) {
+    List<TreplyVO> list = treplyDAO.list_by_theaterno_join_add(theaterno);
+    String treply = "";
+    
+    // 특수 문자 변경
+    for (TreplyVO treplyVO:list) {
+      treply = treplyVO.getTreply();
+      treply = Tool.convertChar(treply);
+      treplyVO.setTreply(treply);
+    }
+    
     return list;
   }
 

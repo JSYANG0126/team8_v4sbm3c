@@ -30,6 +30,19 @@ CREATE SEQUENCE treply_seq
     
 COMMIT;    
 
+SELECT id, treplyno, theaterno, memno, treply, pw, cdate, r
+FROM (
+    SELECT id, treplyno, theaterno, memno, treply, pw, cdate, rownum as r
+    FROM (
+        SELECT m.id, t.treplyno, t.theaterno, t.memno, t.treply, t.pw, t.cdate
+        FROM mem m,  treply t
+        WHERE (m.memno = t.memno) AND t.theaterno=5
+        ORDER BY t.treplyno DESC
+    )
+)
+WHERE r <= 1000;
+
+
 INSERT INTO treply(treplyno, theaterno, memno, treply, pw, cdate) 
 VALUES (treply_seq.nextval, 3, 1, '좋아보여요',1234, sysdate);
 

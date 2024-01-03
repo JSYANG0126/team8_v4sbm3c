@@ -75,113 +75,151 @@ public class TreplyCont {
     return mav;
   }
 
-  /**
-   <xmp>
-   http://localhost:9090/ojt/reply/list_by_contentsno.do?contentsno=1
-   글이 없는 경우: {"list":[]}
-   글이 있는 경우
-   {"list":[
-            {"memberno":1,"rdate":"2019-12-18 16:46:43","passwd":"123","replyno":3,"content":"댓글 3","contentsno":1}
-            ,
-            {"memberno":1,"rdate":"2019-12-18 16:46:39","passwd":"123","replyno":2,"content":"댓글 2","contentsno":1}
-            ,
-            {"memberno":1,"rdate":"2019-12-18 16:46:35","passwd":"123","replyno":1,"content":"댓글 1","contentsno":1}
-            ] 
-   }
-   </xmp>  
-   * @param contentsno
-   * @return
-   */
-  @ResponseBody
-  @RequestMapping(value = "/treply/list_by_theaterno.do",
-                            method = RequestMethod.GET,
-                            produces = "text/plain;charset=UTF-8")
-  public String list_by_theaterno(int theaterno) {
-    List<TreplyVO> list = treplyProc.list_by_theaterno(theaterno);
-    
-    JSONObject obj = new JSONObject();
-    obj.put("list", list);
- 
-    return obj.toString(); 
-
-  }
+    /**
+     <xmp>
+     http://localhost:9090/ojt/reply/list_by_contentsno.do?contentsno=1
+     글이 없는 경우: {"list":[]}
+     글이 있는 경우
+     {"list":[
+              {"memberno":1,"rdate":"2019-12-18 16:46:43","passwd":"123","replyno":3,"content":"댓글 3","contentsno":1}
+              ,
+              {"memberno":1,"rdate":"2019-12-18 16:46:39","passwd":"123","replyno":2,"content":"댓글 2","contentsno":1}
+              ,
+              {"memberno":1,"rdate":"2019-12-18 16:46:35","passwd":"123","replyno":1,"content":"댓글 1","contentsno":1}
+              ] 
+     }
+     </xmp>  
+     * @param contentsno
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/treply/list_by_theaterno.do",
+                              method = RequestMethod.GET,
+                              produces = "text/plain;charset=UTF-8")
+    public String list_by_theaterno(int theaterno) {
+      List<TreplyVO> list = treplyProc.list_by_theaterno(theaterno);
+      
+      JSONObject obj = new JSONObject();
+      obj.put("list", list);
+   
+      return obj.toString(); 
   
-  /**
-  컨텐츠별 댓글 목록 
-  {
-  "list":[
-           {
-             "memberno":1,
-             "rdate":"2019-12-18 16:46:35",
-              "passwd":"123",
-             "replyno":1,
-             "id":"user1",
-              "content":"댓글 1",
-             "contentsno":1
-           }
-           ,
-           {
-             "memberno":1,
-             "rdate":"2019-12-18 16:46:35",
-             "passwd":"123",
-             "replyno":1,
-             "id":"user1",
-             "content":"댓글 1",
-             "contentsno":1
-           }
-         ]
-  }
-  * http://localhost:9093/resort/reply/list_by_contentsno_join.do?contentsno=53
-  * @param contentsno
-  * @return
-  */
- @ResponseBody
- @RequestMapping(value = "/treply/list_by_theaterno_join.do",
-                             method = RequestMethod.GET,
-                             produces = "text/plain;charset=UTF-8")
- public String list_by_theaterno_join(int theaterno) {
-   // String msg="JSON 출력";
-   // return msg;
-   List<MemVO> list = treplyProc.list_by_theaterno_join(theaterno);
-   
-   JSONObject obj = new JSONObject();
-   obj.put("list", list);
-
-   return obj.toString();     
- }
- 
- 
- /**
-  * 패스워드를 검사한 후 삭제 
-  * http://localhost:9090/resort/reply/delete.do?replyno=1&passwd=1234
-  * {"delete_cnt":0,"passwd_cnt":0}
-  * {"delete_cnt":1,"passwd_cnt":1}
-  * @param replyno
-  * @param passwd
-  * @return
-  */
- @ResponseBody
- @RequestMapping(value = "/treply/delete.do", 
-                             method = RequestMethod.POST,
-                             produces = "text/plain;charset=UTF-8")
- public String delete(int treplyno, String pw) {
-   Map<String, Object> map = new HashMap<String, Object>();
-   map.put("treplyno", treplyno);
-   map.put("pw", pw);
-   
-   int passwd_cnt = treplyProc.checkPw(map); // 패스워드 일치 여부, 1: 일치, 0: 불일치
-   int delete_cnt = 0;                                    // 삭제된 댓글
-   if (passwd_cnt == 1) { // 패스워드가 일치할 경우
-     delete_cnt = treplyProc.delete(treplyno); // 댓글 삭제
+    }
+  
+    /**
+    컨텐츠별 댓글 목록 
+    {
+    "list":[
+             {
+               "memberno":1,
+               "rdate":"2019-12-18 16:46:35",
+                "passwd":"123",
+               "replyno":1,
+               "id":"user1",
+                "content":"댓글 1",
+               "contentsno":1
+             }
+             ,
+             {
+               "memberno":1,
+               "rdate":"2019-12-18 16:46:35",
+               "passwd":"123",
+               "replyno":1,
+               "id":"user1",
+               "content":"댓글 1",
+               "contentsno":1
+             }
+           ]
+    }
+    * http://localhost:9093/resort/reply/list_by_contentsno_join.do?contentsno=53
+    * @param contentsno
+    * @return
+    */
+   @ResponseBody
+   @RequestMapping(value = "/treply/list_by_theaterno_join.do",
+                               method = RequestMethod.GET,
+                               produces = "text/plain;charset=UTF-8")
+   public String list_by_theaterno_join(int theaterno) {
+     // String msg="JSON 출력";
+     // return msg;
+     List<TreplyVO> list = treplyProc.list_by_theaterno_join(theaterno);
+     
+     JSONObject obj = new JSONObject();
+     obj.put("list", list);
+  
+     return obj.toString();     
    }
    
-   JSONObject obj = new JSONObject();
-   obj.put("passwd_cnt", passwd_cnt); // 패스워드 일치 여부, 1: 일치, 0: 불일치
-   obj.put("delete_cnt", delete_cnt); // 삭제된 댓글
    
-   return obj.toString();
- }
- 
+   /**
+    * 패스워드를 검사한 후 삭제 
+    * http://localhost:9090/resort/reply/delete.do?replyno=1&passwd=1234
+    * {"delete_cnt":0,"passwd_cnt":0}
+    * {"delete_cnt":1,"passwd_cnt":1}
+    * @param replyno
+    * @param passwd
+    * @return
+    */
+   @ResponseBody
+   @RequestMapping(value = "/treply/delete.do", 
+                               method = RequestMethod.POST,
+                               produces = "text/plain;charset=UTF-8")
+   public String delete(int treplyno, String pw) {
+     Map<String, Object> map = new HashMap<String, Object>();
+     map.put("treplyno", treplyno);
+     map.put("pw", pw);
+     
+     int passwd_cnt = treplyProc.checkPw(map); // 패스워드 일치 여부, 1: 일치, 0: 불일치
+     int delete_cnt = 0;                                    // 삭제된 댓글
+     if (passwd_cnt == 1) { // 패스워드가 일치할 경우
+       delete_cnt = treplyProc.delete(treplyno); // 댓글 삭제
+     }
+     
+     JSONObject obj = new JSONObject();
+     obj.put("passwd_cnt", passwd_cnt); // 패스워드 일치 여부, 1: 일치, 0: 불일치
+     obj.put("delete_cnt", delete_cnt); // 삭제된 댓글
+     return obj.toString();
+   }
+   
+   /**
+    * {"list":[
+           {"memberno":1,
+         "rdate":"2019-12-18 16:46:35",
+       "passwd":"123",
+       "replyno":1,
+       "id":"user1",
+       "content":"댓글 1",
+       "contentsno":1}
+     ,
+         {"memberno":1,
+        "rdate":"2019-12-18 16:46:35",
+        "passwd":"123",
+        "replyno":1,
+        "id":"user1",
+        "content":"댓글 1",
+        "contentsno":1}
+     ]
+   }
+
+    * http://localhost:9093/treply/list_by_theaterno_join_add.do?contentsno=5
+    * @param contentsno
+    * @return
+    */
+   @ResponseBody
+   @RequestMapping(value = "/treply/list_by_theaterno_join_add.do",
+                               method = RequestMethod.GET,
+                               produces = "text/plain;charset=UTF-8")
+   public String list_by_theaterno_join_add(int theaterno) {
+     // String msg="JSON 출력";
+     // return msg;
+     
+     List<TreplyVO> list = treplyProc.list_by_theaterno_join_add(theaterno);
+     
+     JSONObject obj = new JSONObject();
+     obj.put("list", list);
+  
+     return obj.toString();     
+   }
   
   
 }

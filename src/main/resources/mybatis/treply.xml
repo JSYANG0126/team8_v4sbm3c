@@ -32,8 +32,8 @@
   </select>
   
    <delete id="delete" parameterType="int">
-    DELETE FROM reply
-    WHERE replyno=#{replyno}
+    DELETE FROM treply
+    WHERE treplyno=#{treplyno}
   </delete>
   
   <select id="list_by_theaterno_join" resultType="dev.mvc.treply.TreplyVO" parameterType="int">
@@ -41,6 +41,20 @@
     FROM mem m,  treply t
     WHERE (m.memno = t.memno) AND t.theaterno=#{theaterno}
     ORDER BY t.treplyno DESC
+  </select>
+  
+  <select id="list_by_theaterno_join_add" resultType="dev.mvc.treply.TreplyVO" parameterType="int">
+    SELECT id, treplyno, theaterno, memno, treply, pw, cdate, r
+		FROM (
+		    SELECT id, treplyno, theaterno, memno, treply, pw, cdate, rownum as r
+		    FROM (
+		        SELECT m.id, t.treplyno, t.theaterno, t.memno, t.treply, t.pw, t.cdate
+		        FROM mem m,  treply t
+		        WHERE (m.memno = t.memno) AND t.theaterno=#{theaterno}
+		        ORDER BY t.treplyno DESC
+		    )
+		)
+		WHERE <![CDATA[ r <=1000 ]]> 
   </select>
   
 

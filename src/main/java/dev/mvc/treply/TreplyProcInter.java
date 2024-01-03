@@ -19,7 +19,14 @@ public interface TreplyProcInter {
 
   public int delete(int treplyno);
   
-  public List<MemVO> list_by_theaterno_join(int theaterno);
+  public List<TreplyVO> list_by_theaterno_join(int theaterno);
+  
+  /**
+   * 특정글 관련 전체 댓글 목록
+   * @param theaterno
+   * @return
+   */
+  public List<TreplyVO> list_by_theaterno_join_add(int theaterno);
   
 
 }

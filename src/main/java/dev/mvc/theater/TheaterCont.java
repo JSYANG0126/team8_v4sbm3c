@@ -260,6 +260,9 @@ public class TheaterCont {
     // 댓글 기능 추가 
     mav.setViewName("/theater/read_cookie_reply"); // /WEB-INF/views/contents/read_cookie_reply.jsp
     
+    // 댓글 + 더보기 버튼 기능 추가 
+    mav.setViewName("/theater/read_cookie_reply_add"); // /WEB-INF/views/contents/read_cookie_reply_add.jsp
+    
     // -------------------------------------------------------------------------------
     // 쇼핑 카트 장바구니에 상품 등록전 로그인 폼 출력 관련 쿠기  
     // -------------------------------------------------------------------------------

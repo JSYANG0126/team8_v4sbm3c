@@ -69,7 +69,7 @@
           <!-- 4기준 하나의 이미지, 24 * 4 = 96% -->
 		      <!-- 5기준 하나의 이미지, 19.2 * 5 = 96% -->
 		      <div onclick="location.href='./read.do?theaterno=${theaterno}&word=${param.word }&now_page=${param.now_page == null ? 1 : param.now_page }'" 
-		             style='width: 19%; height: 200px; float: left; margin: 0.5%; padding: 0.5%; background-color: #EEEFFF; text-align: left; cursor: pointer;'>
+		             style='width: 19%; height: 200px; float: left; margin: 0.5%; padding: 0.5%; background-color: #E5E5E5; text-align: left; cursor: pointer;'>
 		        
 		        <c:choose> 
 		          <c:when test="${thumbimg1.endsWith('jpg') || thumbimg1.endsWith('png') || thumbimg1.endsWith('gif')}"> <%-- 이미지인지 검사 --%>

@@ -44,6 +44,8 @@
     $('#btn_create', frm_reply).on('click', reply_create);  // 댓글 작성시 로그인 여부 확인
 
     list_by_theaterno_join();
+
+    $('#btn_add').on('click', list_by_contentsno_join_add);  // [더보기] 버튼
     // ---------------------------------------- 댓글 관련 종료 ----------------------------------------
 
   }) // 끝
@@ -132,12 +134,24 @@
       dataType: "json",   // 응답 형식: json, xml, html...
       data: params,        // 서버로 전달하는 데이터
       success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
-        //alert(rdata);
+        // alert(rdata);
         var msg = '';
         
         $('#reply_list').html(''); // 패널 초기화, val(''): 안됨
+
+        // -------------------- 전역 변수에 댓글 목록 추가 --------------------
+        reply_list = rdata.list;
+        // -------------------- 전역 변수에 댓글 목록 추가 --------------------
+        // alert('rdata.list.length: ' + rdata.list.length);
         
-        for (i=0; i < rdata.list.length; i++) {
+        var last_index=1; 
+        if (rdata.list.length >= 2 ) { // 글이 2건 이상이라면 2건만 출력
+          last_index = 2
+        }
+
+        for (i=0; i < last_index; i++) {
+          // alert('i: ' + i); 
+          
           var row = rdata.list[i];
           
           msg += "<DIV id='"+row.treplyno+"' style='border-bottom: solid 1px #EEEEEE; margin-bottom: 10px;'>";
@@ -145,7 +159,7 @@
           msg += "  " + row.cdate;
           
           if ('${sessionScope.memno}' == row.memno) { // 글쓴이 일치여부 확인, 본인의 글만 삭제 가능함 ★
-            msg += " <A href='javascript:reply_delete(" + row.treplyno + ")'><IMG src='/treply/images/delete.png'></A>";
+            msg += " <A href='javascript:reply_delete("+row.treplyno+")'><IMG src='/treply/images/delete.png'></A>";
           }
           msg += "  " + "<br>";
           msg += row.treply;
@@ -158,7 +172,9 @@
       error: function(request, status, error) { // callback 함수
         console.log(error);
       }
-  });}
+    });
+    
+  }
 
   // 댓글 삭제 레이어 출력
   function reply_delete(treplyno) {
@@ -214,6 +230,37 @@
       }
     });
   }
+
+  // // [더보기] 버튼 처리
+  function list_by_contentsno_join_add() {
+    // alert('list_by_contentsno_join_add called');
+    
+    let cnt_per_page = 2; // 2건씩 추가
+    let replyPage=parseInt($("#reply_list").attr("data-replyPage"))+cnt_per_page; // 2
+    $("#reply_list").attr("data-replyPage", replyPage); // 2
+    
+    var last_index=replyPage + 2; // 4
+    // alert('replyPage: ' + replyPage);
+    
+    var msg = '';
+    for (i=replyPage; i < last_index; i++) {
+      var row = reply_list[i];
+      
+      msg = "<DIV id='"+row.treplyno+"' style='border-bottom: solid 1px #EEEEEE; margin-bottom: 10px;'>";
+      msg += "<span style='font-weight: bold;'>" + row.id + "</span>";
+      msg += "  " + row.cdate;
+      
+      if ('${sessionScope.memno}' == row.memno) { // 글쓴이 일치여부 확인, 본인의 글만 삭제 가능함 ★
+        msg += " <A href='javascript:reply_delete("+row.treplyno+")'><IMG src='/treply/images/delete.png'></A>";
+      }
+      msg += "  " + "<br>";
+      msg += row.treply;
+      msg += "</DIV>";
+
+      // alert('msg: ' + msg);
+      $('#reply_list').append(msg);
+    }    
+  }
     
     
 </script>
@@ -223,12 +270,6 @@
 <body>
 <c:import url="/menu/top.do" />
 <!-- Modal 알림창 시작 -->
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal_panel_delete">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
 <div class="modal fade" id="modal_panel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -287,7 +328,7 @@
       <a href="./delete.do?theaterno=${theaterno}">삭제</a>  
       <span class='menu_divide' >│</span>
     </c:if>
-    <a href='./list_all.do'>목록</a>
+    <a href='./list_by_search_paging.do?now_page=1'>목록</a>
     <span class='menu_divide' >│</span>
     <a href="javascript:location.reload();">새로고침</a>
   </aside> 
@@ -307,14 +348,14 @@
 				            </c:otherwise>
 				        </c:choose>
 				    </div>
-				    <div style="width: 68%; float: left;">
+				    <div style="width: 60%; float: left;">
 				        <div>
 				            <span style="font-size: 1.5em; font-weight: bold;">${tname }</span>
 				            <span style="font-size: 1em;"> ${tdate}</span><br>
 				        </div>
 				        <div>
-				            ${tinfo}
-				        </div>
+								    <textarea rows="5" cols="50" readonly style="resize: none; white-space: nowrap; overflow-x: hidden;">${tinfo}</textarea>
+								</div>
 				    </div>
 				</li>
      

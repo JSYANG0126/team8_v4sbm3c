@@ -27,9 +27,9 @@
     <span class='menu_divide' >│</span>
     <a href="javascript:location.reload();">새로고침</a>
     <span class='menu_divide' >│</span>    
-    <a href="./list_by_search_paging.do?now_page=${param.now_page}&word=${param.word }">목록형</a>    
+    <a href="./list_by_search_paging.do?now_page=1&word=${param.word }">목록형</a>    
     <span class='menu_divide' >│</span>
-    <a href="./list_by_genreno_grid.do?now_page=${param.now_page}&word=${param.word }">갤러리형</a>
+    <a href="./list_by_genreno_grid.do?now_page=1&word=${param.word }">갤러리형</a>
   </aside>
   
   <div style="text-align: right; clear: both;">  
