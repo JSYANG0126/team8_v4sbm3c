@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, width=device-width" /> 
-<title>http://localhost:9093/genre/list_all.do</title>
+<title>영화리뷰 블로그</title>
 <link rel="shortcut icon" href="/images/star.png" /> <%-- /static 기준 --%>
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
  
@@ -15,7 +15,7 @@
 <body>
 <c:import url="/menu/top.do" />
 
-  <div class='title_line'>카테고리</div>
+  <div class='title_line'>장르</div>
   
   <aside class="aside_right">
     <a href="./create.do?genreno=${genreVO.genreno }">등록</a>
@@ -26,7 +26,7 @@
   
   <form name='frm' method='post' action='/genre/create.do'>
     <div style="text-align: center;">
-      <label>카테고리 이름</label>
+      <label>장르 이름</label>
       <input type="text" name="name" value="" required="required" autofocus="autofocus" 
                  class="" style="width: 50%">
       <button type="submit" class="btn btn-sm" style="height: 28px; margin-bottom: 5px; background-color: #323232; color:white;">등록</button>
@@ -46,7 +46,7 @@
       <thead>
         <tr>
           <th class="th_bs">순서</th>
-          <th class="th_bs">카테고리 이름</th>
+          <th class="th_bs">장르 이름</th>
           <th class="th_bs">자료수</th>
           <th class="th_bs">등록일</th>
           <th class="th_bs">기타</th>

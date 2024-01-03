@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, width=device-width" /> 
-<title>http://localhost:9093/movie/list_all.do</title>
+<title>영화리뷰 블로그</title>
 <link rel="shortcut icon" href="/images/star.png" /> <%-- /static 기준 --%>
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
 
@@ -63,11 +63,6 @@
                 </c:otherwise>
               </c:choose>
               (${movieVO.rdate.substring(0, 16) })
-            </td>
-            <td class="td_bs">
-              <a href="#" title="삭제"><img src="/movie/images/map.png" class="icon"></a>
-              <a href="#" title="삭제"><img src="/movie/images/youtube.png" class="icon"></a>
-              <a href="#" title="삭제"><img src="/movie/images/delete.png" class="icon"></a>
             </td>
           </tr>
         </c:forEach>

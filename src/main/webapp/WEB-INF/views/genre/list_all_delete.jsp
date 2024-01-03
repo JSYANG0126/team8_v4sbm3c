@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, width=device-width" /> 
-<title>http://localhost:9093/genre/list_all.do</title>
+<title>영화리뷰 블로그</title>
 <link rel="shortcut icon" href="/images/star.png" /> <%-- /static 기준 --%>
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
 
@@ -38,18 +38,18 @@
           <label>관련 카테고리 이름</label>:  ${genreVO.name } 
           <a href="../movie/list_by_genreno.do?genreno=${genreVO.genreno }&now_page=1" title="관련 카테고리로 이동"><img src='/genre/images/link.png'></a>
           &nbsp;      
-          <button type="submit" id='submit' class='btn btn-danger btn-sm' style='height: 28px; margin-bottom: 5px;'>관련 자료와 함게 카테고리 삭제</button>
+          <button type="submit" id='submit' class='btn btn-sm' style='height: 28px; margin-bottom: 5px; background-color: #323232; color:white;'>카테고리 삭제(관련 자료 포함)</button>
           
         </c:when>
         <c:otherwise> <%-- 자식 레코드가 없는 상황 --%>
           <div class="msg_warning">카테고리를 삭제하면 복구 할 수 없습니다.</div>
           <label>카테고리 이름</label>: ${genreVO.name }
       
-          <button type="submit" id='submit' class='btn btn-warning btn-sm' style='height: 28px; margin-bottom: 5px;'>삭제</button>          
+          <button type="submit" id='submit' class='btn btn-sm' style='height: 28px; margin-bottom: 5px; background-color: #323232; color:white;'>삭제</button>          
         </c:otherwise>
       </c:choose>      
 
-      <button type="button" onclick="location.href='/genre/list_all.do'" class='btn btn-info btn-sm' style='height: 28px; margin-bottom: 5px;'>취소</button>
+      <button type="button" onclick="location.href='/genre/list_all.do'" class='btn btn-sm' style='height: 28px; margin-bottom: 5px; background-color: #323232; color:white;'>취소</button>
     </form>
   </div>
   
