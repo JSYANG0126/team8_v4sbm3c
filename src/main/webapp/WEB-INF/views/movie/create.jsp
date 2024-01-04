@@ -79,7 +79,7 @@
 	    </div>   
 	    <div class="content_body_bottom">
 	      <button type="submit" class="btn" style="background-color: #323232; color: white;">등록</button>
-	      <button type="button" onclick="location.href='./list_by_genreno_search_paging.do?genreno=${param.genreno}'" class="btn" style="background-color: #323232; color: white;">목록</button>
+	      <button type="button" onclick="location.href='./list_by_genreno.do?genreno=${param.genreno}'" class="btn" style="background-color: #323232; color: white;">목록</button>
 	    </div>
 	  
 	  </form>
