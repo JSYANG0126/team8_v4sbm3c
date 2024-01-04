@@ -35,6 +35,12 @@
             <span class="span_success">새로운 컨텐츠를 등록했습니다.</span>
           </li> 
         </c:when>
+        
+        <c:when test="${code == 'update_success'}"> <%-- Java if --%>
+          <li class='li_none'>
+            <span class="span_success">업데이트에 성공 했습니다.</span>
+          </li> 
+        </c:when>
 
         <c:when test="${code == 'check_upload_file_fail'}"> <%-- Java if --%>
           <li class='li_none'>
@@ -85,7 +91,7 @@
         </c:choose>
         
         <button type='button' onclick="location.href='./list_by_search_paging.do?nowpage=1'" class="btn btn-sm" style="background-color: #323232; color: white;">목록</button>
-        <button type='button' onclick="location.href='./list_by_cateno_grid.do?cateno=${cateno}'" class="btn btn-sm" style="background-color: #323232; color: white;">갤러리 목록</button>
+        <button type='button' onclick="location.href='./list_by_grid.do?nowpage=1}'" class="btn btn-sm" style="background-color: #323232; color: white;">갤러리 목록</button>
       </li>
     </UL>
   </fieldset>

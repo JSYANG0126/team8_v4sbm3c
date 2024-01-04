@@ -43,17 +43,17 @@
           <input type='text' name='word' id='word' value='' class='input_word'>
         </c:otherwise>
       </c:choose>
-      <button type='submit' class='btn btn-secondary btn-sm' style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px;">검색</button>
+      <button type='submit' class="btn btn-sm" style="background-color: #323232; padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px; color: white;">검색</button>
       <c:if test="${param.word.length() > 0 }">
-        <button type='button' class='btn btn-secondary btn-sm' 
-                    onclick="location.href='./list_by_search_paging.do?word='" style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px;">검색 취소</button>  
+        <button type='button' class='btn btn-sm' 
+                    onclick="location.href='./list_by_search_paging.do?word='" style="background-color: #323232; padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px; color: white;">>검색 취소</button>  
       </c:if>    
     </form>
   </div>
   
   <div class='menu_line'></div>
   
-  <form name='frm' method='post' action='./update.do'>
+  <form name='frm' method='post' action='./update.do' enctype="multipart/form-data">
     <input type="hidden" name="theaterno" value="${param.theaterno }">
     <input type="hidden" name="now_page" value="${param.now_page }">
     

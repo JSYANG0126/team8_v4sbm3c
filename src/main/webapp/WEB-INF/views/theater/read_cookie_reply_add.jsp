@@ -334,32 +334,33 @@
   </aside> 
   
   <DIV class='menu_line'></DIV>
-
+		<style>
+		    .movie-info-text {
+		        white-space: nowrap; /* pre-line은 개행은 유지하면서 공백은 합칩니다. */
+		    }
+		</style>
   <fieldset class="fieldset_basic">
     <ul>
-				<li class="li_none">
-				    <div style="width: 30%; float: left; margin-top: 0.5%; margin-right: 1%;">
+			<li class="li_none">
+			    <div style="width: 80%; word-break: break-all; overflow: hidden;">
+				    <div style="width: 42%; float: left; margin-top: 0.5%; margin-right: 3%;">
 				        <c:choose>
 				            <c:when test="${thumbimg1.endsWith('jpg') || thumbimg1.endsWith('png') || thumbimg1.endsWith('gif')}">
-				                <img src="/theater/storage/${img1saved}" style="width: 100%; word-break: break-all;">
+				                <img src="/theater/storage/${img1saved}" style="width: 100%;">
 				            </c:when>
 				            <c:otherwise>
-				                <img src="/theater/images/none1.png" style="width: 100%; word-break: break-all;">
+				                <img src="/theater/images/none1.png" style="width: 100%;">
 				            </c:otherwise>
 				        </c:choose>
 				    </div>
-				    <div style="width: 60%; float: left;">
-				        <div>
-				            <span style="font-size: 1.5em; font-weight: bold;">${tname }</span>
-				            <span style="font-size: 1em;"> ${tdate}</span><br>
-				        </div>
-				        <div>
-								    <textarea rows="5" cols="50" readonly style="resize: none; white-space: nowrap; overflow-x: hidden;">${tinfo}</textarea>
-								</div>
+				
+				    <div style="width: 55%; float: left;">
+				        <span style="font-size: 1.5em; font-weight: bold;">${tname}</span>
+				        <span style="font-size: 1em;">${tdate}</span><br>
+				        <span class="movie-info-text">${tinfo}</span>
 				    </div>
-				</li>
-     
-      
+				</div>
+			</li>
       <li class="li_none" style="clear: both;">
         <DIV style='text-decoration: none;'>
           <br>

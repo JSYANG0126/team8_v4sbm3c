@@ -469,20 +469,30 @@ public class TheaterCont {
       
       if (this.theaterProc.password_check(hashMap) == 1) { // 패스워드 일치
         this.theaterProc.update(theaterVO); // 글수정  
+     
+        int cnt = this.theaterProc.update(theaterVO); 
+
+        if (cnt == 1) {
+          mav.addObject("code", "update_success");
+          // genreProc.increaseCnt(movieVO.getGenreno()); // 글수 증가
+        } else {
+            mav.addObject("code", "update_fail");
+        }
+        mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
          
         // mav 객체 이용
         mav.addObject("theaterno", theaterVO.getTheaterno());
-        mav.setViewName("redirect:/theater/read.do"); // 페이지 자동 이동
+        mav.setViewName("redirect:/theater/msg.do"); // 페이지 자동 이동
         
       } else { // 패스워드 불일치
         mav.addObject("code", "passwd_fail");
         mav.addObject("cnt", 0);
-        mav.addObject("url", "/movie/msg"); // msg.jsp, redirect parameter 적용
-        mav.setViewName("redirect:/movie/msg.do");  // POST -> GET -> JSP 출력
+        mav.addObject("url", "/theater/msg"); // msg.jsp, redirect parameter 적용
+        mav.setViewName("redirect:/theater/msg.do");  // POST -> GET -> JSP 출력
       }
     } else { // 정상적인 로그인이 아닌 경우 로그인 유도
       mav.addObject("url", "/mem/login_need"); // /WEB-INF/views/manager/login_need.jsp
-      mav.setViewName("redirect:/movie/msg.do"); 
+      mav.setViewName("redirect:/theater/msg.do"); 
     }
     
     mav.addObject("now_page", theaterVO.getNow_page()); // POST -> GET: 데이터 분실이 발생함으로 다시하번 데이터 저장 ★
@@ -569,7 +579,7 @@ public class TheaterCont {
     if (this.memProc.isMem(session)) {
       // 삭제할 파일 정보를 읽어옴, 기존에 등록된 레코드 저장용
       TheaterVO theaterVO_old = theaterProc.read(theaterVO.getTheaterno());
-      
+      int theaterno = theaterVO.getTheaterno();
       // -------------------------------------------------------------------
       // 파일 삭제 시작
       // -------------------------------------------------------------------
@@ -625,7 +635,7 @@ public class TheaterCont {
       this.theaterProc.update_file(theaterVO); // Oracle 처리
 
       mav.addObject("theaterno", theaterVO.getTheaterno());
-      mav.setViewName("redirect:/theater/read.do"); // request -> param으로 접근 전환
+      mav.setViewName("redirect:/theater/update_file.do");  // request -> param으로 접근 전환
                 
     } else {
       mav.addObject("url", "/manager/login_need"); // login_need.jsp, redirect parameter 적용
