@@ -40,7 +40,7 @@ CREATE SEQUENCE MEM_SEQ
 -- CREATE
 -- 회원 관리용 계정, Q/A 용 계정
 INSERT INTO mem(memno, id, passwd, mname, tel, zipcode, address1, address2, mdate, grade)
-VALUES (mem_seq.nextval, 'commentsmanager', '1234', '댓글관리자', '000-0000-0000', '12345', '서울시 종로구', '관철동', sysdate, 1);
+VALUES (mem_seq.nextval, 'reviewmanager', '1234', '리뷰 관리자', '000-0000-0000', '12345', '서울시 종로구', '관철동', sysdate, 1);
  
 INSERT INTO mem(memno, id, passwd, mname, tel, zipcode, address1, address2, mdate, grade)
 VALUES (mem_seq.nextval, 'qnamanager', '1234', '질문관리자', '000-0000-0000', '12345', '서울시 종로구', '관철동', sysdate, 1);

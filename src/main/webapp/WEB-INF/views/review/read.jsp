@@ -98,7 +98,7 @@ function unlike() {
 
   <aside class="aside_right">
     <%-- 관리자로 로그인해야 메뉴가 출력됨 --%>
-    <c:if test="${sessionScope.id != null && sessionScope.memno == reviewVO.memno }">
+    <c:if test="${sessionScope.grade == 1 || sessionScope.memno == reviewVO.memno }">
       <%--
       http://localhost:9091/movie/create.do?genreno=1
       http://localhost:9091/movie/create.do?genreno=2
