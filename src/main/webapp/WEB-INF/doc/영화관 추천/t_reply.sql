@@ -13,10 +13,10 @@ CREATE TABLE treply(
 );
 
 COMMENT ON TABLE treply is '영화관 댓글';
-COMMENT ON COLUMN treply.commentno is '영화관 댓글 번호';
-COMMENT ON COLUMN treply.movieno is '영화관 번호';
+COMMENT ON COLUMN treply.treplyno is '영화관 댓글 번호';
+COMMENT ON COLUMN treply.theaterno is '영화관 번호';
 COMMENT ON COLUMN treply.memno is '회원 번호';
-COMMENT ON COLUMN treply.reply is '내용';
+COMMENT ON COLUMN treply.treply is '내용';
 COMMENT ON COLUMN treply.pw is '비밀번호';
 COMMENT ON COLUMN treply.cdate is '날짜';
 
