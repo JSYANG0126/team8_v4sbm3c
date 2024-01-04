@@ -53,6 +53,18 @@
        
     win.moveTo(x, y); // 화면 중앙으로 이동
   }
+
+  function issue() {
+	    // 추천을 개발한 사람의 AWS IP
+	    // "http://localhost:8000/ais/recommend_form/?memberno=${sessionScope.memberno }"  
+	    var url = 'http://43.203.63.165:3000';
+	    var win = window.open(url, '공지사항', 'width=1300px, height=850px');
+	       
+	    var x = (screen.width - 1300) / 2;
+	    var y = (screen.height - 850) / 2;
+	       
+	    win.moveTo(x, y); // 화면 중앙으로 이동
+	}
 </script>
 
 
@@ -105,7 +117,7 @@
             </li>
             
              <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
-              <a class="nav-link top_menu_link" href="http://43.203.63.165:3000">공지사항</a>
+              <a class="nav-link top_menu_link" href="javascript: issue();">공지사항</a>
             </li>
             
 
