@@ -1,11 +1,11 @@
-DROP TABLE REVIEW;
+DROP TABLE REVIEW CASCADE CONSTRAINTS;
 DROP SEQUENCE review_seq;
 
 CREATE TABLE review(
 		reviewno                      		NUMBER(10)		 NULL 		 PRIMARY KEY,
 		memno                         		NUMBER(10)		 NOT NULL,
         rtitle                       		VARCHAR2(30)	 NOT NULL,
-		rinfo                       	VARCHAR2(1000)	 NOT NULL,
+		rinfo                       	VARCHAR2(3000)	 NOT NULL,
 		rdate                        		DATE		     NULL ,	
 		rname                          	VARCHAR2(30)    NULL ,
 		word                          		VARCHAR2(100)	 NULL ,

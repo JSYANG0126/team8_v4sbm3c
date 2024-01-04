@@ -277,17 +277,17 @@ public class MovieCont {
     ArrayList<MovieVO> list = movieProc.list_by_genreno_search_paging(movieVO);
     
     // for문을 사용하여 객체를 추출, Call By Reference 기반의 원본 객체 값 변경
-    for (MovieVO vo : list) {
-      String title = vo.getTitle();
-      String content = vo.getContent();
-      
-      title = Tool.convertChar(title);  // 특수 문자 처리
-      content = Tool.convertChar(content); 
-      
-      vo.setTitle(title);
-      vo.setContent(content);  
-  
-    }
+//    for (MovieVO vo : list) {
+//      String title = vo.getTitle();
+//      String content = vo.getContent();
+//      
+//      title = Tool.convertChar(title);  // 특수 문자 처리
+//      content = Tool.convertChar(content); 
+//      
+//      vo.setTitle(title);
+//      vo.setContent(content);  
+//  
+//    }
     
     mav.addObject("list", list);
   
@@ -341,17 +341,17 @@ public class MovieCont {
     ArrayList<MovieVO> list = movieProc.list_by_genreno_search_paging(movieVO);
     
     // for문을 사용하여 객체를 추출, Call By Reference 기반의 원본 객체 값 변경
-    for (MovieVO vo : list) {
-      String title = vo.getTitle();
-      String content = vo.getContent();
-      
-      title = Tool.convertChar(title);  // 특수 문자 처리
-        content = Tool.convertChar(content); 
-        
-        vo.setTitle(title);
-        vo.setContent(content);  
-    
-      }
+//    for (MovieVO vo : list) {
+//      String title = vo.getTitle();
+//      String content = vo.getContent();
+//      
+//      title = Tool.convertChar(title);  // 특수 문자 처리
+//        content = Tool.convertChar(content); 
+//        
+//        vo.setTitle(title);
+//        vo.setContent(content);  
+//    
+//      }
       
       mav.addObject("list", list);
     

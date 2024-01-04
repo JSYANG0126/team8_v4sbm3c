@@ -218,17 +218,17 @@ public class ReviewCont {
     ArrayList<ReviewVO> list = reviewProc.list_search_paging(reviewVO);
     
     // for문을 사용하여 객체를 추출, Call By Reference 기반의 원본 객체 값 변경
-    for (ReviewVO vo : list) {
-      String rtitle = vo.getRtitle();
-      String rinfo = vo.getRinfo();
-      
-      rtitle = Tool.convertChar(rtitle);  // 특수 문자 처리
-      rinfo = Tool.convertChar(rinfo); 
-      
-      vo.setRtitle(rtitle);
-      vo.setRinfo(rinfo);  
-  
-    }
+//    for (ReviewVO vo : list) {
+//      String rtitle = vo.getRtitle();
+//      String rinfo = vo.getRinfo();
+//      
+//      rtitle = Tool.convertChar(rtitle);  // 특수 문자 처리
+//      rinfo = Tool.convertChar(rinfo); 
+//      
+//      vo.setRtitle(rtitle);
+//      vo.setRinfo(rinfo);  
+//  
+//    }
     
     mav.addObject("list", list);
   
@@ -268,17 +268,17 @@ public class ReviewCont {
     
     ArrayList<ReviewVO> list = this.reviewProc.list_search_paging(reviewVO);
 
-    for(ReviewVO vo : list) {
-      
-      String rtitle = vo.getRtitle();
-      String rinfo = vo.getRinfo();
-        
-      rtitle = Tool.convertChar(rtitle);
-      rinfo = Tool.convertChar(rinfo);
-        
-      vo.setRtitle(rtitle);
-      vo.setRinfo(rinfo);
-    }
+//    for(ReviewVO vo : list) {
+//      
+//      String rtitle = vo.getRtitle();
+//      String rinfo = vo.getRinfo();
+//        
+//      rtitle = Tool.convertChar(rtitle);
+//      rinfo = Tool.convertChar(rinfo);
+//        
+//      vo.setRtitle(rtitle);
+//      vo.setRinfo(rinfo);
+//    }
     mav.addObject("list", list);
   
     
