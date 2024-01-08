@@ -319,17 +319,17 @@ public class TheaterCont {
         ArrayList<TheaterVO> list = theaterProc.list_by_search_paging(theaterVO);        
         
         // for문을 사용하여 객체를 추출, Call By Reference 기반의 원본 객체 값 변경
-        for (TheaterVO vo : list) {
-          String tname = vo.getTname();
-          String tinfo = vo.getTinfo();
-          
-          tname = Tool.convertChar(tname);  // 특수 문자 처리
-          tinfo = Tool.convertChar(tinfo); 
-          
-          vo.setTname(tname);
-          vo.setTinfo(tinfo);  
-      
-        }
+//        for (TheaterVO vo : list) {
+//          String tname = vo.getTname();
+//          String tinfo = vo.getTinfo();
+//          
+//          tname = Tool.convertChar(tname);  // 특수 문자 처리
+//          tinfo = Tool.convertChar(tinfo); 
+//          
+//          vo.setTname(tname);
+//          vo.setTinfo(tinfo);  
+//      
+//        }
         
         mav.addObject("list", list);
 
