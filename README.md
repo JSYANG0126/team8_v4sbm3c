@@ -1,7 +1,8 @@
 <h2>영화리뷰 & 추천 시스템</h2>
 
-![logical](https://github.com/JSYANG0126/team8_v4sbm3c/assets/69448561/40d7edf7-e86c-47e0-83f0-f9f96638e28e)
-![pysical](https://github.com/JSYANG0126/team8_v4sbm3c/assets/69448561/bf536c88-7ea3-49a3-8cad-3530e54c249f)
+![erdfinal](https://github.com/JSYANG0126/team8_v4sbm3c/assets/69448561/b353df66-6be0-4e20-9209-66ba692b755c)
+![erdfinalpys](https://github.com/JSYANG0126/team8_v4sbm3c/assets/69448561/9c3ff7be-4989-4a40-8d3e-a26e6cdf1755)
+
 
 
 
